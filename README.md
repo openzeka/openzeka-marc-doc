@@ -1,4 +1,5 @@
-Türkçe döküman için:
+## Türkçe döküman için:  
+[Türkçe döküman](./ilk\ adımlar.md)
 
-
-For English docs:
+## For English docs:
+[English docs](./first\ steps.md)
