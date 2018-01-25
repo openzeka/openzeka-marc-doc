@@ -1,0 +1,145 @@
+ls
+l
+mkdir deneme
+ls deneme
+rm -rf deneme
+mkdir deneme
+ls
+cd deneme
+ls
+touch dosya
+ls
+touch dosya.tx
+ls
+mv dosya.tx dosya.txt
+ls
+mkdir deneme2
+ls
+mv dosya.txt deneme2
+ls
+cd deneme2
+ls
+cd ..
+ls
+mv deneme2/dosya.txt .
+ls
+nano dosya.txt
+ls
+nano dosya.txt
+cat dosya.txt
+nano dosya.txt
+programim dosya.txt
+ls
+cp dosya.txt deneme2
+ls
+cd deneme2
+ls
+cd ..
+ls
+cd deneme2
+ls
+cd ..
+ls deneme2
+hostname
+ls
+hostname
+hostname -I
+python
+cd deneme2
+ls
+touch asdf
+touch baskadosya
+ls
+rm *
+ls
+touch asdf
+touch baskadosya
+touch kdfsghakjfd
+ls
+mkdir birklasor
+ls
+rm *
+ls
+touch gfdhj
+ls
+rm -r *
+ls
+nano ornek.cpp
+ls
+g++ --help
+g++ ornek.cpp -o ornek
+ls
+./ornek
+nano ornek.cpp
+gedit ornek.cpp
+code ornek.cpp
+./ornek
+echo helloworld
+ls
+cd ../..
+ls
+ls | grep src
+ls | grep de
+cd -
+ls
+./ornek | grep hello
+./ornek > dosya.txt
+ls
+cat dosya.txt
+nano ornek.py
+ls
+nano ornek.cpp
+python ornek.py
+l
+apt-get install htop
+sudo apt-get install ntfs-config
+l
+chmod -x ornek
+l
+./ornek
+l | grep ornek
+cat ornek
+ls
+l
+./ornek
+man chmod
+chmod  ornek
+ls
+l
+./ornek
+chmod  /bin/bash
+l /bin | grep bash
+sudo apt-get install htop
+htop
+sleep 15
+ls
+sleep 15
+fg
+sleep 15
+bg
+cd /var/log
+ls
+cat kern.log
+tail kern.log
+clear
+tail kern.log
+head kern.log
+head kern.log -n 3
+du -h
+df -h
+su root
+su
+cd
+su
+ls
+sudo pwd root
+sudo passwd root
+su root
+cd /var/log
+cd
+ls
+su root
+cd deneme
+ls
+echo history
+echo $history
