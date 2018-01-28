@@ -159,12 +159,12 @@ After you're done with that, we can install the racecar code!
 Download and build racecar code
 ```bash
 cd ~/
-git clone --recursive https://github.com/MuhsinFatih/racecar-workspace [referans 0 (kaynak kod)]
+git clone --recursive https://github.com/openzeka/racecar-workspace
 ```
 Racecar's source code is under the `src/` folder. This `racecar-ws` folder is what's called a `catkin workspace`. To get more information on ROS and catkin workspaces:  
 wiki.ros.org/ROS/Tutorials  
 and to access sample code used in lectures:  
-[referans 1 (racecar controllers, bang bang, opencv ve deepLearning)]  
+github.com/openzeka/racecar-controllers  
 For now let's go ahead and compile the code:
 ```bash
 cd ~/racecar-ws
@@ -254,8 +254,8 @@ lrwxrwxrwx 1 root root 7 Nov  8 21:29 /dev/imu -> ttyACM1
 ```
 # The End :)  
 If everything above works fine, then we can start coding! Check out our ROS documents and sample codes:  
-[referans 2 (ROS dökümanı, örnek python ve c++)]  
-[referans 1 örnek kodlar (bangbang felan)]  
+[ROS fundamentals](ros%20fundamentals.md)  
+[Racecar code examples](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)  
 
 ---
 In addition, this may be useful, but we don't need it for this application:
@@ -271,13 +271,13 @@ go to `.gitmodules` file in the project's main directory. It should look like th
 ```bash
 [submodule "src/racecar"]
 	path = src/racecar
-	url = https://github.com/MuhsinFatih/racecar.git
+	url = https://github.com/openzeka/racecar.git
 [submodule "src/racecar-controllers"]
 	path = src/racecar-controllers
-	url = https://github.com/MuhsinFatih/racecar-controllers.git
+	url = https://github.com/openzeka/racecar-controllers.git
 [submodule "src/racecar-simulator"]
 	path = src/racecar-simulator
-	url = https://github.com/MuhsinFatih/racecar-simulator.git
+	url = https://github.com/openzeka/racecar-simulator.git
 [submodule "src/vesc"]
 	path = src/vesc
 	url = https://github.com/mit-racecar/vesc

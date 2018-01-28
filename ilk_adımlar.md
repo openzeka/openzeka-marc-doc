@@ -155,12 +155,12 @@ Ana dizine racecar kodunu yükleyeceğiz, önce ana dizine gir ve kodu indir:
 
 ```bash
 cd ~/
-git clone --recursive https://github.com/MuhsinFatih/racecar-workspace [referans 0 (kaynak kod)]
+git clone --recursive https://github.com/openzeka/racecar-workspace
 ```
 Racecar kodu `src/` klasörünün içinde. Bu `racecar-ws` klasörü `catkin workspace` adında bir çalışma ortamı. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
 wiki.ros.org/ROS/Tutorials  
 ve eğitimde kullanılan örneklere ulaşmak için:  
-[referans 1 (racecar controllers, bang bang, opencv ve deepLearning)]  
+github.com/openzeka/racecar-controllers  
 Şimdilik devam edelim, kodu sonra inceleyeceğiz.
 
 Şimdi kodu derleyelim:
@@ -256,8 +256,8 @@ lrwxrwxrwx 1 root root 7 Nov  8 21:29 /dev/imu -> ttyACM1
 ```
 # Bitti :)
 Buraya kadar herşey çalışıyorsa programı incelemeye başlayabiliriz! Örnek ROS dökümanlarımıza ve örnek kodlara bir göz at:  
-https://github.com/MuhsinFatih/lecture_materials/blob/master/ros%20fundamentals.md [referans 2 (ROS dökümanı, örnek python ve c++)]  
-[referans 1 örnek kodlar (bangbang felan)]
+[ROS temelleri](ros%20fundamentals.md)  
+[Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
 
 ---------------------------------
 Ek olarak bu da işe yarayabilir, fakat bu uygulama için ihtiyacımız yok:
@@ -274,13 +274,13 @@ ana dizindeki `.gitmodules` dosyasına gir. Buna benziyor olmalı:
 ```bash
 [submodule "src/racecar"]
 	path = src/racecar
-	url = https://github.com/MuhsinFatih/racecar.git
+	url = https://github.com/openzeka/racecar.git
 [submodule "src/racecar-controllers"]
 	path = src/racecar-controllers
-	url = https://github.com/MuhsinFatih/racecar-controllers.git
+	url = https://github.com/openzeka/racecar-controllers.git
 [submodule "src/racecar-simulator"]
 	path = src/racecar-simulator
-	url = https://github.com/MuhsinFatih/racecar-simulator.git
+	url = https://github.com/openzeka/racecar-simulator.git
 [submodule "src/vesc"]
 	path = src/vesc
 	url = https://github.com/mit-racecar/vesc
