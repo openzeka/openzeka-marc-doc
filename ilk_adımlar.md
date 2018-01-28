@@ -256,7 +256,7 @@ lrwxrwxrwx 1 root root 7 Nov  8 21:29 /dev/imu -> ttyACM1
 ```
 # Bitti :)
 Buraya kadar herşey çalışıyorsa programı incelemeye başlayabiliriz! Örnek ROS dökümanlarımıza ve örnek kodlara bir göz at:  
-[ROS temelleri](ros%20fundamentals.md)  
+[ROS temelleri](lecture%20materials/ros%20fundamentals.md)  
 [Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
 
 ---------------------------------

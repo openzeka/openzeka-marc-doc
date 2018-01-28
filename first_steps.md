@@ -254,7 +254,7 @@ lrwxrwxrwx 1 root root 7 Nov  8 21:29 /dev/imu -> ttyACM1
 ```
 # The End :)  
 If everything above works fine, then we can start coding! Check out our ROS documents and sample codes:  
-[ROS fundamentals](ros%20fundamentals.md)  
+[ROS fundamentals](lecture%20materials/ros%20fundamentals.md)  
 [Racecar code examples](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)  
 
 ---
