@@ -1,0 +1,3 @@
+[submodule "lecture materials/Control-Theory-Demonstration"]
+	path = lecture materials/Control-Theory-Demonstration
+	url = https://github.com/MuhsinFatih/Control-Theory-Demonstration
