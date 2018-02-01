@@ -179,7 +179,7 @@ Bu bölüm için bir ekran a ihtiyacın var, veya X server mevcut olan bir işle
   ```
   Eğer kendi ekranında bir pencerenin açıldığını görürsen devam etmek için hazırsın!
 
-Yukarıdaki seçeneklerden herhangi birini yaptıysan [Jetsonhacks'in bu videosu](https://www.xquartz.org/) ile devam edebilirsin  
+Yukarıdaki seçeneklerden herhangi birini yaptıysan [Jetsonhacks'in bu videosu](https://www.youtube.com/watch?v=fiaiA-o83c4) ile devam edebilirsin  
 Bununla işin bittiğinde racecar kodunu kurabiliriz!
 
 ## <a name="installracecar"></a> Racecar ı kur
