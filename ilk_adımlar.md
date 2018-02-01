@@ -1,4 +1,4 @@
-# Jetson a Ubuntu kurduktan sonra izlenecek ilk adımlar
+# Jetson'a JetPack kurduktan sonra izlenecek ilk adımlar
 ### Jetson ın IP adresini al ve ssh ile bağlan
 MacOS'de "lanscan", Windows'da "wnetwatcher", ve Linux'de "angry ip scanner" kullanabilirsin. Veya terminal i kullanarak IP tarayabilirsin:
 
@@ -81,6 +81,13 @@ sudo apt-get install screen
 ```
 Screen kullanımını öğrenmek için:  
 https://www.gnu.org/software/screen/manual/screen.html
+
+
+Devam etmeden önce bazı gerekli uygulamaların kurulması gereklidir. Bunun için terminalde şu kodu çalıştırabilirsiniz. 
+```bash
+sudo apt-get install cmake ca-certificates
+```
+
 ## Kerneli yeniden derle
 Bu işlem için JetsonHacks tarafından hazırlanan döküman da takip edilebilir. 
 Kerneli derlemek için öncelikle gerekli dosyaları şuradan çekin
