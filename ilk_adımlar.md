@@ -81,6 +81,38 @@ sudo apt-get install screen
 ```
 Screen kullanımını öğrenmek için:  
 https://www.gnu.org/software/screen/manual/screen.html
+## Kerneli yeniden derle
+Bu işlem için JetsonHacks tarafından hazırlanan döküman da takip edilebilir. 
+Kerneli derlemek için öncelikle gerekli dosyaları şuradan çekin
+```bash
+cd ~/
+git clone https://github.com/jetsonhacks/buildJetsonTX2Kernel.git
+```
+Dosyaları Jetsona kaydettikten sonra ilk olarak kernel dosyalarını NVIDIA'nın sitesinden çekelim. Bunun için aşağıdaki komutu çalıştırın
+```bash
+cd ~/buildJetsonTX2Kernel
+#Getting the kernel sources
+./getKernelSources.sh
+```
+İşlem tamamlandıktan sonra .config dosyasındaki düzenlemeler için bir grafik arayüzü açılacaktır. Değişiklikleri kaydederek kapatın. Artık kerneli derleyebiliriz. Aşağıdaki kodu çalıştırın.
+```bash
+cd ~/buildJetsonTX2Kernel
+#Building the kernel sources
+./makeKernel.sh
+```
+Bu işlem 10 dakika civarında sürmektedir. Derleme tamamlandıktan sonra, derlenen dosyaları kopyalabiliriz. Bunun için şu kodu çalıştırabilirsiniz.
+```bash
+cd ~/buildJetsonTX2Kernel
+#Copying the kernel sources
+./copyImage.sh
+```
+Jetsonu yeniden başlatın
+
+Bu işlemler bittikten sonra indirilen dosyaları silebilirsiniz. Dosyalar /usr/src/sources dizinine indirilmiştir. Silmek için aşağıdaki komutu çalıştırabilirsiniz. 
+```bash
+cd /usr/src/sources
+sudo rm -rf kernel_src-tx2.tbz2 
+```
 
 ## Scanse SDK sını kur
 ```bash
