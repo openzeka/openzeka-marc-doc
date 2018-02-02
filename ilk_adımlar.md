@@ -101,7 +101,13 @@ cd ~/buildJetsonTX2Kernel
 #Getting the kernel sources
 ./getKernelSources.sh
 ```
-İşlem tamamlandıktan sonra .config dosyasındaki düzenlemeler için bir grafik arayüzü açılacaktır. Değişiklikleri kaydederek kapatın. Artık kerneli derleyebiliriz. Aşağıdaki kodu çalıştırın.
+İşlem tamamlandıktan sonra .config dosyasındaki düzenlemeler için bir grafik arayüzü açılacaktır. 
+Burada bazı değişiklikler yapmamız gerekmektedir. JetsonHacks'e ait olan [bu videodan](https://www.youtube.com/watch?v=fxWObd1nK4s) da takip edebilirsiniz. 
+
+Öncelikle açılan ekrandan General Setup'a tıklayın. sağ tarafta açılan menüden Local version -append to kernel release çift tıklayın. Bu kısma - ile başlayan bir isim girebilirsiniz. Biz -openzeka-v0.1 yazıp devam edeceğiz. 
+Daha sonra Edit > Find seçeneğinden açılan pencereye ACM yazarak USB Modem (CDC ACM) support'u aktif hale getirin.Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. 
+
+Değişiklikleri kaydederek kapatın. Artık kerneli derleyebiliriz. Aşağıdaki kodu çalıştırın.
 ```bash
 cd ~/buildJetsonTX2Kernel
 #Building the kernel sources
