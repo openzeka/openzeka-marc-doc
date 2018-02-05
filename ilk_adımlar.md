@@ -104,8 +104,11 @@ cd ~/buildJetsonTX2Kernel
 İşlem tamamlandıktan sonra .config dosyasındaki düzenlemeler için bir grafik arayüzü açılacaktır. 
 Burada bazı değişiklikler yapmamız gerekmektedir. JetsonHacks'e ait olan [bu videodan](https://www.youtube.com/watch?v=fxWObd1nK4s) da takip edebilirsiniz. 
 
-Öncelikle açılan ekrandan General Setup'a tıklayın. sağ tarafta açılan menüden Local version -append to kernel release çift tıklayın. Bu kısma - ile başlayan bir isim girebilirsiniz. Biz -openzeka-v0.1 yazıp devam edeceğiz. 
-Daha sonra Edit > Find seçeneğinden açılan pencereye ACM yazarak USB Modem (CDC ACM) support'u aktif hale getirin.Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. 
+Öncelikle açılan ekrandan **General Setup**'a tıklayın. sağ tarafta açılan menüden **Local version -append to kernel release** çift tıklayın. Bu kısma - ile başlayan bir isim girebilirsiniz. Biz *-openzeka-v0.1* yazıp devam edeceğiz. 
+
+Daha sonra **Edit > Find** seçeneğinden açılan pencereye **ACM** yazarak **USB Modem (CDC ACM) support**'u aktif hale getirin.Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. 
+
+Daha sonra aynı şekile aratarak **CH341** Portunu da aktifleştirin.
 
 Değişiklikleri kaydederek kapatın. Artık kerneli derleyebiliriz. Aşağıdaki kodu çalıştırın.
 ```bash
@@ -155,7 +158,8 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 sudo apt-get update
-sudo apt-get install ros-kinetic-ros-desktop
+sudo apt-get install ros-kinetic-desktop-full
+# Bu kurulum biraz uzun sürmektedir.
 sudo rosdep init
 rosdep update
 ```
@@ -202,7 +206,7 @@ Ana dizine racecar kodunu yükleyeceğiz, önce ana dizine gir ve kodu indir:
 cd ~/
 git clone --recursive https://github.com/openzeka/racecar-workspace
 ```
-Racecar kodu `src/` klasörünün içinde. Bu `racecar-ws` klasörü `catkin workspace` adında bir çalışma ortamı. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
+Racecar kodu `src/` klasörünün içinde. Bu `racecar-workspace` klasörü `catkin workspace` adında bir çalışma ortamı. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
 wiki.ros.org/ROS/Tutorials  
 ve eğitimde kullanılan örneklere ulaşmak için:  
 github.com/openzeka/racecar-controllers  
@@ -213,6 +217,21 @@ github.com/openzeka/racecar-controllers
 cd ~/racecar-ws
 rm -rf build devel
 catkin_make
+```
+catkin_make sırasında *ackermann_msgs* hatası alırsanız, aşağıdaki eklentileri kurduktan sonra tekrarr **catkin_make** yapınız. 
+
+```bash
+sudo apt-get install ros-kinetic-ackermann-msgs 
+sudo apt-get install ros-kinetic-serial
+cd ~/racecar-ws
+rm -rf build devel
+catkin_make
+```
+Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
+
+```bash
+sudo apt-get install ros-kinetic-joy
+sudo apt-get install ros-kinetic-joy-teleop 
 ```
 
 ve test edelim:  
