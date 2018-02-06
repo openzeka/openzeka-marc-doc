@@ -318,7 +318,121 @@ lrwxrwxrwx 1 root root 7 Nov  9 11:16 /dev/vesc -> ttyACM0
 lrwxrwxrwx 1 root root 7 Nov  9 10:59 /dev/sweep -> ttyUSB0
 lrwxrwxrwx 1 root root 7 Nov  8 21:29 /dev/imu -> ttyACM1
 ```
-# Bitti :)
+## Gerekli eklentilerin kurulması
+
+### Tensorflow 
+İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow 1.5 sürümünü kurun. Bunun için şu adımları takip edin.
+
+```bash
+git clone https://github.com/JesperChristensen89/TensorFlow-Jetson-TX2.git
+cd ~/TensorFlow-Jetson-TX2/wheel_files
+sudo apt-get install -y python-pip python-dev
+sudo pip install tensorflow-1.5.0rc0-cp27-cp27mu-linux_aarch64.whl
+```
+Tensorflow kurulumu tamamlandıktan sonra aşağıdaki gibi test edebilirsiniz. 
+
+### Keras ve diğer eklentiler
+Şu kodu çalıştırmanız,bu adım için yeterli olacaktır.
+```bash
+sudo pip install h5py keras matplotlib scipy pandas
+```
+Bu kurulum uzun sürecektir(~45 dakika).
+
+### Jupyter Notebook
+
+Öncelikle Ipython'u kuralım
+
+```bash
+sudo apt-get -y install ipython ipython-notebook
+```
+Ardından Jupyter Notebook kurulumuna geçebiliriz.
+
+```bash
+sudo -H pip install jupyter
+```
+
+Bu işlem, jupyter'i sadece **python2** kerneli ile kuracaktır. Eğer **python3** kernelini de kurmak isterseniz aşağıdaki kodu kullanabilirsiniz. 
+```bash
+python3 -m pip install ipykernel
+python3 -m ipykernel install --user
+```
+## Jetson TX2 Yüksek Performans modu
+
+Jetson'u farklı senaryolarda yüksek performans yada enerji tasarrufu ayarı ile kullanabiliriz. NVIDIA, bunun için bize **NVPModel**'i sunmaktadır. 
+
+Jetson, 4 adet ARM A57 ve 2 adet Denver 2 çekirdeği ile gelmektedir. Default olarak Denver 2 çekirdekleri _off_ konumunda gelmektedir. Bunu **tegrastat**'tan da görebiliriz. 
+
+Tegrastats, sistem kaynaklarının ne kadarının kullanıldığını gösteren ve derin öğrenme tarafında uygulamalar geliştirirken takip etmemiz gereken bir uygulamadır. Çalıştırmak için aşağıdaki komutu çalıştırın. 
+
+```bash
+~/tegrastats
+```
+Çıktı şu şekilde olacaktır. 
+
+Burada GPU kullanımı gösterilmemektedir. GPU kullanımı takip etmek için _super\_user_ modunda çalıştırmamız gerekiyor. Bunun için : 
+```bash
+sudo su
+./tegrastats
+```
+En sağda gösterilen **GR3D** bizim GPU'muzu göstermektedir. 
+
+NVPModel'in farklı modlarda nasıl çalıştığını aşağıdaki tabloda görebilirsiniz. 
+
+Mode | Mode Name | Denver 2 | Frequency | ARM A57 | Frequency | GPU Frequency
+---- | --------- | -------- | --------- | ------- | --------- | -------------
+0 | Max-N | 2 | 2.0 GHz | 4 | 2.0 GHz | 1.30 Ghz
+1 | Max-Q | 0 | | 4 | 1.2 Ghz | 0.85 Ghz
+2 | Max-P Core-All | 2 | 1.4 GHz | 4 | 1.4 GHz | 1.12 Ghz
+3 | Max-P ARM | 0 | | 4 | 2.0 GHz | 1.12 Ghz
+4 | Max-P Denver | 2 | 2.0 GHz | 0 | | 1.12 Ghz
+
+Çalıştırmak için aşağıdaki kodu uygulayabilirsiniz.
+```bash
+sudo nvpmodel -m 0
+# Burada 0 yerine istediğiniz modu girebilirsiniz.
+# 0 yüksek performans modudur ve tüm çekirdekleri aktif hale getirir. 
+```
+## Verilerin Toplanması
+
+Buraya kadar başarıyla gelebildiyseniz artık veri toplayabiliriz. Veri toplama işlemine başlamadan önce aracı aracın bataryalarının dolu olduğundan ve tüm donanımın özellikle de joystick ve kameranın bağlı olduğundan emin olun. Teleop'u çalıştırmadan önce joytstick'in doğru ayarlandığından emin olalım. 
+Öncelikle joystick'in açık olduğundan ve _mode_ ışığının **yanmadığından** emin olun. Vibration tuşu ile kontrol edin. **D** moduna alın. 
+![D mode](images/joystick_d_mode.jpg)
+
+Aşağıda gösterilen dizini kontrol edin
+
+```bash
+ls /dev/input
+```
+Bu komutun çıktısında **js0** adında bir dosya görüyor olmanız lazım. Eğer **js1** gibi bir dosya var ise aşağıdaki komutu çalıştırın.
+
+```bash
+sudo mv /dev/input/js1 /dev/input/js0
+```
+Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca bağlı olduğundan, mode ışığının yanmadığından ve **D** modunda olduğundan emin olun. 
+
+Şimdi **teleop**'u çalıştırabiliriz.
+
+```bash
+cd ~/racecar-workspace
+source devel/setup.bash
+roslaunch racecar teleop.launch
+```
+Komut çalıştırıldıktan sonra joystick ile aracı kontrol edebilirsiniz. 
+Teleopun çalıştığı terminali kapatmadan yeni bir terminal açın ve veri toplamak için aşağıdaki kodu çalıştırın. 
+```bash
+cd ~/racecar-workspace
+source devel/setup.bash
+rosrun deep_learning collect_data.py
+```
+Kodu çalıştırdıktan sonra aşağıdaki gibi araca ait hız ve açı değerleri akmaya başlayacaktır. 
+![Data Flowing](images/data_flowing.png)
+
+Joystick ile kontrol etmeye başladığınızda hız ve açı değerlerinin resimdeki gibi değiştiğini göreceksiniz.
+![Data Flowing Change](images/daha_flowing_change.png)
+
+Aracı sürmeye başlayarak veri toplayabilirsiniz. Kameradan alınan görüntü, hız ve açı değerleri **racecar-workspace/src/racecar-controllers/marc-examples/deep_learning/data/** klasörüne kaydedilecektir. Her collect_data.py dosyasını çalıştırdığınızda **001**'den başlayarak ve artarak yeni bir klasör oluşturulacak ve veriler o klasöre kaydedilecektir. 
+
+# Bitti :metal:
 Buraya kadar herşey çalışıyorsa programı incelemeye başlayabiliriz! Örnek ROS dökümanlarımıza ve örnek kodlara bir göz at:  
 [ROS temelleri](lecture%20materials/ros%20fundamentals.md)  
 [Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
