@@ -575,7 +575,7 @@ rosrun deep_learning predict.py
 
 Eğer bu komutu çalıştırdıktan sonra _No such file or directory_ hatası alırsanız, **predict.py** içindeki 28.satırda bulunan **model_name** değişkeninin doğru yolu gösterdiğinden emin olun. 
 
-![predict.py](images/predict.py)
+![predict.py](images/predict.png)
 
 
 # Bitti :metal:
