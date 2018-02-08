@@ -497,12 +497,16 @@ Tegrastats, sistem kaynaklarının ne kadarının kullanıldığını gösteren 
 ```
 Çıktı şu şekilde olacaktır. 
 
+![tegrastats](images/tegrastats.png)
+
 Burada GPU kullanımı gösterilmemektedir. GPU kullanımı takip etmek için _super\_user_ modunda çalıştırmamız gerekiyor. Bunun için : 
 ```bash
 sudo su
 ./tegrastats
 ```
 En sağda gösterilen **GR3D** bizim GPU'muzu göstermektedir. 
+
+![tegrastats_with_gpu](images/tegrastats_gpu.png)
 
 NVPModel'in farklı modlarda nasıl çalıştığını aşağıdaki tabloda görebilirsiniz. 
 
