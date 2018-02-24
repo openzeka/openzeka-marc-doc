@@ -1,5 +1,9 @@
 ![logo](images/Open-Zeka-logo.png)
 
+<p align="center">
+	<img src="images/Open-Zeka-logo.png" style="width:500px" />
+</p>
+
 - [Jetson'a JetPack kurduktan sonra izlenecek ilk adımlar](https://github.com/openzeka/docs/blob/master/ilk_ad%C4%B1mlar.md#jetsona-jetpack-kurduktan-sonra-izlenecek-ilk-adımlar)
   - [Jetson ın IP adresini al ve ssh ile bağlan](https://github.com/openzeka/docs/blob/master/ilk_ad%C4%B1mlar.md#jetson-%C4%B1n-ip-adresini-al-ve-ssh-ile-ba%C4%9Flan)
   - [Şifreyi değiştir](https://github.com/openzeka/docs/blob/master/ilk_ad%C4%B1mlar.md#%C5%9Eifreyi-de%C4%9Fi%C5%9Ftir)
