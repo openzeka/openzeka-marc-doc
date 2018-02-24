@@ -148,7 +148,7 @@ You need a montior or an OS which uses X Server for this part of the tutorial. X
     ```bash
     nautilus .
     ```
-    If you see some windows shows up on your screen, you are rady to go!
+    If you see some windows shows up on your screen, you are ready to go!
  
 First, we need to make sure that some dependincies is installed. For that, run the code below:
 
@@ -183,7 +183,9 @@ cd ~/bldc-tool
 ./BLDC-Tool
 ```
 When you run those commands, an interface will show up to install firmware.
+First, make sure that battery connected to VESC and also VESC connected to the USB Hub. In addition check the VESC lights. If RED light blinks, your battery level is low. We highly recommend that continue this part of the tutorial after your battery is fulled. If BLUE light is solid than you are good to go!
 
+Under **Serial Connection**, you will see the *VESC-ttyACM0*(this your VESC).
 
 ## Install drivers for VESC
 We will follow [this](https://www.youtube.com/watch?v=fiaiA-o83c4) tutorial on youtube to install VESC.  
