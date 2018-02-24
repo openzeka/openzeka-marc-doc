@@ -162,7 +162,7 @@ After the installation, we need to pull firmware for the VESC from github and co
 cd ~
 git clone https://github.com/vedderb/bldc-tool
 cd bldc-tool
-# Derleyelim
+# Let's compile.
 qmake -qt=qt5
 make clean && make
 ```
