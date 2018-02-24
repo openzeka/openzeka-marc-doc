@@ -205,13 +205,13 @@ Son olarak:
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 ## VESC sürücülerini yükle
-Youtube da [Bu online tutorial](https://www.youtube.com/watch?v=fiaiA-o83c4) ı takip edeceğiz.  
-Bu bölüm için bir ekran a ihtiyacın var, veya X server mevcut olan bir işletim sistemine. X server programlar ve OS arasında bir ara birim olarak görev yapar. X server ı havalı yapan bir özellik de başka bir cihazda çalışan X server işlemine uzaktan bağlanabiliyor olmamız. Bu anlattıklarım çok mantıksız gelmiş veya bir cacık anlamamış olabilirsin :). Eğer öyleyse endişelenme, sadece adımları takip et.
+ 
+Bu bölüm için bir ekrana ihtiyacın var, veya X server mevcut olan bir işletim sistemine. X server programlar ve OS arasında bir ara birim olarak görev yapar. X serverı havalı yapan bir özellik de başka bir cihazda çalışan X server işlemine uzaktan bağlanabiliyor olmamız.
 
-* Bunlardan birini yap:
-  * Cihazını (jetson), bir ekran a bağla,   
+* Aşağıdaki işlemlerden birisi ile devam edin:
+  * Cihazını (jetson), bir ekrana bağla,   
   veya
-  * X server mevcut olan bir işletim sisteminde oturum aç (linux de her zaman vardır, yani senin VM'inde de var. Aynı zamanda Macos'de [xquartz](https://www.xquartz.org/)'ı da kurabilirsin. Windows konusunda hiçbir fikrim yok)  
+  * X server mevcut olan bir işletim sisteminde oturum aç (linuxta her zaman vardır, yani senin VM'inde de var. Aynı zamanda Macos'de [xquartz](https://www.xquartz.org/)'ı da kurabilirsin.)  
   Bir ssh oturumu ile bağlan
   ```bash
   ssh user@host -X
@@ -341,12 +341,12 @@ source devel/setup.zsh
 roslaunch racecar teleop.launch
 ```
 
-"Portları bulamadım" gibi bir yığın hata göreceksin. Bu hataları düzeltmemiz için port kuralları ayarlamamız gerek. Port konfigürasyonu için devam et..
+"Portları bulamadım" gibi bir yığın hata göreceksin. Bu hataları düzeltmemiz için port kuralları ayarlamamız gerek. Port konfigürasyonu için devam et.
 
 ---
 
 ## Usb port kuralları konfigürasyonu
-Usb sensörleri, motoru vb taktığımızda linux bunlara ttyUSB0 gibi adresler verir. Bu adresler herkesde aynı olmayabilir, ama sabit olmasını istiyoruz ki daha sonra hangi port a ney bağlı diye bakmakla uğraşmayalım.
+Usb sensörleri, motoru ve diğer donanımları taktığımızda linux bunlara ttyUSB0 gibi adresler verir. Bu adresler herkesde aynı olmayabilir, ama sabit olmasını istiyoruz ki daha sonra hangi porta ne bağlı diye bakmakla uğraşmayalım.
 
 Önce usb cihazları bul:
 ```bash
@@ -382,7 +382,7 @@ Vendor ID ve/veya Product ID'ye ihtiyacımız var. Neyse ki lsusb aşağıdaki f
 Bus <bus number> Device <device number>: ID <vendor id>:<product id> <Device name>
 ```
 Hadi onları alalım.
-İlk cihaz `(Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC)` scanse sweep lidar oluyor. İkincisi imu (9d0f göndermesini farkettin mi?). Son olarak(`STMicroelectronics`) de vesc. Mesela vesc'nin vendor ID'si `0483`, and product ID'si `5740`, bazı sayılar senin ürününde farklı olabilir o yüzden kontrol etmen gerek.
+İlk cihaz `(Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC)` scanse sweep lidar oluyor. İkincisi IMU. Son olarak(`STMicroelectronics`) de VESC. Mesela VESC'in vendor ID'si `0483`, and product ID'si `5740`, bazı sayılar senin ürününde farklı olabilir o yüzden kontrol etmen gerek.
 
 Usb port kurallarını ayarlamak için usb kural dosyasını düzenleyeceğiz:
 ```bash
@@ -411,7 +411,7 @@ lrwxrwxrwx 1 root root 7 Nov  8 21:29 /dev/imu -> ttyACM1
 ```
 
 
-Buraya kadar herşey çalışıyorsa programı incelemeye başlayabiliriz! Örnek ROS dökümanlarımıza ve örnek kodlara bir göz at:  
+Buraya kadar herşey çalışıyorsa programı incelemeye başlayabiliriz! Örnek ROS dökümanlarımıza ve örnek kodlara bir göz atabilirsiniz:  
 [ROS temelleri](lecture%20materials/ros%20fundamentals.md)  
 [Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
 
@@ -424,7 +424,7 @@ usb-devices | grep "Manufacturer\|Product\|SerialNumber\|^$"
 ```
 
 # Projeyi kendi çalışma alanına taşı:
-[Projeyi klonladıktan sonra](#installracecar) kendi çalışma alanına taşıyıp takım arkadaşlarınla Git kullanmak istersen (öhm, istemelisin!):
+[Projeyi klonladıktan sonra](#installracecar) kendi çalışma alanına taşıyıp takım arkadaşlarınızla Git kullanmak isterseniz:
 
 ana dizindeki `.gitmodules` dosyasına gir. Buna benziyor olmalı:
 ```bash
@@ -441,9 +441,9 @@ ana dizindeki `.gitmodules` dosyasına gir. Buna benziyor olmalı:
 	path = src/vesc
 	url = https://github.com/mit-racecar/vesc
 ```
-Bu gördüklerine submodule deniyor (Ayrıntı için: [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)). Submodule ler sayesinde birden fazla git projesini bir proje altında toplayabiliyoruz, burada da öyle yaptık. Fakat muhtemelen değişiklik yaptığında commit ve push dediğin zaman iznin olmadığını söyleyecek, bunun için kendi özel repository ni oluşturmalısın.  
-* Github da her proje için (racecar, racecar-controllers, racecar-simulator, vesc) bir repository oluştur ( - Nasıl yapılıyodu unuttum!: [Github: Create A Repo](https://help.github.com/articles/create-a-repo/))  
-Veya değişiklik yapmayacağını düşündüğün repo varsa (mesela muhtemelen vesc), o repository için bunu yapmana gerek yok. 
+Bu gördüklerine submodule deniyor (Ayrıntı için: [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)). Submodule ler sayesinde birden fazla git projesini bir proje altında toplayabiliyoruz, burada da öyle yaptık. Fakat muhtemelen değişiklik yaptığında commit ve push dediğin zaman iznin olmadığını söyleyecek, bunun için kendi özel repository'ni oluşturmalısın.  
+* Github da her proje için (racecar, racecar-controllers, racecar-simulator, vesc) bir repository oluşturun ([Github: Create A Repo](https://help.github.com/articles/create-a-repo/))  
+Veya değişiklik yapmayacağını düşündüğün repo varsa (mesela muhtemelen VESC), o repository için bunu yapmana gerek yok. 
 * Repoların adreslerini az önceki `.gitmodules` dosyasında değiştir, kendininkileri yaz. Mesela şunun gibi:
 ```bash
 [submodule "src/racecar"]
@@ -476,7 +476,7 @@ git remote add origin <senin racecar/simulator/controller vb. repository nin adr
 git push origin master
 ```
 
-Github a bak ve kontrol et, projen artık senin adresinde olmalı. Submodule lere basınca da işaret ettikleri repository e yönlendirmesi gerek. Bunları yapıyorsa herşey tamam demektir.
+Github a bak ve kontrol et, projen artık senin adresinde olmalı. Submodule'lere basınca da işaret ettikleri repository'e yönlendirmesi gerek. Bunları yapıyorsa herşey tamam demektir.
 
 ---
 
@@ -532,12 +532,7 @@ Bu kurulum uzun sürecektir(~45 dakika).
 
 ### Jupyter Notebook
 
-Öncelikle Ipython'u kuralım
-
-```bash
-sudo apt-get -y install ipython ipython-notebook
-```
-Ardından Jupyter Notebook kurulumuna geçebiliriz.
+Jupyter Notebook kurulumunu aşağıdaki komut ile yapabilirsiniz.
 
 ```bash
 sudo -H pip install jupyter
