@@ -260,7 +260,15 @@ Bu komutu çalıştırdığınızda firmware'ı yüklemek için aşağıdaki ara
 
 **Serial Connection** altında *VESC-ttyACM0* adı ile VESC'i göreceksiniz. Eğer bu isim ile bir cihaz görünmüyor ise kernel'i derlerken yukarıda belirtilen ayarların yapıldığından ve VESC'in Hub'a bağlı olduğundan emin olun. **Connect** butonuna bastığınızda VESC ile bağlantınız kurulacaktır. 
 
+Üst menüden **Firmware**'a tıklayın. 
 
+![bldc_firmware](images/bldc_firmware.png)
+
+**Choose**'a tıklayın. Aşağıdaik gibi bir uyarı alacaksınız. **OK**'a tıkladıktan sonra devam edebilirsiniz. 
+
+<p align="center">
+  <img src="images/warning.png" />
+</p>
 
 Bununla işin bittiğinde racecar kodunu kurabiliriz!
 
