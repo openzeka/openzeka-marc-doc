@@ -131,6 +131,59 @@ Lastly:
 ```bash
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
+## Install drivers for VESC
+You need a montior or an OS which uses X Server for this part of the tutorial. X Server runs as an interface that connects apps and OS.
+
+* You can proceed with one of the selections below:
+  * Connect the Jetson to a monitor.
+  Or
+  * Login on an OS which has X Server.
+    Connect to the device using a SSH session
+    ```bash
+    ssh user@host -X
+    # -X seçeneğine dikkatini çekerim
+    ```
+    
+    Make sure that X Server is up and running:
+    ```bash
+    nautilus .
+    ```
+    If you see some windows shows up on your screen, you are rady to go!
+ 
+First, we need to make sure that some dependincies is installed. For that, run the code below:
+
+```bash
+sudo apt-get install qtcreator qt-sdk libudev-dev libqt5serialport5-dev 
+```
+
+After the installation, we need to pull firmware for the VESC from github and compile it. For that, run the codes below sequentially:
+
+```bash
+cd ~
+git clone https://github.com/vedderb/bldc-tool
+cd bldc-tool
+# Derleyelim
+qmake -qt=qt5
+make clean && make
+```
+
+After this, we need to pull the configuration files for VESC:
+
+```bash
+cd ~
+git clone https://github.com/mit-racecar/hardware.git
+```
+
+After all these steps, VESC firmware files is at `~/bldc-tool/firmwares` and configuration files is at `~/hardware/vesc`.
+
+Run these commands sequentially to install VESC Firmware.
+
+```bash
+cd ~/bldc-tool
+./BLDC-Tool
+```
+When you run those commands, an interface will show up to install firmware.
+
 
 ## Install drivers for VESC
 We will follow [this](https://www.youtube.com/watch?v=fiaiA-o83c4) tutorial on youtube to install VESC.  
@@ -150,6 +203,8 @@ You will need a display for this part, or a desktop environment with the X serve
   nautilus .
   ```
   If you see the window rendered on your screen, you're good to go!
+  
+  asd
 
 If you have done either of the above, you can proceed with [the video tutorial by Jetsonhacks](https://www.xquartz.org/)  
 After you're done with that, we can install the racecar code!
