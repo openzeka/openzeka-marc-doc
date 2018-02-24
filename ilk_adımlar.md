@@ -270,6 +270,14 @@ Bu komutu çalıştırdığınızda firmware'ı yüklemek için aşağıdaki ara
   <img src="images/warning.png" />
 </p>
 
+Servo motor kullandığımız için `~/bldc-tool/firmwares/hw_410_411_412` dizininde bulunan `VESC_servoout.bin` dosyasını seçin. 
+
+<p align="center">
+  <img src="images/save_bldc.png" />
+</p>
+
+**Upload** butonuna basarak VESC'e Firmware yüklemesini başlatabilirsiniz. Yükleme bittikten sonra uygulama kapanacaktır. Terminalden yukarıdaki aynı yolu kullanarak tekrar başlatabilirsiniz. Bu adım ile VESC'e firmware yüklemiş olduk. 
+
 Bununla işin bittiğinde racecar kodunu kurabiliriz!
 
 ## <a name="installracecar"></a> Racecar'ı kur
