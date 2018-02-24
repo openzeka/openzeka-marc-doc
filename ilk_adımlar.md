@@ -278,7 +278,17 @@ Servo motor kullandığımız için `~/bldc-tool/firmwares/hw_410_411_412` dizin
 
 **Upload** butonuna basarak VESC'e Firmware yüklemesini başlatabilirsiniz. Yükleme bittikten sonra uygulama kapanacaktır. Terminalden yukarıdaki aynı yolu kullanarak tekrar başlatabilirsiniz. Bu adım ile VESC'e firmware yüklemiş olduk. 
 
-Bununla işin bittiğinde racecar kodunu kurabiliriz!
+bldc-tool'u yeniden başlattıktan sonra *VESC-ttyACM0* adı ile **connect**'e tıklamayı unutmayın. 
+
+**Read Configuration**'a tıklayın. Mevcut konfigürasyon ayarları mevcut ekranda görünecektir. 
+
+**Load XML** butonuna tıklayın. `~/hardware/vesc/6.141_bldc_old_hw_30k_erpm.xml` dizinindeki dosyası seçin. 
+
+**Write Configuration** butonuna tıklayın. Daha sonra **Reboot**'a tıklayarak VESC'i yeniden başlatın. Bu adımda uygulama yine kapanabilir. Yukarıda belirtilen yol ile tekrar uygulamayı başlatabilirsiniz. Uygulamanın kapanması, VESC'in yeniden başlatılmasını engellemez. 
+
+Uygulamayı yeniden başlattıktan sonra **Read Configuration**'a tıklayarak ayarların aşağıdaki gibi olduğundan emin olunuz. 
+
+VESC ayarlarını yaptıktan sonra *Racecar* kurulumuna geçebilirsiniz. 
 
 ## <a name="installracecar"></a> Racecar'ı kur
 Ana dizine racecar kodunu yükleyeceğiz, önce ana dizine gir ve kodu indir:
