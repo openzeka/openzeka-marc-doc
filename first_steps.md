@@ -185,7 +185,38 @@ cd ~/bldc-tool
 When you run those commands, an interface will show up to install firmware.
 First, make sure that battery connected to VESC and also VESC connected to the USB Hub. In addition check the VESC lights. If RED light blinks, your battery level is low. We highly recommend that continue this part of the tutorial after your battery is fulled. If BLUE light is solid than you are good to go!
 
-Under **Serial Connection**, you will see the *VESC-ttyACM0*(this your VESC).
+Under **Serial Connection**, you will see the *VESC-ttyACM0*(this is your VESC). If you don't see this name, make sure that you followed the steps above when you compile kernel and VESC connected to USB Hub.
+Whwn you press **Connect** button, you will be connected to the VESC.
+
+Choose **Firmware** from the upper menu.
+
+![bldc_firmware](images/bldc_firmware.png)
+
+Press **Choose**. It will prompt an error as below. Just press **OK** and then you can continue.
+
+<p align="center">
+  <img src="images/warning.png" />
+</p>
+
+Since we use servo motor, choose the `VESC_servoout.bin` file from `~/bldc-tool/firmwares/hw_410_411_412` directory.
+
+<p align="center">
+  <img src="images/save_bldc.png" />
+</p>
+
+You can choose **Upload** to start the Firmware installation. Application will be closed once installation is completed. However, you can start it again by following the same steps. We completed VESC firmware installation with this step.
+
+After you restart *bldc-tool*, DO NOT forget to press **connect** with the name of *VESC-ttyACM0*.
+
+Click **Read Configuration**. Current configuration settings will be displayed on window.
+
+Press the **Load XML** button. Choose the file which placed at `~/hardware/vesc/6.141_bldc_old_hw_30k_erpm.xml` directory.
+
+Press **Write Configuration** button. Then choose **Reboot** and VESC will restart itself. Application may shutdown itself during this step. This doesn't harm the *Reboot* process. Once again, you can start the app using the earlier method.
+
+After you restart the application, make sure that **Read Configuration** file is the same as below.
+
+After you configured the VESC settings, you can proceed to *Racecar* installation.
 
 ## Install drivers for VESC
 We will follow [this](https://www.youtube.com/watch?v=fiaiA-o83c4) tutorial on youtube to install VESC.  
