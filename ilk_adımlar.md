@@ -1,7 +1,7 @@
 ![logo](images/Open-Zeka-logo.png)
 
 <p align="center">
-	<img src="images/Open-Zeka-logo.png" style="width:500px" />
+	<img src="images/Open-Zeka-logo.png" style="max-width:300px" />
 </p>
 
 - [Jetson'a JetPack kurduktan sonra izlenecek ilk adımlar](https://github.com/openzeka/docs/blob/master/ilk_ad%C4%B1mlar.md#jetsona-jetpack-kurduktan-sonra-izlenecek-ilk-adımlar)
