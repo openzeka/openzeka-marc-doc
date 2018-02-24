@@ -556,7 +556,9 @@ Tegrastats, sistem kaynaklarının ne kadarının kullanıldığını gösteren 
 ```
 Çıktı şu şekilde olacaktır. 
 
-![tegrastats](images/tegrastats.png)
+<p align="center">
+  <img src="images/tegrastats.png" />
+</p>
 
 Burada GPU kullanımı gösterilmemektedir. GPU kullanımı takip etmek için _super\_user_ modunda çalıştırmamız gerekiyor. Bunun için : 
 ```bash
@@ -565,7 +567,9 @@ sudo su
 ```
 En sağda gösterilen **GR3D** bizim GPU'muzu göstermektedir. 
 
-![tegrastats_with_gpu](images/tegrastats_gpu.png)
+<p align="center">
+  <img src="images/tegrastats_gpu.png" />
+</p>
 
 NVPModel'in farklı modlarda nasıl çalıştığını aşağıdaki tabloda görebilirsiniz. 
 
@@ -578,6 +582,7 @@ Mode | Mode Name | Denver 2 | Frequency | ARM A57 | Frequency | GPU Frequency
 4 | Max-P Denver | 2 | 2.0 GHz | 0 | | 1.12 Ghz
 
 Çalıştırmak için aşağıdaki kodu uygulayabilirsiniz.
+
 ```bash
 sudo nvpmodel -m 0
 # Burada 0 yerine istediğiniz modu girebilirsiniz.
@@ -588,14 +593,20 @@ sudo nvpmodel -m 0
 Buraya kadar başarıyla gelebildiyseniz artık veri toplayabiliriz. Veri toplama işlemine başlamadan önce aracı aracın bataryalarının dolu olduğundan ve tüm donanımın özellikle de joystick ve kameranın bağlı olduğundan emin olun. Teleop'u çalıştırmadan önce joytstick'in doğru ayarlandığından emin olalım. 
 Öncelikle joystick'in açık olduğundan ve _mode_ ışığının **yanmadığından** emin olun. Vibration tuşu ile kontrol edin. **D** moduna alın. 
 
-![D mode](images/joystick_d_mode.png)
+<p align="center">
+  <img src="images/joystick_d_mode.png" />
+</p>
 
 Aşağıda gösterilen dizini kontrol edin
 
 ```bash
 ls /dev/input
 ```
-![js0](images/js0.png)
+
+<p align="center">
+  <img src="images/js0.png" />
+</p>
+
 
 Bu komutun çıktısında **js0** adında bir dosya görüyor olmanız lazım. Eğer **js1** gibi bir dosya var ise aşağıdaki komutu çalıştırın.
 
@@ -623,11 +634,16 @@ rosrun deep_learning collect_data.py
 ```
 
 Kodu çalıştırdıktan sonra aşağıdaki gibi araca ait hız ve açı değerleri akmaya başlayacaktır. 
-![Data Flowing](images/data_flowing.png)
+
+<p align="center">
+  <img src="images/data_flowing.png" />
+</p>
 
 Joystick ile kontrol etmeye başladığınızda hız ve açı değerlerinin resimdeki gibi değiştiğini göreceksiniz.
 
-![Data Flowing Change](images/daha_flowing_change.png)
+<p align="center">
+  <img src="images/daha_flowing_change.png" />
+</p>
 
 Aracı sürmeye başlayarak veri toplayabilirsiniz. Kameradan alınan görüntü, hız ve açı değerleri **racecar-workspace/src/racecar-controllers/marc-examples/deep_learning/data/** klasörüne kaydedilecektir. Her collect_data.py dosyasını çalıştırdığınızda **001**'den başlayarak ve artarak yeni bir klasör oluşturulacak ve veriler o klasöre kaydedilecektir. 
 
