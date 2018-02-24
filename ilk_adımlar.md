@@ -246,10 +246,25 @@ cd ~
 git clone https://github.com/mit-racecar/hardware.git
 ```
 
-Bu işlemlerden sonra VESC Firmware'ı **~/bldc-tool/firmwares**, konfigürasyon dosyaları ise **~/hardware/vesc** klasörlerinin içinde bulunmaktadır. 
+Bu işlemlerden sonra VESC Firmware'ı `~/bldc-tool/firmwares`, konfigürasyon dosyaları ise `~/hardware/vesc` klasörlerinin içinde bulunmaktadır. 
+
+VESC Firmware'ı yüklemek için aşağıdaki komutları sırasıyla uygulayın. 
+
+```bash
+cd ~/bldc-tool
+./BLDC-Tool
+```
+
+Bu komutu çalıştırdığınızda firmware'ı yüklemek için aşağıdaki arayüz karşınıza gelecektir. 
+Öncelikle VESC'e bataryanın bağlı olduğundan ve USB kablosuyla Hub'a bağlı olduğundan emin olun. Ayrıca VESC ışıklarını da kontrol edin. Eğer kırmızı ışık yanıp sönüyorsa bataryanız bitmek üzere demektir. Bataryanızı şarj ettikten sonra bu işleme devam etmeniz önerilmektedir. Sabit bir mavi ışığın yanması bataryanızın dolu olduğunu anlamına gelmektedir ve ek birşey yapmanıza gerek yoktur. 
+
+**Serial Connection** altında *VESC-ttyACM0* adı ile VESC'i göreceksiniz. Eğer bu isim ile bir cihaz görünmüyor ise kernel'i derlerken yukarıda belirtilen ayarların yapıldığından ve VESC'in Hub'a bağlı olduğundan emin olun. **Connect** butonuna bastığınızda VESC ile bağlantınız kurulacaktır. 
+
+
+
 Bununla işin bittiğinde racecar kodunu kurabiliriz!
 
-## <a name="installracecar"></a> Racecar ı kur
+## <a name="installracecar"></a> Racecar'ı kur
 Ana dizine racecar kodunu yükleyeceğiz, önce ana dizine gir ve kodu indir:
 
 ```bash
