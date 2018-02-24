@@ -223,7 +223,30 @@ Bu bölüm için bir ekran a ihtiyacın var, veya X server mevcut olan bir işle
   ```
   Eğer kendi ekranında bir pencerenin açıldığını görürsen devam etmek için hazırsın!
 
-Yukarıdaki seçeneklerden herhangi birini yaptıysan [Jetsonhacks'in bu videosu](https://www.youtube.com/watch?v=fiaiA-o83c4) ile devam edebilirsin  
+Öncelikle bazı gereksinimlerin yüklü olduğundan emin olalım. Bunun için aşağıdaki kodu çalıştırın.
+
+```bash
+sudo apt-get install qtcreator qt-sdk libudev-dev libqt5serialport5-dev 
+```
+
+Yükleme bittikten sonra VESC için firmware'ı github'tan çekelim ve derleyelim. Bunun için aşağıdaki kodları sırasıyla çalıştırın. 
+
+```bash
+cd ~
+git clone https://github.com/vedderb/bldc-tool
+cd bldc-tool
+# Derleyelim
+qmake -qt=qt5
+make clean && make
+```
+
+Daha sonra VESC için konfigürasyon dosyalarının çekelim. 
+```bash
+cd ~
+git clone https://github.com/mit-racecar/hardware.git
+```
+
+Bu işlemlerden sonra VESC Firmware'ı **~/bldc-tool/firmwares**, konfigürasyon dosyaları ise **~/hardware/vesc** klasörlerinin içinde bulunmaktadır. 
 Bununla işin bittiğinde racecar kodunu kurabiliriz!
 
 ## <a name="installracecar"></a> Racecar ı kur
