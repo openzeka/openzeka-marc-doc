@@ -141,7 +141,7 @@ You need a montior or an OS which uses X Server for this part of the tutorial. X
     Connect to the device using a SSH session
     ```bash
     ssh user@host -X
-    # -X seçeneğine dikkatini çekerim
+    # Attention to the -X flag!
     ```
     
     Make sure that X Server is up and running:
