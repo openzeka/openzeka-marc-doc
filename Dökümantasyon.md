@@ -16,6 +16,7 @@
 - [Projeyi kendi çalışma alanına taşıma](#projeyi-kendi-%C3%A7al%C4%B1%C5%9Fma-alan%C4%B1na-ta%C5%9F%C4%B1)
 - [ROS uzaktan bağlantısını varsayılan olarak açılması için konfigüre et](#ros-uzaktan-ba%C4%9Flant%C4%B1s%C4%B1n%C4%B1-varsay%C4%B1lan-olarak-a%C3%A7%C4%B1lmas%C4%B1-i%C3%A7in-konfig%C3%BCre-et)
 - [**Gerekli eklentilerin kurulması**](#gerekli-eklentilerin-kurulmas%C4%B1)
+  - [Caffe kurulumu](#caffe-kurulumu) 
   - [Tensorflow 1.5.0](#tensorflow)
   - [Keras ve diğer eklentiler](#keras-ve-di%C4%9Fer-eklentiler)
   - [Jupyter Notebook](#jupyter-notebook)
