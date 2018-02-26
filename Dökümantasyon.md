@@ -17,6 +17,7 @@
 - [ROS uzaktan bağlantısını varsayılan olarak açılması için konfigüre et](#ros-uzaktan-ba%C4%9Flant%C4%B1s%C4%B1n%C4%B1-varsay%C4%B1lan-olarak-a%C3%A7%C4%B1lmas%C4%B1-i%C3%A7in-konfig%C3%BCre-et)
 - [**Gerekli eklentilerin kurulması**](#gerekli-eklentilerin-kurulmas%C4%B1)
   - [Caffe kurulumu](#caffe-kurulumu) 
+  - [pyTorch kurulumu](#torch-kurulumu) 
   - [Tensorflow 1.5.0](#tensorflow)
   - [Keras ve diğer eklentiler](#keras-ve-di%C4%9Fer-eklentiler)
   - [Jupyter Notebook](#jupyter-notebook)
@@ -588,6 +589,37 @@ echo “LIBRARY_DIRS += /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5
 
 Buraya kadar herhangi bir hata ile karşılaşmadıysanız caffe kurulumu başarılı bir şekilde tamamlanmıştır. 
 Eğer bu adımları takip ederek caffe'yi derlediyseniz Caffe executable dosyasını `~/caffe/tool` dizini altında bulabilirsiniz. 
+
+### Torch Kurulumu
+
+Öncelikle Torch için bazı gereksinimlerin kurulumunu yapalım. Aşağıdaki kodları sırasıyla terminalde çalıştırın. 
+
+```bash 
+sudo apt install libopenblas-dev libatlas-dev liblapack-dev
+sudo apt install liblapacke-dev checkinstall
+sudo pip install numpy scipy pyyaml scikit-build cffi
+sudo apt install ninja-build
+sudo apt install libffi-dev
+```
+
+Genel gereksinimleri kurduktan sonra github'tan Torch'u çekelim.
+
+```bash
+cd ~
+git clone https://github.com/pytorch/pytorch.git
+cd pytorch
+git submodule update --init
+# Derleyelim.
+sudo python setup.py install 
+```
+
+Kurulum işlemi bittikten sonra aşağıdaki gibi test edebilirsiniz. 
+
+```bash
+import torch
+torch.backends.cudnn.is_acceptable(torch.cuda.FloatTensor(1))
+# Eğer True dönerse tebrikler!
+```
 
 
 ### Tensorflow 
