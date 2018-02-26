@@ -512,6 +512,83 @@ emulate zsh
 
 ## Gerekli eklentilerin kurulması
 
+### Caffe Kurulumu
+
+Caffe kurulumuna geçmeden önce caffe için bazı gereksinimlerin kurulu olması gerekmektedir. Aşağıdaki komutları sırasıyla çalıştırınız. Caffe için gerekli eklentilerin kurulması işlemidir. 
+
+```bash
+sudo add-apt-repository universe
+sudo apt-get update -y
+sudo apt-get install cmake -y
+# Genel gereksinimler
+sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler -y
+sudo apt-get install --no-install-recommends libboost-all-dev -y
+# BLAS
+sudo apt-get install libatlas-base-dev -y
+# Diğer gereksinimler
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev -y
+sudo apt-get install python-dev python-numpy -y
+sudo usermod -a -G video $USER
+```
+
+Yukarıdaki kurulumlar tamamlandıktan sonra aşağıdaki adımları takip edin. Caffe'yi githubtan çekip derleme işlemini yapacağız. 
+
+```bash
+cd ~
+git clone https://github.com/BVLC/caffe.git 
+cd caffe
+cp Makefile.config.example Makefile.config
+# config dosyası içinde yapılması gereken bazı değişiklikler
+sudo sed -i 's/# USE_CUDNN := 1/USE_CUDNN := 1/' Makefile.config
+sudo sed -i 's/# WITH_PYTHON_LAYER := 1/WITH_PYTHON_LAYER := 1/' Makefile.config
+```
+
+Devam etmeden önce config dosyasına Jetson TX2'ye ait mimari kodlarını da eklememiz gerekmektedir. `Makefile.config` dosyasını çift tıklayarak açın.
+**CUDA_ARCH** değişkenini dosya içerisinde bulun. `compute_62` ve `sm_62` satırları (aşağıdaki son iki satır) varsayılan olarak bulunmuyor olabilir. Dosyaya onları eklediğinizden emin olun. **Makefile.config** dosyası içerisinde bulunan **CUDA_ARCH** değişkeninin aşağıdaki ile aynı olduğundan emin olun ve dosyayı kaydederek kapatın. 
+
+```bash
+CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \
+		-gencode arch=compute_20,code=sm_21 \
+		-gencode arch=compute_30,code=sm_30 \
+		-gencode arch=compute_35,code=sm_35 \
+		-gencode arch=compute_50,code=sm_50 \
+		-gencode arch=compute_52,code=sm_52 \
+		-gencode arch=compute_53,code=sm_53 \
+		-gencode arch=compute_60,code=sm_60 \
+		-gencode arch=compute_61,code=sm_61 \
+		-gencode arch=compute_62,code=sm_62 \
+		-gencode arch=compute_62,code=compute_62 
+```
+
+Bu değişikliği yaptıktan sonra devam edebiliriz. 
+
+
+```bash
+# Ubuntu 16.04 static cuda ile ilgili bir hata verdiğinden derlerken bu özelliğini kapatmamız gerek.
+cmake -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF
+# Derleme işlemi Jetsondaki 6 çekirdeği de kullanılarak yapılacaktır. Bu işlem sırasında başka bir işlem yapmamanız önerilir.
+# Ayrıca bu adımdan önce Jetsonu yüksek performans moduna almak işlemi hızlandıracaktır. 
+sudo nvpmodel -m 0
+sudo ~/jetson_clocks.sh
+make -j6 all
+# Derleme işlemi bittikten sonra testleri çalıştıralım
+make -j6 runtest
+# Hızlı bir test (opsiyonel)
+cd ~/caffe
+tools/caffe time --model=models/bvlc_alexnet/deploy.prototxt --gpu=0
+```
+
+Eğer işlemler sırasında hdf5 hatası alınırsa şu adımları uyguladıktan sonra tekrar derleyin. 
+
+```bash
+echo “INCLUDE_DIRS += /usr/include/hdf5/serial” >> Makefile.config
+echo “LIBRARY_DIRS += /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial” >> Makefile.config
+```
+
+Buraya kadar herhangi bir hata ile karşılaşmadıysanız caffe kurulumu başarılı bir şekilde tamamlanmıştır. 
+Eğer bu adımları takip ederek caffe'yi derlediyseniz Caffe executable dosyasını `~/caffe/tool` dizini altında bulabilirsiniz. 
+
+
 ### Tensorflow 
 İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow 1.5 sürümünü kurun. Bunun için şu adımları takip edin.
 
