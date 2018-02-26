@@ -17,7 +17,6 @@
 - [ROS uzaktan bağlantısını varsayılan olarak açılması için konfigüre et](#ros-uzaktan-ba%C4%9Flant%C4%B1s%C4%B1n%C4%B1-varsay%C4%B1lan-olarak-a%C3%A7%C4%B1lmas%C4%B1-i%C3%A7in-konfig%C3%BCre-et)
 - [**Gerekli eklentilerin kurulması**](#gerekli-eklentilerin-kurulmas%C4%B1)
   - [Caffe kurulumu](#caffe-kurulumu) 
-  - [pyTorch kurulumu](#torch-kurulumu) 
   - [Tensorflow 1.5.0](#tensorflow)
   - [Keras ve diğer eklentiler](#keras-ve-di%C4%9Fer-eklentiler)
   - [Jupyter Notebook](#jupyter-notebook)
@@ -595,32 +594,31 @@ Eğer bu adımları takip ederek caffe'yi derlediyseniz Caffe executable dosyas�
 Öncelikle Torch için bazı gereksinimlerin kurulumunu yapalım. Aşağıdaki kodları sırasıyla terminalde çalıştırın. 
 
 ```bash 
-sudo apt install libopenblas-dev libatlas-dev liblapack-dev
-sudo apt install liblapacke-dev checkinstall
-sudo pip install numpy scipy pyyaml scikit-build cffi
-sudo apt install ninja-build
-sudo apt install libffi-dev
+sudo apt-get install --no-install-recommends git software-properties-common -y
 ```
 
-Genel gereksinimleri kurduktan sonra github'tan Torch'u çekelim.
+Genel gereksinimleri kurduktan sonra github'tan Torch'u çekelim ve kuruluma geçelim.
 
 ```bash
-cd ~
-git clone https://github.com/pytorch/pytorch.git
-cd pytorch
-git submodule update --init
-# Derleyelim.
-sudo python setup.py install 
+echo 'export TORCH_ROOT=~/torch' >> ~/.bashrc
+git clone https://github.com/torch/distro.git ~/torch --recursive
+cd ~/torch
+./install-deps
+./install.sh -b
+source ~/.bashrc
 ```
 
-Kurulum işlemi bittikten sonra aşağıdaki gibi test edebilirsiniz. 
+Aşağıdaki kurulumları tamamlandıktan sonra **Torch** kurulumu tamamlanacaktır. 
 
-```python
-import torch
-torch.backends.cudnn.is_acceptable(torch.cuda.FloatTensor(1))
-# Eğer True dönerse tebrikler!
+
+```bash
+sudo apt-get install --no-install-recommends libhdf5-serial-dev liblmdb-dev -y
+luarocks install tds
+luarocks install dpnn
+luarocks install "https://raw.github.com/deepmind/torch-hdf5/master/hdf5-0-0.rockspec"
+luarocks install "https://raw.github.com/Neopallium/lua-pb/master/lua-pb-scm-0.rockspec"
+luarocks install lightningmdb 0.9.18.1-1 LMDB_INCDIR=/usr/include LMDB_LIBDIR=/usr/lib/x86_64-linux-gnu
 ```
-
 
 ### Tensorflow 
 İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow 1.5 sürümünü kurun. Bunun için şu adımları takip edin.
