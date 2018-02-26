@@ -615,7 +615,7 @@ sudo python setup.py install
 
 Kurulum işlemi bittikten sonra aşağıdaki gibi test edebilirsiniz. 
 
-```bash
+```python
 import torch
 torch.backends.cudnn.is_acceptable(torch.cuda.FloatTensor(1))
 # Eğer True dönerse tebrikler!
