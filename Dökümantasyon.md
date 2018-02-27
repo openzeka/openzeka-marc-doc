@@ -622,15 +622,21 @@ luarocks install lightningmdb 0.9.18.1-1 LMDB_INCDIR=/usr/include LMDB_LIBDIR=/u
 ```
 
 ### Tensorflow 
-İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow 1.5 sürümünü kurun. Bunun için şu adımları takip edin.
+İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow'u kurun. Bunun için şu adımları takip edin.
 
 ```bash
-git clone https://github.com/JesperChristensen89/TensorFlow-Jetson-TX2.git
-cd ~/TensorFlow-Jetson-TX2/wheel_files
-sudo apt-get install -y python-pip python-dev
-sudo pip install tensorflow-1.5.0rc0-cp27-cp27mu-linux_aarch64.whl
+git clone https://github.com/openzeka/Tensorflow-for-Jetson-TX2.git ~/tensorflow
+cd ~/tensorflow/Tensorflow-for-Jetson-TX2/Jetpack-3.1/1.6
+sudo pip install tensorflow-1.6.0rc1-cp27-cp27mu-linux_aarch64.whl
 ```
 Tensorflow kurulumu tamamlandıktan sonra aşağıdaki gibi test edebilirsiniz. 
+
+```python
+import tensorflow as tf
+hello = tf.constant('Hello, TensorFlow!')
+sess = tf.Session()
+print(sess.run(hello))
+```
 
 ### Keras ve diğer eklentiler
 Şu kodu çalıştırmanız,bu adım için yeterli olacaktır.
