@@ -18,7 +18,7 @@
 - [**Gerekli eklentilerin kurulması**](#gerekli-eklentilerin-kurulmas%C4%B1)
   - [Caffe kurulumu](#caffe-kurulumu) 
   - [Torch kurulumu](#torch-kurulumu)
-  - [Tensorflow 1.5.0](#tensorflow)
+  - [Tensorflow](#tensorflow)
   - [Keras ve diğer eklentiler](#keras-ve-di%C4%9Fer-eklentiler)
   - [Jupyter Notebook](#jupyter-notebook)
   - [Jetson TX2 Yüksek Performans modu](#jetson-tx2-y%C3%BCksek-performans-modu)
