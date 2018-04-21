@@ -159,7 +159,7 @@ cd /usr/src/sources
 sudo rm -rf kernel_src-tx2.tbz2 
 ```
 
-## Scanse SDK sını kur
+## Scanse SDK Kurulumu
 ```bash
 cd ~/
 # clone the sweep-sdk repository
@@ -178,7 +178,9 @@ cmake --build .
 sudo cmake --build . --target install
 sudo ldconfig
 ```
-## ROS Kinetic i kur
+
+
+## ROS Kinetic Kurulumu
 Racecar ROS (Robot Operating System) kütüphaneleri ile çalışıyor. Bundan daha sonra bahsedeceğiz, şimdi kuralım:  
 (Kurulum ile ilgili ayrıntılı ve açıklamalı döküman için: http://wiki.ros.org/kinetic/Installation/Ubuntu . Veya kısaca aşağıdakileri de uygulayabilirsin:)
 ```bash
@@ -307,7 +309,7 @@ github.com/openzeka/racecar-controllers
 
 Şimdi kodu derleyelim:
 ```bash
-cd ~/racecar-ws
+cd ~/racecar-workspace
 rm -rf build devel
 catkin_make
 ```
@@ -316,7 +318,7 @@ catkin_make sırasında *ackermann_msgs* hatası alırsanız, aşağıdaki eklen
 ```bash
 sudo apt-get install ros-kinetic-ackermann-msgs 
 sudo apt-get install ros-kinetic-serial
-cd ~/racecar-ws
+cd ~/racecar-workspace
 rm -rf build devel
 catkin_make
 ```
