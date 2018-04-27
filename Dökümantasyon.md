@@ -1,41 +1,42 @@
 ![logo](images/Open-Zeka-logo_resized.png)
 
-- [Jetson'a JetPack kurduktan sonra izlenecek ilk adımlar](#jetsona-jetpack-kurduktan-sonra-izlenecek-ilk-adımlar)
-  - [Jetson ın IP adresini al ve ssh ile bağlan](#jetson-%C4%B1n-ip-adresini-al-ve-ssh-ile-ba%C4%9Flan)
-  - [Şifreyi değiştir](#%C5%9Eifreyi-de%C4%9Fi%C5%9Ftir)
-  - [Text editör'ü kur](#text-edit%C3%B6r-%C3%BC-kur-%C3%B6zellikle-yeni-linux-kullan%C4%B1c%C4%B1s%C4%B1-isen-nano-kullan)
-  - [Hostname (bilgisayar ismini) değiştir](#hostname-i-bilgisayar-ismini-de%C4%9Fi%C5%9Ftir)
-  - [zsh'i kur (isteğe bağlı)](#zshi-kur-iste%C4%9Fe-ba%C4%9Fl%C4%B1)
-  - [screen'i kur](#screeni-kur)
+- [Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar](#jetsona-jetpack-kurduktan-sonra-izlenecek-ilk-adımlar)
+  - [Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması](#jetson-%C4%B1n-ip-adresini-al-ve-ssh-ile-ba%C4%9Flan)
+  - [Şifrenin değiştirilmesi](#%C5%9Eifreyi-de%C4%9Fi%C5%9Ftir)
+  - [Text editörün kurulması](#text-edit%C3%B6r-%C3%BC-kur-%C3%B6zellikle-yeni-linux-kullan%C4%B1c%C4%B1s%C4%B1-isen-nano-kullan)
+  - [Hostname'in(bilgisayar adı) değiştirilmesi](#hostname-i-bilgisayar-ismini-de%C4%9Fi%C5%9Ftir)
+  - [ZSH'ın kurulması (İSTEĞE BAĞLI)](#zshi-kur-iste%C4%9Fe-ba%C4%9Fl%C4%B1)
+  - [Screen'in kurulması](#screeni-kur)
 - [Kernelin yeniden derlenmesi](#kerneli-yeniden-derle)
-- [Scanse SDK sını kur](#scanse-sdk-s%C4%B1n%C4%B1-kur)
-- [ROS Kinetic kur](#ros-kinetic-i-kur)
-- [VESC sürücülerini yükle](#vesc-s%C3%BCr%C3%BCc%C3%BClerini-y%C3%BCkle)
-- [Racecar'ı kur](#-racecar-%C4%B1-kur)
-- [Usb port kuralları konfigürasyonu](#usb-port-kurallar%C4%B1-konfig%C3%BCrasyonu)
-- [Projeyi kendi çalışma alanına taşıma](#projeyi-kendi-%C3%A7al%C4%B1%C5%9Fma-alan%C4%B1na-ta%C5%9F%C4%B1)
-- [ROS uzaktan bağlantısını varsayılan olarak açılması için konfigüre et](#ros-uzaktan-ba%C4%9Flant%C4%B1s%C4%B1n%C4%B1-varsay%C4%B1lan-olarak-a%C3%A7%C4%B1lmas%C4%B1-i%C3%A7in-konfig%C3%BCre-et)
+- [Scanse SDK kurulumu](#scanse-sdk-s%C4%B1n%C4%B1-kur)
+- [ROS Kinetic kurulumu](#ros-kinetic-i-kur)
+- [VESC sürücülerinin yüklenmesi](#vesc-s%C3%BCr%C3%BCc%C3%BClerini-y%C3%BCkle)
+- [Racecar'ın kurulması](#-racecar-%C4%B1-kur)
+- [USB port kuralları konfigürasyonu](#usb-port-kurallar%C4%B1-konfig%C3%BCrasyonu)
+- [Projenin belirlenen çalışma alanına taşınması](#projeyi-kendi-%C3%A7al%C4%B1%C5%9Fma-alan%C4%B1na-ta%C5%9F%C4%B1)
+- [ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar](#ros-uzaktan-ba%C4%9Flant%C4%B1s%C4%B1n%C4%B1-varsay%C4%B1lan-olarak-a%C3%A7%C4%B1lmas%C4%B1-i%C3%A7in-konfig%C3%BCre-et)
 - [**Gerekli eklentilerin kurulması**](#gerekli-eklentilerin-kurulmas%C4%B1)
   - [Caffe kurulumu](#caffe-kurulumu) 
   - [Torch kurulumu](#torch-kurulumu)
-  - [Tensorflow](#tensorflow)
-  - [Keras ve diğer eklentiler](#keras-ve-di%C4%9Fer-eklentiler)
-  - [Jupyter Notebook](#jupyter-notebook)
+  - [Tensorflow kurulumu](#tensorflow)
+  - [Keras ve diğer eklentilerin kurulumu](#keras-ve-di%C4%9Fer-eklentiler)
+  - [Jupyter Notebook kurulumu](#jupyter-notebook)
   - [Jetson TX2 Yüksek Performans modu](#jetson-tx2-y%C3%BCksek-performans-modu)
 - [**Verilerin Toplanması**](#verilerin-toplanmas%C4%B1)
 - [**Toplanan verilerle ağın eğitilmesi**](#toplanan-verilerle-a%C4%9F%C4%B1n-e%C4%9Fitilmesi)
 - [**Eğitilen ağın kullanılması**](#e%C4%9Fitilen-a%C4%9F%C4%B1n-kullan%C4%B1lmas%C4%B1)
   
 
-# Jetson'a JetPack kurduktan sonra izlenecek ilk adımlar
-### Jetson ın IP adresini al ve ssh ile bağlan
-MacOS'de "lanscan", Windows'da "wnetwatcher", ve Linux'de "angry ip scanner" kullanabilirsin. Veya terminal i kullanarak IP tarayabilirsin:
+# Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar
+### Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması
+Bu bağlantının yapılabilmesi için MacOS'ta "lanscan", Windows'ta "wnetwatcher" ve Linux'ta "angry IP scanner" kullanılabilir.
+Bu yöntemler yerine, terminal kullanılarak da aşağıdaki komutlarda gösterildiği gibi IP taraması yapılabilir:
 
 ```bash
 sudo apt-get update && sudo apt-get install arp-scan
-sudo arp-scan --localnet ## Burada "--interface" seçeneğini araştırman gerekebilir
+sudo arp-scan --localnet 	## Bu adımda "--interface" parametresinin kullanımı incelenmelidir.
 ```
-Çıktı buna benzemeli:
+Çıktı aşağıdaki gibi olmalıdır:
 ```bash
 Interface: enp0s5, datalink type: EN10MB (Ethernet)
 Starting arp-scan 1.8.1 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/)
@@ -44,48 +45,48 @@ Starting arp-scan 1.8.1 with 256 hosts (http://www.nta-monitor.com/tools/arp-sca
 2 packets received by filter, 0 packets dropped by kernel
 Ending arp-scan 1.8.1: 256 hosts scanned in 1.546 seconds (165.59 hosts/sec). 2 responded
 ```
-IP yi öğrendikten sonra:
+IP öğrenildikten sonra aşağıda gösterildiği gibi bağlantı kurulabilir:
 ```bash
-ssh nvidia@<buraya IP adresi>
-# örnek:
-ssh nvidia@192.168.1.110 # varsayılan şifre: nvidia
+ssh nvidia@<IP adresi>
+# Örneğin:
+ssh nvidia@192.168.1.110 # Varsayılan şifre: nvidia
 ```
 
-### Şifreyi değiştir
-Şifreyi varsayılan olarak bırakmak iyi bir fikir değildir
+### Şifrenin değiştirilmesi
+Şifreyi varsayılan olarak bırakmak, güvenlik açısından iyi değildir.
 ```bash
 passwd
 ```
 
-### Text editör ü kur (özellikle yeni linux kullanıcısı isen nano kullan)
+### Text editörün kurulması (Linux konusunda tecrübesi az olan/olmayan kullanıcıların NANO kullanması tavsiye edilir.)
 ```bash
 sudo apt-get install nano
 ```
 
 ---
-### Hostname i (bilgisayar ismini) değiştir
-Her seferinde IP adresini aramak yerine yerel domain kullanmak için.  
-[Ascii Cinema sürümü (video gibi ama yazıları kopyalayabilirsin)](https://asciinema.org/a/nytXz7ZUMGAXb6VpHY0fLHEJY)
+### Hostname'in(bilgisayar adı) değiştirilmesi
+Her seferinde IP adresini aramak yerine yerel alan adı kullanmak için bu video takip edilebilir:
+[Ascii Cinema sürümü (yazılar kopyalayanabilmektedir)](https://asciinema.org/a/nytXz7ZUMGAXb6VpHY0fLHEJY)
 ```bash
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install avahi-daemon
 ```
-`/etc/hosts` dosyasına girip:
+`/etc/hosts` dizinine girilir:
 ```bash
 sudo nano /etc/hosts
 ```
-Şu satırı bul ve `tegra` yı istediğin isimle değiştir, mesela takımının adını yazabilirsin:
+Aşağıda gösterildiği şekilde benzer olan satır bulunur ve `tegra` istenilen isimle değiştirilebilir:
 ```bash
 ...
 
 127.0.1.1       tegra
 ...
 ```
-Aynı ismi bu dosyaya da yaz:
+Değiştirilen isim, aşağıda belirtilen dosyaya da yazılmalıdır:
 ```bash
 sudo nano /etc/hostname
 ```
-Son olarak `hostname` script ini çalıştır ve yeniden başlat:
+Son olarak aşağıda gösterildiği gibi `hostname` isimli script çalıştırılır ve sistem yeniden başlatılır:
 ```bash
 sudo /etc/init.d/hostname.sh
 
@@ -93,86 +94,86 @@ sudo reboot
 ```
 ---
 
-Şimdi hostname i kullanarak giriş yapabilirsin:
+Artık hostname kullanılarak giriş yapılabilir:
 ```bash
-ssh nvidia@<Buraya hostname>.local
+ssh nvidia@<HOSTNAME>.local
 # örnek:
-ssh nvidia@teamName.local
+ssh nvidia@TAKIM_ADI.local
 ```
 
-### zsh'i kur (isteğe bağlı)
+### ZSH'ın kurulması (İSTEĞE BAĞLI)
+Bunun için aşağıdaki videoda anlatılan adımlar takip edilebilir:
 Ascii cinema: https://asciinema.org/a/x6QlETqxDvdK8t0lmBvOWVoKD
 
-### screen'i kur
-Screen, linux terminal'inde program çalıştırırken işe yarayacak, bağlantı kopsa bile arkaplanda istediğimiz script i çalıştırmaya devam etmek için kullanacağımız bir program.
+### Screen'in kurulması
+Screen, Linux terminalinde program çalıştırılırken bağlantının kopması durumunda, arka planda istediğimiz scriptin çalışmaya devam etmesini sağlayan bir programdır.
 ```bash
 sudo apt-get install screen
 ```
-Screen kullanımını öğrenmek için:  
+Screen kullanımı hakkında daha detaylı bilgi için aşağıdaki kaynak takip edilebilir:  
 https://www.gnu.org/software/screen/manual/screen.html
 
 
-Devam etmeden önce bazı gerekli uygulamaların kurulması gereklidir. Bunun için terminalde şu kodu çalıştırabilirsiniz. 
+Bu aşamadan itibaren devam etmeden önce bazı gerekli uygulamaların kurulması gereklidir. Bunun için terminalde, aşağıdaki komut çalıştırılabilir:
 ```bash
 sudo apt-get install cmake ca-certificates
 ```
 
-## Kerneli yeniden derle
-Bu işlem için JetsonHacks tarafından hazırlanan döküman da takip edilebilir. 
-Kerneli derlemek için öncelikle gerekli dosyaları şuradan çekin
+## Kernelin yeniden derlenmesi
+Kernelin yeniden derlenmesi için, öncelikle aşağıda gösterildiği gibi gerekli dosyalar indirilir:
 ```bash
 cd ~/
 git clone https://github.com/jetsonhacks/buildJetsonTX2Kernel.git
 ```
-Dosyaları Jetsona kaydettikten sonra ilk olarak kernel dosyalarını NVIDIA'nın sitesinden çekelim. Bunun için aşağıdaki komutu çalıştırın
+Dosyalar Jetson'a kaydedildikten sonra ilk olarak, kernel dosyaları NVIDIA'nın sitesinden indirilmelidir. Bunun için aşağıdaki komutu çalıştırılabilir:
 ```bash
 cd ~/buildJetsonTX2Kernel
-#Getting the kernel sources
+#Kernel kaynaklarının indirilmesi
 ./getKernelSources.sh
 ```
 İşlem tamamlandıktan sonra .config dosyasındaki düzenlemeler için bir grafik arayüzü açılacaktır. 
-Burada bazı değişiklikler yapmamız gerekmektedir. JetsonHacks'e ait olan [bu videodan](https://www.youtube.com/watch?v=fxWObd1nK4s) da takip edebilirsiniz. 
+Burada bazı değişikliklerin yapılması gerekmektedir. JetsonHacks'e ait olan [bu videodan](https://www.youtube.com/watch?v=fxWObd1nK4s)  gerekli adımlar takip edilebilir.
 
-Öncelikle açılan ekrandan **General Setup**'a tıklayın. sağ tarafta açılan menüden **Local version -append to kernel release** çift tıklayın. Bu kısma - ile başlayan bir isim girebilirsiniz. Biz *-openzeka-v0.1* yazıp devam edeceğiz. 
+Öncelikle açılan ekrandan **General Setup**'a tıklanır, daha sonra ise sağ tarafta açılan menüden **Local version -append to kernel release** butonuna çift tıklanır. Bu kısma, - ile başlayan bir isim gireilebilir. Burada *-openzeka-v0.1* şeklinde isim verilecektir. 
 
-Daha sonra **Edit > Find** seçeneğinden açılan pencereye **ACM** yazarak **USB Modem (CDC ACM) support**'u aktif hale getirin.Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. 
+Daha sonra **Edit > Find** menüsünden açılan pencereye **ACM** yazılarak **USB Modem (CDC ACM) support** aktif hale getirilir. DİKKAT: Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. 
 
-Daha sonra aynı şekile aratarak **CH341** Portunu da aktifleştirin.
+Daha sonra aynı şekile arama yapılarak **CH341** portu da aktifleştirilir.
 
-Değişiklikleri kaydederek kapatın. Artık kerneli derleyebiliriz. Aşağıdaki kodu çalıştırın.
+Değişiklikler kaydedilir ve uygulama kapatılır. Artık kernel derlenebilir. Aşağıdaki komut çalıştırılır:
 ```bash
 cd ~/buildJetsonTX2Kernel
-#Building the kernel sources
+#Kernel kaynaklarının "build" edilmesi
 ./makeKernel.sh
 ```
-Bu işlem 10 dakika civarında sürmektedir. Derleme tamamlandıktan sonra, derlenen dosyaları kopyalabiliriz. Bunun için şu kodu çalıştırabilirsiniz.
+Bu işlem 10 dakika civarında sürmektedir. Derleme tamamlandıktan sonra, derlenen dosyalar kopyalanabilir. Bunun için aşağıdaki komut çalıştırılabilir:
 ```bash
 cd ~/buildJetsonTX2Kernel
-#Copying the kernel sources
+#Kernel kaynaklarının kopyalanması
 ./copyImage.sh
 ```
-Jetsonu yeniden başlatın
+Jetson, yeniden başlatılır.
 
-Bu işlemler bittikten sonra indirilen dosyaları silebilirsiniz. Dosyalar /usr/src/sources dizinine indirilmiştir. Silmek için aşağıdaki komutu çalıştırabilirsiniz. 
+Bu işlemler bittikten sonra indirilen dosyalar silinebilir. Dosyalar /usr/src/sources dizinine indirilmiştir. Silmek için aşağıdaki komut çalıştırılabilir:
 ```bash
 cd /usr/src/sources
 sudo rm -rf kernel_src-tx2.tbz2 
 ```
 
-## Scanse SDK Kurulumu
+## Scanse SDK kurulumu
 ```bash
 cd ~/
-# clone the sweep-sdk repository
+# sweep-sdk repository'si indirilir
 git clone https://github.com/scanse/sweep-sdk
 
-# enter the libsweep directory
+# libsweep dizinine girilir
 cd sweep-sdk/libsweep
 
-# create and enter a build directory
+# build adında bir klasör oluşturulur ve içerisine girilir.
 mkdir -p build
 cd build
 
-# build and install the libsweep library
+# libsweep kütüphanesi build edilir ve yüklenir.
 cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 sudo cmake --build . --target install
@@ -208,89 +209,101 @@ Son olarak:
 ```bash
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
-## VESC sürücülerini yükle
- 
-Bu bölüm için bir ekrana ihtiyacın var, veya X server mevcut olan bir işletim sistemine. X server programlar ve OS arasında bir ara birim olarak görev yapar. X serverı havalı yapan bir özellik de başka bir cihazda çalışan X server işlemine uzaktan bağlanabiliyor olmamız.
+
+## RPLIDAR kurulumu ve Test Edilmesi (ROS kurulumundan sonra yapılmalıdır)
+```bash
+cd ~/
+# rplidar_ros repository'si indirilir
+git clone https://github.com/robopeak/rplidar_ros.git
+
+# rplidar ros paketi ile yapılan taramanın grafiksel arayüzde görüntülenmesi
+roslaunch rplidar_ros view_rplidar.launch
+```
+
+## VESC sürücülerinin yüklenmesi
+Bu bölümün bir monitör varlığında veya X Server mevcut olan bir işletim sisteminde yapılması gerekmektedir. X Server, programlar ve işletim sistemi arasında bir ara birim olarak görev yapar. X Server sayesinde, bu uygulamanın çalıştığı başka bir cihaza da bağlantı yapmak mümkündür.
 
 * Aşağıdaki işlemlerden birisi ile devam edin:
-  * Cihazını (jetson), bir ekrana bağla,   
+  * Jetson, HDMI ile monitöre bağlanır.
   veya
-  * X server mevcut olan bir işletim sisteminde oturum aç (linuxta her zaman vardır, yani senin VM'inde de var. Aynı zamanda Macos'de [xquartz](https://www.xquartz.org/)'ı da kurabilirsin.)  
-  Bir ssh oturumu ile bağlan
+  * X Server mevcut olan bir işletim sisteminde oturum açıldıktan sonra (Bu özellik, Linux'ta gömülü olarak gelmektedir. Aynı zamanda MacOS'ta [xquartz](https://www.xquartz.org/) da kullanılabilir.)
+  
+  Bir SSH oturumu ile bağlantı yapılır:
   ```bash
   ssh user@host -X
-  # -X seçeneğine dikkatini çekerim
+  # -X parametresine dikkat edilmelidir.
   ```
-  X server ın çalıştığından emin ol:
+  X Server'ın çalıştığından emin olunmalıdır:
   ```bash
   nautilus .
   ```
-  Eğer kendi ekranında bir pencerenin açıldığını görürsen devam etmek için hazırsın!
+  Eğer bir pencere açılmışsa bir sonraki adıma geçliebilir.
 
-Öncelikle bazı gereksinimlerin yüklü olduğundan emin olalım. Bunun için aşağıdaki kodu çalıştırın.
+Bu aşamadan itibaren devam edilebilmesi için öncelikle bazı gereksinimlerin yüklü olduğundan emin olunmalıdır. Bunun için aşağıdaki komut çalıştırılır:
 
 ```bash
 sudo apt-get install qtcreator qt-sdk libudev-dev libqt5serialport5-dev 
 ```
 
-Yükleme bittikten sonra VESC için firmware'ı github'tan çekelim ve derleyelim. Bunun için aşağıdaki kodları sırasıyla çalıştırın. 
+Yükleme bittikten sonra VESC için firmware, GitHub'dan çekilir ve derlenir. Bunun için aşağıdaki komutlar sırasıyla çalıştırılır:
 
 ```bash
 cd ~
 git clone https://github.com/vedderb/bldc-tool
 cd bldc-tool
-# Derleyelim
+
+# Derleme işlemi
 qmake -qt=qt5
 make clean && make
 ```
 
-Daha sonra VESC için konfigürasyon dosyalarının çekelim. 
+Daha sonra VESC için konfigürasyon dosyaları indirilir: 
 ```bash
 cd ~
 git clone https://github.com/mit-racecar/hardware.git
 ```
 
-Bu işlemlerden sonra VESC Firmware'ı `~/bldc-tool/firmwares`, konfigürasyon dosyaları ise `~/hardware/vesc` klasörlerinin içinde bulunmaktadır. 
+Bu işlemlerden sonra VESC Firmware'ı `~/bldc-tool/firmwares` dizininde; konfigürasyon dosyaları ise `~/hardware/vesc` dizininde bulunmaktadır. 
 
-VESC Firmware'ı yüklemek için aşağıdaki komutları sırasıyla uygulayın. 
+VESC Firmware'ı yüklemek için aşağıdaki komutları sırasıyla uygulayınız: 
 
 ```bash
 cd ~/bldc-tool
 ./BLDC-Tool
 ```
 
-Bu komutu çalıştırdığınızda firmware'ı yüklemek için aşağıdaki arayüz karşınıza gelecektir. 
-Öncelikle VESC'e bataryanın bağlı olduğundan ve USB kablosuyla Hub'a bağlı olduğundan emin olun. Ayrıca VESC ışıklarını da kontrol edin. Eğer kırmızı ışık yanıp sönüyorsa bataryanız bitmek üzere demektir. Bataryanızı şarj ettikten sonra bu işleme devam etmeniz önerilmektedir. Sabit bir mavi ışığın yanması bataryanızın dolu olduğunu anlamına gelmektedir ve ek birşey yapmanıza gerek yoktur. 
+Bu komut çalıştırıldığında, firmware'ın yüklenmesi için aşağıdaki arayüz ile karşılaşılacaktır. 
+Öncelikle VESC'e bataryanın bağlı olduğundan ve USB kablosuyla Hub'a bağlı olduğundan emin olunuz. Ayrıca VESC ışıklarını da kontrol ediniz. Eğer kırmızı ışık yanıp sönüyorsa batarya(aracın alt kısmında bulunan) bitmek üzere demektir. Bataryanızı şarj ettikten sonra bu işleme devam etmeniz önerilmektedir. Sabit bir mavi ışığın yanması, bataryanızın dolu olduğu anlamına gelmektedir ve ek birşey yapmanıza gerek yoktur. 
 
-**Serial Connection** altında *VESC-ttyACM0* adı ile VESC'i göreceksiniz. Eğer bu isim ile bir cihaz görünmüyor ise kernel'i derlerken yukarıda belirtilen ayarların yapıldığından ve VESC'in Hub'a bağlı olduğundan emin olun. **Connect** butonuna bastığınızda VESC ile bağlantınız kurulacaktır. 
+**Serial Connection** altında *VESC-ttyACM0* adı ile VESC görülecektir. Eğer bu isim ile bir cihaz görünmüyor ise kernel derlenirken belirtilen ayarların yapıldığından ve VESC'in Hub'a bağlı olduğundan emin olunuz. **Connect** butonuna basıldığında, VESC ile bağlantınız kurulacaktır. 
 
-Üst menüden **Firmware**'a tıklayın. 
+Üst menüden **Firmware**'a tıklayınız. 
 
 ![bldc_firmware](images/bldc_firmware.png)
 
-**Choose**'a tıklayın. Aşağıdaik gibi bir uyarı alacaksınız. **OK**'a tıkladıktan sonra devam edebilirsiniz. 
+**Choose** butonuna tıklayınız. Aşağıdaki gibi bir uyarı alınacaktır. **OK** butonuna tıkladıktan sonra devam ediniz. 
 
 <p align="center">
   <img src="images/warning.png" />
 </p>
 
-Servo motor kullandığımız için `~/bldc-tool/firmwares/hw_410_411_412` dizininde bulunan `VESC_servoout.bin` dosyasını seçin. 
+Araçta servo motor kullanıldı için `~/bldc-tool/firmwares/hw_410_411_412` dizininde bulunan `VESC_servoout.bin` dosyası seçilmelidir.
 
 <p align="center">
   <img src="images/save_bldc.png" />
 </p>
 
-**Upload** butonuna basarak VESC'e Firmware yüklemesini başlatabilirsiniz. Yükleme bittikten sonra uygulama kapanacaktır. Terminalden yukarıdaki aynı yolu kullanarak tekrar başlatabilirsiniz. Bu adım ile VESC'e firmware yüklemiş olduk. 
+**Upload** butonuna basılarak VESC'e Firmware yükleme işlemi başlatılabilir. Yükleme bittikten sonra uygulama kapanacaktır. Uygulama, terminalden yukarıda anlatıldığı gibi tekrar başlatılabilir. Bu adım ile VESC'e firmware yüklenmiş olunur. 
 
-bldc-tool'u yeniden başlattıktan sonra *VESC-ttyACM0* adı ile **connect**'e tıklamayı unutmayın. 
+bldc-tool'u yeniden başlattıktan sonra *VESC-ttyACM0* adı ile **Connect**'e tıklamayı unutmayınız. 
 
-**Read Configuration**'a tıklayın. Mevcut konfigürasyon ayarları mevcut ekranda görünecektir. 
+**Read Configuration**'a tıklayınız. Mevcut konfigürasyon ayarları mevcut ekranda görünecektir. 
 
-**Load XML** butonuna tıklayın. `~/hardware/vesc/6.141_bldc_old_hw_30k_erpm.xml` dizinindeki dosyası seçin. 
+**Load XML** butonuna tıklayın. `~/hardware/vesc/6.141_bldc_old_hw_30k_erpm.xml` dizinindeki dosyası seçiniz. 
 
-**Write Configuration** butonuna tıklayın. Daha sonra **Reboot**'a tıklayarak VESC'i yeniden başlatın. Bu adımda uygulama yine kapanabilir. Yukarıda belirtilen yol ile tekrar uygulamayı başlatabilirsiniz. Uygulamanın kapanması, VESC'in yeniden başlatılmasını engellemez. 
+**Write Configuration** butonuna tıklayınız. Daha sonra **Reboot**'a tıklayarak VESC'i yeniden başlatınız. Bu adımda uygulama yine kapanabilir. Yukarıda belirtilen yol ile tekrar uygulamayı başlatabilirsiniz. Uygulamanın kapanması, VESC'in yeniden başlatılmasını engellemez.
 
-Uygulamayı yeniden başlattıktan sonra **Read Configuration**'a tıklayarak ayarların aşağıdaki gibi olduğundan emin olunuz. 
+Uygulamayı yeniden başlattıktan sonra **Read Configuration**'a tıklayarak ayarların aşağıdaki gibi olduğundan emin olunuz:
 
 VESC ayarlarını yaptıktan sonra *Racecar* kurulumuna geçebilirsiniz. 
 
