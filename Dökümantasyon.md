@@ -416,32 +416,14 @@ ATTRS{idProduct}=="9d0f", SYMLINK+="imu"
 ATTRS{idVendor}=="0483", SYMLINK+="vesc"
 ATTRS{idProduct}=="5740", SYMLINK+="vesc"
 ```
-**Usb cihazları tekrar çıkar-tak**, ve bağlantıyı test et:
-```bash
-l /dev/vesc || l /dev/sweep || l /dev/imu
-```
-Çıktı olarak bu kısayolların görmen gerek:
-```powershell (for syntax highlighting)
-lrwxrwxrwx 1 root root 7 Nov  9 11:16 /dev/vesc -> ttyACM0
-lrwxrwxrwx 1 root root 7 Nov  9 10:59 /dev/sweep -> ttyUSB0
-lrwxrwxrwx 1 root root 7 Nov  8 21:29 /dev/imu -> ttyACM1
-```
 
-
-Buraya kadar herşey çalışıyorsa programı incelemeye başlayabiliriz! Örnek ROS dökümanlarımıza ve örnek kodlara bir göz atabilirsiniz:  
+Bu aşamaya kadar her şey sorunsuz çalışıyorsa, aşağıdaki adımlarla kuruluma devam ediniz. Aşağıdaki örnek ROS dökümanlarının ve örnek kodların incelenmesi önerilmektedir:
 [ROS temelleri](lecture%20materials/ros%20fundamentals.md)  
 [Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
 
----------------------------------
-Ek olarak bu da işe yarayabilir, fakat bu uygulama için ihtiyacımız yok:
-```bash
-# Cihazların seri numaralarını öğrenmek için:
-usb-devices | grep "Manufacturer\|Product\|SerialNumber\|^$"
 
-```
-
-# Projeyi kendi çalışma alanına taşı:
-[Projeyi klonladıktan sonra](#installracecar) kendi çalışma alanına taşıyıp takım arkadaşlarınızla Git kullanmak isterseniz:
+# Projenin belirlenen çalışma alanına taşınması
+[Proje klonlandıktan sonra](#installracecar) belirlenen çalışma alanına taşınıp takım arkadaşlarınızla Git kullanmak isterseniz:
 
 ana dizindeki `.gitmodules` dosyasına gir. Buna benziyor olmalı:
 ```bash
@@ -497,41 +479,33 @@ Github a bak ve kontrol et, projen artık senin adresinde olmalı. Submodule'ler
 
 ---
 
-## ROS uzaktan bağlantısını varsayılan olarak açılması için konfigüre et 
-(Bu adım opsiyonel, hatta ihtiyacınız olduğunu düşünene kadar yapmamanız daha iyi)  
+## ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar (Bu aşama opsiyoneldir)
 
-`nano ~/.profile` e git
-Aşağıdaki satırları ekle:
+`nano ~/.profile` dosyasını açtıktan sonra aşağıdaki satırları ekleyiniz:
 
  ---
- Uzak makinada (robot):
+ Uzak makinede (robot):
 ```bash
 export ROS_MASTER_URI=http://$(echo -e $(hostname -I)):11311
 export ROS_IP=$(hostname -I)
 ```
 ---
-Yerel makinada (Bilgisayarın, veya muhtemelen sanal bilgisayarın):
+Yerel makinede (Bilgisayar veya sanal bilgisayar):
 ```bash
 export ROS_MASTER_URI=http://$(sudo arp-scan --localnet | grep NVIDIA | awk '{print $1;}'):11311
 export ROS_IP=$(hostname -I)
 ```
 ---
-`nano ~/.bashrc` ye git ve şu satırı **dosyanın sonuna değil, başına** ekle:
+`nano ~/.bashrc` dosyasını açınız ve aşağıdaki satırı (**dosyanın sonuna değil, başına**) ekleyiniz:
 ```bash
 source ~/.profile
-```
-Eğer zsh kullanıyorsan, `nano ~/.zshrc` e git ve aşağıdaki satırları **dosyanın sonuna değil, başına** ekle:
-```bash
-emulate sh
-. ~/.profile
-emulate zsh
 ```
 
 ## Gerekli eklentilerin kurulması
 
 ### Caffe Kurulumu
 
-Caffe kurulumuna geçmeden önce caffe için bazı gereksinimlerin kurulu olması gerekmektedir. Aşağıdaki komutları sırasıyla çalıştırınız. Caffe için gerekli eklentilerin kurulması işlemidir. 
+Caffe kurulumuna geçmeden önce caffe için bazı gereksinimlerin kurulu olması gerekmektedir. Aşağıdaki komutları sırasıyla çalıştırınız:
 
 ```bash
 sudo add-apt-repository universe
@@ -548,7 +522,7 @@ sudo apt-get install python-dev python-numpy -y
 sudo usermod -a -G video $USER
 ```
 
-Yukarıdaki kurulumlar tamamlandıktan sonra aşağıdaki adımları takip edin. Caffe'yi githubtan çekip derleme işlemini yapacağız. 
+Yukarıdaki kurulumlar tamamlandıktan sonra aşağıdaki adımları takip ediniz. Caffe, GitHub'dan indirildikten sonra derlenmelidir:
 
 ```bash
 cd ~
@@ -560,8 +534,8 @@ sudo sed -i 's/# USE_CUDNN := 1/USE_CUDNN := 1/' Makefile.config
 sudo sed -i 's/# WITH_PYTHON_LAYER := 1/WITH_PYTHON_LAYER := 1/' Makefile.config
 ```
 
-Devam etmeden önce config dosyasına Jetson TX2'ye ait mimari kodlarını da eklememiz gerekmektedir. `Makefile.config` dosyasını çift tıklayarak açın.
-**CUDA_ARCH** değişkenini dosya içerisinde bulun. `compute_62` ve `sm_62` satırları (aşağıdaki son iki satır) varsayılan olarak bulunmuyor olabilir. Dosyaya onları eklediğinizden emin olun. **Makefile.config** dosyası içerisinde bulunan **CUDA_ARCH** değişkeninin aşağıdaki ile aynı olduğundan emin olun ve dosyayı kaydederek kapatın. 
+Devam etmeden önce "config" dosyasına Jetson TX2'ye ait mimari kodlarının da eklenmesi gerekmektedir. `Makefile.config` dosyasını çift tıklayarak açın.
+**CUDA_ARCH** değişkenini dosya içerisinde bulun. `compute_62` ve `sm_62` satırları (aşağıdaki son iki satır) varsayılan olarak bulunmuyor olabilir. Eğer yoksa bu dosyaya onları eklediğinizden emin olun. **Makefile.config** dosyası içerisinde bulunan **CUDA_ARCH** değişkeninin aşağıdaki ile aynı olduğundan emin olun ve dosyayı kaydederek kapatın. 
 
 ```bash
 CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \
@@ -577,13 +551,13 @@ CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \
 		-gencode arch=compute_62,code=compute_62 
 ```
 
-Bu değişikliği yaptıktan sonra devam edebiliriz. 
+Bu değişiklilk yapıldıktan sonra devam edilebilir. 
 
 
 ```bash
-# Ubuntu 16.04 static cuda ile ilgili bir hata verdiğinden derlerken bu özelliğini kapatmamız gerek.
+# Ubuntu 16.04, static cuda ile ilgili bir hata verdiğinden, derleme işlemi yapılırken bu özelliğin kapatılması gerekmektedir.
 cmake -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF
-# Derleme işlemi Jetsondaki 6 çekirdeği de kullanılarak yapılacaktır. Bu işlem sırasında başka bir işlem yapmamanız önerilir.
+# Derleme işlemi, Jetson'da bulunan 6 çekirdek de kullanılarak yapılacaktır. Bu işlem sırasında başka bir işlem yapmamanız önerilir.
 # Ayrıca bu adımdan önce Jetsonu yüksek performans moduna almak işlemi hızlandıracaktır. 
 sudo nvpmodel -m 0
 sudo ~/jetson_clocks.sh
