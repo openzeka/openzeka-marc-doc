@@ -308,19 +308,21 @@ Uygulamayı yeniden başlattıktan sonra **Read Configuration**'a tıklayarak ay
 VESC ayarlarını yaptıktan sonra *Racecar* kurulumuna geçebilirsiniz. 
 
 ## <a name="installracecar"></a> Racecar'ı kur
-Ana dizine racecar kodunu yükleyeceğiz, önce ana dizine gir ve kodu indir:
+
+## <a name="installracecar"></a> Racecar'ı kur
+Ana dizine racecar-workspace klasörünü indirmek için aşağıdaki komutu sırasıyla çalıştırınız:
 
 ```bash
 cd ~/
 git clone --recursive https://github.com/openzeka/racecar-workspace
 ```
-Racecar kodu `src/` klasörünün içinde. Bu `racecar-workspace` klasörü `catkin workspace` adında bir çalışma ortamı. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
-wiki.ros.org/ROS/Tutorials  
-ve eğitimde kullanılan örneklere ulaşmak için:  
-github.com/openzeka/racecar-controllers  
-Şimdilik devam edelim, kodu sonra inceleyeceğiz.
 
-Şimdi kodu derleyelim:
+Bu `racecar-workspace` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
+wiki.ros.org/ROS/Tutorials  
+Eğitimde kullanılan örneklere ulaşmak için:  
+github.com/openzeka/racecar-controllers  
+
+Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
 ```bash
 cd ~/racecar-workspace
 rm -rf build devel
@@ -335,6 +337,7 @@ cd ~/racecar-workspace
 rm -rf build devel
 catkin_make
 ```
+
 Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
 
 ```bash
@@ -342,51 +345,50 @@ sudo apt-get install ros-kinetic-joy
 sudo apt-get install ros-kinetic-joy-teleop 
 ```
 
-ve test edelim:  
+Aşağıdaki komutlar ile test aşamasına geçebilirsiniz.
 
----
-**bash kullanıyorsan:**
 ```bash
+cd ~/racecar-workspace
 source devel/setup.bash
-```
-**zsh kullanıyorsan:**
-```bash
-source devel/setup.zsh
 ```
 
 ```bash
 roslaunch racecar teleop.launch
 ```
 
-"Portları bulamadım" gibi bir yığın hata göreceksin. Bu hataları düzeltmemiz için port kuralları ayarlamamız gerek. Port konfigürasyonu için devam et.
+Bu aşamada "Portlar bulunamadı" hasatsı görmeniz muhtemel. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
 
 ---
 
-## Usb port kuralları konfigürasyonu
-Usb sensörleri, motoru ve diğer donanımları taktığımızda linux bunlara ttyUSB0 gibi adresler verir. Bu adresler herkesde aynı olmayabilir, ama sabit olmasını istiyoruz ki daha sonra hangi porta ne bağlı diye bakmakla uğraşmayalım.
+## Usb Port Kuralları Konfigürasyonu
+Usb sensörleri, motoru ve diğer donanımları taktığımızda linux bunlara ttyUSB0 gibi adresler verecektir. Bu adresler herkesde aynı olmayabilir, fakat sabit olması bizi "daha sonra hangi porta hangi cihaz bağlı" uğraşından kurtarmaktadır. 
 
-Önce usb cihazları bul:
+Öncelikle USB cihazları bulunuz:
 ```bash
 lsusb
 ```
-Çıktı böyle birşey olacak:
+Çıktı farklı olabilir fakat büyük oranda şu şekilde olacaktır:
 ```bash
-Bus 002 Device 003: ID 0bda:0411 Realtek Semiconductor Corp.
-Bus 002 Device 002: ID 0bda:0411 Realtek Semiconductor Corp.
+Bus 002 Device 004: ID 2b03:f580  
+Bus 002 Device 003: ID 0bda:0411 Realtek Semiconductor Corp. 
+Bus 002 Device 002: ID 0bda:0411 Realtek Semiconductor Corp. 
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-Bus 001 Device 010: ID 0403:6001 Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
-Bus 001 Device 004: ID 045e:0745 Microsoft Corp. Nano Transceiver v1.0 for Bluetooth
-Bus 001 Device 009: ID 046d:c21f Logitech, Inc. F710 Wireless Gamepad [XInput Mode]
-Bus 001 Device 007: ID 046d:082d Logitech, Inc. HD Pro Webcam C920
-Bus 001 Device 006: ID 1b4f:9d0f
-Bus 001 Device 005: ID 0483:5740 STMicroelectronics STM32F407
-Bus 001 Device 003: ID 0bda:5411 Realtek Semiconductor Corp.
-Bus 001 Device 002: ID 0bda:5411 Realtek Semiconductor Corp.
+Bus 001 Device 013: ID 046d:c219 Logitech, Inc. Cordless RumblePad 2
+Bus 001 Device 007: ID 10c4:ea60 Cygnal Integrated Products, Inc. CP210x UART Bridge / myAVR mySmartUSB light
+Bus 001 Device 012: ID 0483:5740 STMicroelectronics STM32F407
+Bus 001 Device 010: ID 1b4f:9d0f  
+Bus 001 Device 005: ID 045e:0745 Microsoft Corp. Nano Transceiver v1.0 for Bluetooth
+Bus 001 Device 003: ID 0bda:5411 Realtek Semiconductor Corp. 
+Bus 001 Device 002: ID 0bda:5411 Realtek Semiconductor Corp. 
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
 ```
-Scanse Sweep Lidar'ı, vesc'yi ve imu'yu arıyoruz. Bu cihazları filtrele:
+VESC ve IMU cihazlarını bu listede arıyoruz. 
+### Eğer sweep-lidar kullanıyorsanız aşağıdaki adımları takip ediniz:
+***sweep-lidar* kullananlar için, bu cihazın da port ayarlarının yapılması gerektiğinden aşağıdaki adımları uygulaması gerekmektedir.**
+Bu cihazları filtrelememiz çalışma açısından kolaylık sağlayacaktır:
 ```bash
-lsusb | grep "9dof\|STMicro\|Future Technology"
+lsusb | grep "9d0f\|STMicro\|Future Technology"
 ```
 Çıktı:
 ```bash
@@ -394,18 +396,18 @@ Bus 001 Device 010: ID 0403:6001 Future Technology Devices International, Ltd FT
 Bus 001 Device 006: ID 1b4f:9d0f
 Bus 001 Device 005: ID 0483:5740 STMicroelectronics STM32F407
 ```
-Vendor ID ve/veya Product ID'ye ihtiyacımız var. Neyse ki lsusb aşağıdaki format ile bu iki bilgiyi de veriyor:
+Bu cihazlara ait Vendor ID ve/veya Product ID'ye ihtiyacımız vardır. `'lsusb` komutu aşağıdaki format ile bu iki bilgiyi de vermektedir:
 ```html
 Bus <bus number> Device <device number>: ID <vendor id>:<product id> <Device name>
 ```
-Hadi onları alalım.
-İlk cihaz `(Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC)` scanse sweep lidar oluyor. İkincisi IMU. Son olarak(`STMicroelectronics`) de VESC. Mesela VESC'in vendor ID'si `0483`, and product ID'si `5740`, bazı sayılar senin ürününde farklı olabilir o yüzden kontrol etmen gerek.
+
+İlk cihaz `(Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC)` scanse sweep-lidar, ikincisi IMU, son olarak(`STMicroelectronics`) de VESC cihazlarını göstermektedir. Örneğin VESC'e ait vendor ID `0483`, ve product ID `5740` olarak görünmektedir. Bu ID'ler sizin cihazınızda farklı olabilir. Lütfen kend komut satırı çıktısınızda gördüğünüz ID'leri kullanınız.
 
 Usb port kurallarını ayarlamak için usb kural dosyasını düzenleyeceğiz:
 ```bash
 sudo nano /etc/udev/rules.d/99-usb-serial.rules
 ```
-Böyle göründüğünden emin ol, `idVendor` karşısına "vendor id"lerini, `idProduct` karşısına "product id"lerini yaz
+Aşağıda gösterilen kodları usb kural dosyasına yapıştırınız, `idVendor` karşısına kendi cihazınızın "vendor id"lerini, `idProduct` karşısına kendi cihazınızın "product id"lerini yazınız.
 ```bash
 ATTRS{idVendor}=="0403", SYMLINK+="sweep"
 ATTRS{idProduct}=="6015", SYMLINK+="sweep"
@@ -417,7 +419,38 @@ ATTRS{idVendor}=="0483", SYMLINK+="vesc"
 ATTRS{idProduct}=="5740", SYMLINK+="vesc"
 ```
 
-Bu aşamaya kadar her şey sorunsuz çalışıyorsa, aşağıdaki adımlarla kuruluma devam ediniz. Aşağıdaki örnek ROS dökümanlarının ve örnek kodların incelenmesi önerilmektedir:
+### Eğer RPLIDAR kullanıyorsanız aşağıdaki adımları takip ediniz:
+
+Bu cihazları filtrelememiz çalışma açısından kolaylık sağlayacaktır:
+```bash
+lsusb | grep "9d0f\|STMicro\"
+```
+Çıktı:
+```bash
+Bus 001 Device 006: ID 1b4f:9d0f
+Bus 001 Device 005: ID 0483:5740 STMicroelectronics STM32F407
+```
+Bu cihazlara ait Vendor ID ve/veya Product ID'ye ihtiyacımız vardır. `'lsusb` komutu aşağıdaki format ile bu iki bilgiyi de vermektedir:
+```html
+Bus <bus number> Device <device number>: ID <vendor id>:<product id> <Device name>
+```
+
+İlk cihaz IMU, ikinci cihaz(`STMicroelectronics`) ise VESC cihazlarını göstermektedir. Örneğin VESC'e ait vendor ID `0483`, ve product ID `5740` olarak görünmektedir. Bu ID'ler sizin cihazınızda farklı olabilir. Lütfen kend komut satırı çıktısınızda gördüğünüz ID'leri kullanınız.
+
+Usb port kurallarını ayarlamak için usb kural dosyasını düzenleyeceğiz:
+```bash
+sudo nano /etc/udev/rules.d/99-usb-serial.rules
+```
+Aşağıda gösterilen kodları usb kural dosyasına yapıştırınız, `idVendor` karşısına kendi cihazınızın "vendor id"lerini, `idProduct` karşısına kendi cihazınızın "product id"lerini yazınız.
+```bash
+ATTRS{idVendor}=="1b4f", SYMLINK+="imu"
+ATTRS{idProduct}=="9d0f", SYMLINK+="imu"
+
+ATTRS{idVendor}=="0483", SYMLINK+="vesc"
+ATTRS{idProduct}=="5740", SYMLINK+="vesc"
+```
+
+Buraya kadar herşey çalışıyorsa programı incelemeye başlayabilirsiniz! Örnek ROS dökümanlarımıza ve örnek kodlara göz atabilirsiniz:  
 [ROS temelleri](lecture%20materials/ros%20fundamentals.md)  
 [Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
 
