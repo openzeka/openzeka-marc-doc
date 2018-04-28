@@ -52,7 +52,7 @@ ssh nvidia@<IP adresi>
 ssh nvidia@192.168.1.110 # Varsayılan şifre: nvidia
 ```
 
-### Şifrenin değiştirilmesi
+### <a name="change-pass"></a>Şifrenin değiştirilmesi
 Şifreyi varsayılan olarak bırakmak, güvenlik açısından iyi değildir.
 ```bash
 passwd
