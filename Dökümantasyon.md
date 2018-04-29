@@ -1,42 +1,43 @@
 ![logo](images/Open-Zeka-logo_resized.png)
 
-- [Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar](#jetsona-jetpack-kurduktan-sonra-izlenecek-ilk-adımlar)
-  - [Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması](#jetson-%C4%B1n-ip-adresini-al-ve-ssh-ile-ba%C4%9Flan)
-  - [Şifrenin değiştirilmesi](#%C5%9Eifreyi-de%C4%9Fi%C5%9Ftir)
-  - [Text editörün kurulması](#text-edit%C3%B6r-%C3%BC-kur-%C3%B6zellikle-yeni-linux-kullan%C4%B1c%C4%B1s%C4%B1-isen-nano-kullan)
-  - [Hostname'in(bilgisayar adı) değiştirilmesi](#hostname-i-bilgisayar-ismini-de%C4%9Fi%C5%9Ftir)
-  - [ZSH'ın kurulması (İSTEĞE BAĞLI)](#zshi-kur-iste%C4%9Fe-ba%C4%9Fl%C4%B1)
-  - [Screen'in kurulması](#screeni-kur)
-- [Kernelin yeniden derlenmesi](#kerneli-yeniden-derle)
-- [Scanse SDK kurulumu](#scanse-sdk-s%C4%B1n%C4%B1-kur)
-- [ROS Kinetic kurulumu](#ros-kinetic-i-kur)
-- [VESC sürücülerinin yüklenmesi](#vesc-s%C3%BCr%C3%BCc%C3%BClerini-y%C3%BCkle)
-- [Racecar'ın kurulması](#-racecar-%C4%B1-kur)
-- [USB port kuralları konfigürasyonu](#usb-port-kurallar%C4%B1-konfig%C3%BCrasyonu)
-- [Projenin belirlenen çalışma alanına taşınması](#projeyi-kendi-%C3%A7al%C4%B1%C5%9Fma-alan%C4%B1na-ta%C5%9F%C4%B1)
-- [ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar](#ros-uzaktan-ba%C4%9Flant%C4%B1s%C4%B1n%C4%B1-varsay%C4%B1lan-olarak-a%C3%A7%C4%B1lmas%C4%B1-i%C3%A7in-konfig%C3%BCre-et)
-- [**Gerekli eklentilerin kurulması**](#gerekli-eklentilerin-kurulmas%C4%B1)
-  - [Caffe kurulumu](#caffe-kurulumu) 
-  - [Torch kurulumu](#torch-kurulumu)
-  - [Tensorflow kurulumu](#tensorflow)
-  - [Keras ve diğer eklentilerin kurulumu](#keras-ve-di%C4%9Fer-eklentiler)
-  - [Jupyter Notebook kurulumu](#jupyter-notebook)
-  - [Jetson TX2 Yüksek Performans modu](#jetson-tx2-y%C3%BCksek-performans-modu)
+- [Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar](#ilk_adim)
+  - [Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması](#ilk_adim_ssh)
+  - [Şifrenin Değiştirilmesi](#sifre_degistir)
+  - [Text Editörün Kurulması](#editor_kurulumu)
+  - [Hostname'in(Bilgisayar Adı) Değiştirilmesi](#hostname_degistir)
+  - [(Opsiyonel) ZSH'ın kurulması](#zsh_kurulumu)
+  - [(Opsiyonel) Screen'in kurulması](#screen_kurulumu)
+- [Kernelin yeniden derlenmesi](#kernel_derlenmesi)
+- [Scanse SDK kurulumu](#scanse_sdk)
+- [ROS Kinetic kurulumu](#ros_kurulumu)
+- [VESC sürücülerinin yüklenmesi](#vesc_kurulumu)
+- [Racecar'ın kurulması](#racecar_kurulumu)
+- [USB port kuralları konfigürasyonu](#usb_port)
+- [IMU Kurulumu](#imu)
+- [Projenin belirlenen çalışma alanına taşınması](#proje_tasi)
+- [ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar](#ros_uzaktan_baglanti)
+- [**Gerekli eklentilerin kurulması**](#gerekli_eklentilerin_kurulması)
+  - [Caffe kurulumu](#caffe) 
+  - [Torch kurulumu](#torch)
+  - [Tensorflow kurulumu](#tensorflow_1_6)
+  - [Keras ve diğer eklentilerin kurulumu](#keras)
+  - [Jupyter Notebook kurulumu](#jupyter)
+  - [Jetson TX2 Yüksek Performans modu](#jetson_yuksek_performans)
 - [**Verilerin Toplanması**](#verilerin-toplanmas%C4%B1)
 - [**Toplanan verilerle ağın eğitilmesi**](#toplanan-verilerle-a%C4%9F%C4%B1n-e%C4%9Fitilmesi)
 - [**Eğitilen ağın kullanılması**](#e%C4%9Fitilen-a%C4%9F%C4%B1n-kullan%C4%B1lmas%C4%B1)
   
 
-# Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar
-### Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması
-Bu bağlantının yapılabilmesi için MacOS'ta "lanscan", Windows'ta "wnetwatcher" ve Linux'ta "angry IP scanner" kullanılabilir.
-Bu yöntemler yerine, terminal kullanılarak da aşağıdaki komutlarda gösterildiği gibi IP taraması yapılabilir:
+# <a name="ilk_adim"></a>Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar
+### <a name="ilk_adim_ssh"></a>Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması
+Bu bağlantının yapılabilmesi için MacOS'ta "lanscan", Windows'ta "wnetwatcher" ve Linux'ta "angry IP scanner" kullanabilirsiniz.
+Bu yöntemler yerine, terminal kullanılarak da aşağıdaki komutlarda gösterildiği gibi IP taraması yapabilirsiniz:
 
 ```bash
 sudo apt-get update && sudo apt-get install arp-scan
-sudo arp-scan --localnet 	## Bu adımda "--interface" parametresinin kullanımı incelenmelidir.
+sudo arp-scan --localnet 	
 ```
-Çıktı aşağıdaki gibi olmalıdır:
+Aşağıdakine benzer bir çıktı elde edeceksiniz:
 ```bash
 Interface: enp0s5, datalink type: EN10MB (Ethernet)
 Starting arp-scan 1.8.1 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/)
@@ -45,26 +46,26 @@ Starting arp-scan 1.8.1 with 256 hosts (http://www.nta-monitor.com/tools/arp-sca
 2 packets received by filter, 0 packets dropped by kernel
 Ending arp-scan 1.8.1: 256 hosts scanned in 1.546 seconds (165.59 hosts/sec). 2 responded
 ```
-IP öğrenildikten sonra aşağıda gösterildiği gibi bağlantı kurulabilir:
+IP'yi öğrendikten sonra aşağıda gösterildiği gibi bağlantı kurabilirsiniz:
 ```bash
 ssh nvidia@<IP adresi>
 # Örneğin:
 ssh nvidia@192.168.1.110 # Varsayılan şifre: nvidia
 ```
 
-### <a name="change-pass"></a>Şifrenin değiştirilmesi
+### <a name="sifre_degistir"></a>Şifrenin değiştirilmesi
 Şifreyi varsayılan olarak bırakmak, güvenlik açısından iyi değildir.
 ```bash
 passwd
 ```
 
-### Text editörün kurulması (Linux konusunda tecrübesi az olan/olmayan kullanıcıların NANO kullanması tavsiye edilir.)
+### <a name="editor_kurulumu"></a>Text Editörün Kurulması (Linux konusunda tecrübesi az olan/olmayan kullanıcıların NANO kullanması tavsiye edilir.)
 ```bash
 sudo apt-get install nano
 ```
 
 ---
-### Hostname'in(bilgisayar adı) değiştirilmesi
+### <a name="hostname_degistir"></a>Hostname'in(bilgisayar adı) değiştirilmesi
 Her seferinde IP adresini aramak yerine yerel alan adı kullanmak için bu video takip edilebilir:
 [Ascii Cinema sürümü (yazılar kopyalayanabilmektedir)](https://asciinema.org/a/nytXz7ZUMGAXb6VpHY0fLHEJY)
 ```bash
@@ -75,7 +76,7 @@ sudo apt-get install avahi-daemon
 ```bash
 sudo nano /etc/hosts
 ```
-Aşağıda gösterildiği şekilde benzer olan satır bulunur ve `tegra` istenilen isimle değiştirilebilir:
+Aşağıda gösterildiği şekilde benzer olan satır bulunur ve `tegra` istenilen isimle değiştirebilirsiniz:
 ```bash
 ...
 
@@ -86,7 +87,7 @@ Değiştirilen isim, aşağıda belirtilen dosyaya da yazılmalıdır:
 ```bash
 sudo nano /etc/hostname
 ```
-Son olarak aşağıda gösterildiği gibi `hostname` isimli script çalıştırılır ve sistem yeniden başlatılır:
+Son olarak aşağıda gösterildiği gibi `hostname` isimli scripti çalıştırınız ve sistemi yeniden başlatınız:
 ```bash
 sudo /etc/init.d/hostname.sh
 
@@ -101,31 +102,32 @@ ssh nvidia@<HOSTNAME>.local
 ssh nvidia@TAKIM_ADI.local
 ```
 
-### ZSH'ın kurulması (İSTEĞE BAĞLI)
+### <a name="zsh_kurulumu"></a>(Opsiyonel) ZSH'ın kurulması
 Bunun için aşağıdaki videoda anlatılan adımlar takip edilebilir:
 Ascii cinema: https://asciinema.org/a/x6QlETqxDvdK8t0lmBvOWVoKD
 
-### Screen'in kurulması
+### <a name="screen_kurulumu"></a>(Opsiyonel) Screen'in kurulması
 Screen, Linux terminalinde program çalıştırılırken bağlantının kopması durumunda, arka planda istediğimiz scriptin çalışmaya devam etmesini sağlayan bir programdır.
 ```bash
 sudo apt-get install screen
 ```
-Screen kullanımı hakkında daha detaylı bilgi için aşağıdaki kaynak takip edilebilir:  
+Screen kullanımı hakkında daha detaylı bilgi için aşağıdaki kaynağı takip edebilirsiniz:  
 https://www.gnu.org/software/screen/manual/screen.html
 
 
-Bu aşamadan itibaren devam etmeden önce bazı gerekli uygulamaların kurulması gereklidir. Bunun için terminalde, aşağıdaki komut çalıştırılabilir:
+## <a name="kernel_derlenmesi"></a>Kernelin yeniden derlenmesi
+
+Bu aşamadan itibaren devam etmeden önce bazı gerekli uygulamaların kurulması gereklidir. Bunun için terminalde, aşağıdaki komutu çalıştırınız:
 ```bash
 sudo apt-get install cmake ca-certificates
 ```
 
-## Kernelin yeniden derlenmesi
-Kernelin yeniden derlenmesi için, öncelikle aşağıda gösterildiği gibi gerekli dosyalar indirilir:
+Kernelin yeniden derlenmesi için, öncelikle aşağıda gösterildiği gibi gerekli dosyaları indiriniz:
 ```bash
 cd ~/
 git clone https://github.com/jetsonhacks/buildJetsonTX2Kernel.git
 ```
-Dosyalar Jetson'a kaydedildikten sonra ilk olarak, kernel dosyaları NVIDIA'nın sitesinden indirilmelidir. Bunun için aşağıdaki komutu çalıştırılabilir:
+Dosyalar Jetson'a kaydedildikten sonra ilk olarak, kernel dosyaları NVIDIA'nın sitesinden indirilmelidir. Bunun için aşağıdaki komutu çalıştırınız:
 ```bash
 cd ~/buildJetsonTX2Kernel
 #Kernel kaynaklarının indirilmesi
@@ -134,33 +136,33 @@ cd ~/buildJetsonTX2Kernel
 İşlem tamamlandıktan sonra .config dosyasındaki düzenlemeler için bir grafik arayüzü açılacaktır. 
 Burada bazı değişikliklerin yapılması gerekmektedir. JetsonHacks'e ait olan [bu videodan](https://www.youtube.com/watch?v=fxWObd1nK4s)  gerekli adımlar takip edilebilir.
 
-Öncelikle açılan ekrandan **General Setup**'a tıklanır, daha sonra ise sağ tarafta açılan menüden **Local version -append to kernel release** butonuna çift tıklanır. Bu kısma, - ile başlayan bir isim gireilebilir. Burada *-openzeka-v0.1* şeklinde isim verilecektir. 
+*Bu paragrafta anlatılanlar opsiyoneldir*.Öncelikle açılan ekrandan **General Setup**'a tıklanır, daha sonra ise sağ tarafta açılan menüden **Local version -append to kernel release** butonuna çift tıklanır. Bu kısma, - ile başlayan bir isim gireilebilir. Burada *-openzeka-v0.1* şeklinde isim verilecektir. 
 
-Daha sonra **Edit > Find** menüsünden açılan pencereye **ACM** yazılarak **USB Modem (CDC ACM) support** aktif hale getirilir. DİKKAT: Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. 
+Daha sonra **Edit > Find** menüsünden açılan pencereye **ACM** yazılarak **USB Modem (CDC ACM) support** aktif hale getirilir. **DİKKAT: Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. **
 
-Daha sonra aynı şekile arama yapılarak **CH341** portu da aktifleştirilir.
+Daha sonra aynı şekile arama yapılarak **CH341** portu da aktifleştiriniz.
 
-Değişiklikler kaydedilir ve uygulama kapatılır. Artık kernel derlenebilir. Aşağıdaki komut çalıştırılır:
+Değişiklikleri kaydedip uygulamayı kapatabilirsiniz. Artık kernel derlenebilir. Aşağıdaki komutu çalıştırınız:
 ```bash
 cd ~/buildJetsonTX2Kernel
 #Kernel kaynaklarının "build" edilmesi
 ./makeKernel.sh
 ```
-Bu işlem 10 dakika civarında sürmektedir. Derleme tamamlandıktan sonra, derlenen dosyalar kopyalanabilir. Bunun için aşağıdaki komut çalıştırılabilir:
+Bu işlem 10 dakika civarında sürmektedir. Derleme tamamlandıktan sonra, derlenen dosyaları kopyalamak için aşağıdaki komutu çalıştırınız:
 ```bash
 cd ~/buildJetsonTX2Kernel
 #Kernel kaynaklarının kopyalanması
 ./copyImage.sh
 ```
-Jetson, yeniden başlatılır.
+Jetson'ı yeniden başlatınız.
 
-Bu işlemler bittikten sonra indirilen dosyalar silinebilir. Dosyalar /usr/src/sources dizinine indirilmiştir. Silmek için aşağıdaki komut çalıştırılabilir:
+Bu işlemler bittikten sonra indirilen dosyaları silebilirsiniz. Dosyalar /usr/src/sources dizinine indirilmiştir. Silmek için aşağıdaki komutu çalıştırabilirsiniz(Bu işlem opsiyoneldir):
 ```bash
 cd /usr/src/sources
 sudo rm -rf kernel_src-tx2.tbz2 
 ```
 
-## Scanse SDK kurulumu
+## <a name="scanse_sdk"></a>Scanse SDK kurulumu
 ```bash
 cd ~/
 # sweep-sdk repository'si indirilir
@@ -181,9 +183,8 @@ sudo ldconfig
 ```
 
 
-## ROS Kinetic Kurulumu
-Racecar ROS (Robot Operating System) kütüphaneleri ile çalışıyor. Bundan daha sonra bahsedeceğiz, şimdi kuralım:  
-(Kurulum ile ilgili ayrıntılı ve açıklamalı döküman için: http://wiki.ros.org/kinetic/Installation/Ubuntu . Veya kısaca aşağıdakileri de uygulayabilirsin:)
+## <a name="ros_kurulumu"></a>ROS Kinetic Kurulumu
+Racecar, ROS (Robot Operating System) kütüphaneleri ile çalışmaktadr. (Kurulum ile ilgili ayrıntılı ve açıklamalı döküman için: http://wiki.ros.org/kinetic/Installation/Ubuntu . Veya kısaca aşağıdakileri de uygulayabilirsin:)
 ```bash
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
@@ -195,24 +196,19 @@ sudo apt-get install ros-kinetic-desktop-full
 sudo rosdep init
 rosdep update
 ```
-Bash kullanıyorsan:
+Daha sonra:
 ```bash
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
-Zsh kullanıyorsan:
-```bash
-echo "source /opt/ros/kinetic/setup.zsh" >> ~/.zshrc
-source ~/.zshrc
-```
-Son olarak:
+Son olarak aşağıdaki kurulumları gerçekleştiriniz:
 ```bash
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 
-## RPLIDAR kurulumu ve Test Edilmesi (ROS kurulumundan sonra yapılmalıdır)
+## <a name="rp_lidar_kurulumu"></a>RPLIDAR kurulumu ve Test Edilmesi (ROS kurulumundan sonra yapılmalıdır)
 ```bash
-cd ~/
+cd ~/racecar-workspace/src
 # rplidar_ros repository'si indirilir
 git clone https://github.com/robopeak/rplidar_ros.git
 
@@ -220,13 +216,13 @@ git clone https://github.com/robopeak/rplidar_ros.git
 roslaunch rplidar_ros view_rplidar.launch
 ```
 
-## VESC sürücülerinin yüklenmesi
+## <a name="vesc_kurulumu"></a>VESC sürücülerinin yüklenmesi
 Bu bölümün bir monitör varlığında veya X Server mevcut olan bir işletim sisteminde yapılması gerekmektedir. X Server, programlar ve işletim sistemi arasında bir ara birim olarak görev yapar. X Server sayesinde, bu uygulamanın çalıştığı başka bir cihaza da bağlantı yapmak mümkündür.
 
 * Aşağıdaki işlemlerden birisi ile devam edin:
   * Jetson, HDMI ile monitöre bağlanır.
   veya
-  * X Server mevcut olan bir işletim sisteminde oturum açıldıktan sonra (Bu özellik, Linux'ta gömülü olarak gelmektedir. Aynı zamanda MacOS'ta [xquartz](https://www.xquartz.org/) da kullanılabilir.)
+  * X Server mevcut olan bir işletim sisteminde oturum açıldıktan sonra (Bu özellik, Linux'ta gömülü olarak gelmektedir.)
   
   Bir SSH oturumu ile bağlantı yapılır:
   ```bash
@@ -237,15 +233,15 @@ Bu bölümün bir monitör varlığında veya X Server mevcut olan bir işletim 
   ```bash
   nautilus .
   ```
-  Eğer bir pencere açılmışsa bir sonraki adıma geçliebilir.
+  Eğer bir pencere açılmışsa bir sonraki adıma geçebilirsiniz.
 
-Bu aşamadan itibaren devam edilebilmesi için öncelikle bazı gereksinimlerin yüklü olduğundan emin olunmalıdır. Bunun için aşağıdaki komut çalıştırılır:
+Bu aşamadan itibaren devam edilebilmesi için öncelikle bazı gereksinimlerin yüklü olduğundan emin olunmalıdır. Bunun için aşağıdaki komutu çalıştırınız:
 
 ```bash
 sudo apt-get install qtcreator qt-sdk libudev-dev libqt5serialport5-dev 
 ```
 
-Yükleme bittikten sonra VESC için firmware, GitHub'dan çekilir ve derlenir. Bunun için aşağıdaki komutlar sırasıyla çalıştırılır:
+Yükleme bittikten sonra VESC kontrol ve firmware yüklemek için kullanacağımız uygulamanın, GitHub'dan çekilmesi ve derlenmesi gerekmektedir. Bunun için aşağıdaki komutları sırasıyla çalıştırınız:
 
 ```bash
 cd ~
@@ -257,13 +253,13 @@ qmake -qt=qt5
 make clean && make
 ```
 
-Daha sonra VESC için konfigürasyon dosyaları indirilir: 
+Daha sonra VESC için konfigürasyon dosyalarını indiriniz: 
 ```bash
 cd ~
 git clone https://github.com/mit-racecar/hardware.git
 ```
 
-Bu işlemlerden sonra VESC Firmware'ı `~/bldc-tool/firmwares` dizininde; konfigürasyon dosyaları ise `~/hardware/vesc` dizininde bulunmaktadır. 
+Bu işlemlerden sonra VESC Firmware'ı `~/bldc-tool/firmwares` dizininde; konfigürasyon dosyaları ise `~/hardware/vesc` dizine indirilmiş olacaktır. 
 
 VESC Firmware'ı yüklemek için aşağıdaki komutları sırasıyla uygulayınız: 
 
@@ -273,9 +269,11 @@ cd ~/bldc-tool
 ```
 
 Bu komut çalıştırıldığında, firmware'ın yüklenmesi için aşağıdaki arayüz ile karşılaşılacaktır. 
+MCCONF_Limits.png
+![bldc_firmware_arayüz](images/MCCONF_Limits.png)
 Öncelikle VESC'e bataryanın bağlı olduğundan ve USB kablosuyla Hub'a bağlı olduğundan emin olunuz. Ayrıca VESC ışıklarını da kontrol ediniz. Eğer kırmızı ışık yanıp sönüyorsa batarya(aracın alt kısmında bulunan) bitmek üzere demektir. Bataryanızı şarj ettikten sonra bu işleme devam etmeniz önerilmektedir. Sabit bir mavi ışığın yanması, bataryanızın dolu olduğu anlamına gelmektedir ve ek birşey yapmanıza gerek yoktur. 
 
-**Serial Connection** altında *VESC-ttyACM0* adı ile VESC görülecektir. Eğer bu isim ile bir cihaz görünmüyor ise kernel derlenirken belirtilen ayarların yapıldığından ve VESC'in Hub'a bağlı olduğundan emin olunuz. **Connect** butonuna basıldığında, VESC ile bağlantınız kurulacaktır. 
+**Serial Connection** altında *VESC-ttyACM0* adı ile VESC görülecektir. Eğer bu isim ile bir cihaz görünmüyor ise kernel derlenirken belirtilen ayarların yapıldığından ve VESC'in Hub'a bağlı olduğundan emin olunuz. **Connect** butonuna basıldığında, VESC ile bağlantınız kurulacaktır ve uygulamanın sağ altında yeşil renk ile bağlantının başarılı olduğunu belirtilecektir. 
 
 Üst menüden **Firmware**'a tıklayınız. 
 
@@ -295,11 +293,11 @@ Araçta servo motor kullanıldı için `~/bldc-tool/firmwares/hw_410_411_412` di
 
 **Upload** butonuna basılarak VESC'e Firmware yükleme işlemi başlatılabilir. Yükleme bittikten sonra uygulama kapanacaktır. Uygulama, terminalden yukarıda anlatıldığı gibi tekrar başlatılabilir. Bu adım ile VESC'e firmware yüklenmiş olunur. 
 
-bldc-tool'u yeniden başlattıktan sonra *VESC-ttyACM0* adı ile **Connect**'e tıklamayı unutmayınız. 
+`bldc-tool`'u yeniden başlattıktan sonra *VESC-ttyACM0* adı ile **Connect**'e tıklamayı unutmayınız. 
 
 **Read Configuration**'a tıklayınız. Mevcut konfigürasyon ayarları mevcut ekranda görünecektir. 
 
-**Load XML** butonuna tıklayın. `~/hardware/vesc/6.141_bldc_old_hw_30k_erpm.xml` dizinindeki dosyası seçiniz. 
+**Load XML** butonuna tıklayın. `~/hardware/vesc/6.141_bldc_old_hw_30k_erpm.xml` dizinindeki dosyayı seçiniz. 
 
 **Write Configuration** butonuna tıklayınız. Daha sonra **Reboot**'a tıklayarak VESC'i yeniden başlatınız. Bu adımda uygulama yine kapanabilir. Yukarıda belirtilen yol ile tekrar uygulamayı başlatabilirsiniz. Uygulamanın kapanması, VESC'in yeniden başlatılmasını engellemez.
 
@@ -307,9 +305,7 @@ Uygulamayı yeniden başlattıktan sonra **Read Configuration**'a tıklayarak ay
 
 VESC ayarlarını yaptıktan sonra *Racecar* kurulumuna geçebilirsiniz. 
 
-## <a name="installracecar"></a> Racecar'ı kur
-
-## <a name="installracecar"></a> Racecar'ı kur
+## <a name="racecar_kurulumu"></a> Racecar'ı kur
 Ana dizine racecar-workspace klasörünü indirmek için aşağıdaki komutu sırasıyla çalıştırınız:
 
 ```bash
@@ -322,27 +318,17 @@ wiki.ros.org/ROS/Tutorials
 Eğitimde kullanılan örneklere ulaşmak için:  
 github.com/openzeka/racecar-controllers  
 
-Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
-```bash
-cd ~/racecar-workspace
-rm -rf build devel
-catkin_make
-```
-catkin_make sırasında *ackermann_msgs* hatası alırsanız, aşağıdaki eklentileri kurduktan sonra tekrarr **catkin_make** yapınız. 
-
-```bash
-sudo apt-get install ros-kinetic-ackermann-msgs 
-sudo apt-get install ros-kinetic-serial
-cd ~/racecar-workspace
-rm -rf build devel
-catkin_make
-```
-
 Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
 
 ```bash
-sudo apt-get install ros-kinetic-joy
-sudo apt-get install ros-kinetic-joy-teleop 
+sudo apt-get install ros-kinetic-ackermann-msgs ros-kinetic-serial ros-kinetic-joy ros-kinetic-joy-teleop 
+```
+
+Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
+```bash
+cd ~/racecar-workspace
+sudo rm -rf build devel
+catkin_make
 ```
 
 Aşağıdaki komutlar ile test aşamasına geçebilirsiniz.
@@ -356,11 +342,11 @@ source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
 
-Bu aşamada "Portlar bulunamadı" hasatsı görmeniz muhtemel. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
+Bu aşamada "Portlar bulunamadı" hasatsı görmeniz muhtemeldir. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
 
 ---
 
-## Usb Port Kuralları Konfigürasyonu
+## <a name="usb_port"></a>Usb Port Kuralları Konfigürasyonu
 Usb sensörleri, motoru ve diğer donanımları taktığımızda linux bunlara ttyUSB0 gibi adresler verecektir. Bu adresler herkesde aynı olmayabilir, fakat sabit olması bizi "daha sonra hangi porta hangi cihaz bağlı" uğraşından kurtarmaktadır. 
 
 Öncelikle USB cihazları bulunuz:
@@ -384,8 +370,6 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 ```
 VESC ve IMU cihazlarını bu listede arıyoruz. 
-### Eğer sweep-lidar kullanıyorsanız aşağıdaki adımları takip ediniz:
-***sweep-lidar* kullananlar için, bu cihazın da port ayarlarının yapılması gerektiğinden aşağıdaki adımları uygulaması gerekmektedir.**
 Bu cihazları filtrelememiz çalışma açısından kolaylık sağlayacaktır:
 ```bash
 lsusb | grep "9d0f\|STMicro\|Future Technology"
@@ -401,7 +385,7 @@ Bu cihazlara ait Vendor ID ve/veya Product ID'ye ihtiyacımız vardır. `'lsusb`
 Bus <bus number> Device <device number>: ID <vendor id>:<product id> <Device name>
 ```
 
-İlk cihaz `(Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC)` scanse sweep-lidar, ikincisi IMU, son olarak(`STMicroelectronics`) de VESC cihazlarını göstermektedir. Örneğin VESC'e ait vendor ID `0483`, ve product ID `5740` olarak görünmektedir. Bu ID'ler sizin cihazınızda farklı olabilir. Lütfen kend komut satırı çıktısınızda gördüğünüz ID'leri kullanınız.
+İlk cihaz `(Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC)` scanse sweep-lidar, ikincisi IMU, son olarak(`STMicroelectronics`) de VESC cihazlarını göstermektedir. Örneğin VESC'e ait vendor ID `0483`, ve product ID `5740` olarak görünmektedir. Bu ID'ler sizin cihazınızda farklı olabilir. Lütfen kendi komut satırı çıktısınızda gördüğünüz ID'leri kullanınız.
 
 Usb port kurallarını ayarlamak için usb kural dosyasını düzenleyeceğiz:
 ```bash
@@ -419,46 +403,19 @@ ATTRS{idVendor}=="0483", SYMLINK+="vesc"
 ATTRS{idProduct}=="5740", SYMLINK+="vesc"
 ```
 
-### Eğer RPLIDAR kullanıyorsanız aşağıdaki adımları takip ediniz:
-
-Bu cihazları filtrelememiz çalışma açısından kolaylık sağlayacaktır:
-```bash
-lsusb | grep "9d0f\|STMicro\"
-```
-Çıktı:
-```bash
-Bus 001 Device 006: ID 1b4f:9d0f
-Bus 001 Device 005: ID 0483:5740 STMicroelectronics STM32F407
-```
-Bu cihazlara ait Vendor ID ve/veya Product ID'ye ihtiyacımız vardır. `'lsusb` komutu aşağıdaki format ile bu iki bilgiyi de vermektedir:
-```html
-Bus <bus number> Device <device number>: ID <vendor id>:<product id> <Device name>
-```
-
-İlk cihaz IMU, ikinci cihaz(`STMicroelectronics`) ise VESC cihazlarını göstermektedir. Örneğin VESC'e ait vendor ID `0483`, ve product ID `5740` olarak görünmektedir. Bu ID'ler sizin cihazınızda farklı olabilir. Lütfen kend komut satırı çıktısınızda gördüğünüz ID'leri kullanınız.
-
-Usb port kurallarını ayarlamak için usb kural dosyasını düzenleyeceğiz:
-```bash
-sudo nano /etc/udev/rules.d/99-usb-serial.rules
-```
-Aşağıda gösterilen kodları usb kural dosyasına yapıştırınız, `idVendor` karşısına kendi cihazınızın "vendor id"lerini, `idProduct` karşısına kendi cihazınızın "product id"lerini yazınız.
-```bash
-ATTRS{idVendor}=="1b4f", SYMLINK+="imu"
-ATTRS{idProduct}=="9d0f", SYMLINK+="imu"
-
-ATTRS{idVendor}=="0483", SYMLINK+="vesc"
-ATTRS{idProduct}=="5740", SYMLINK+="vesc"
-```
-
 Buraya kadar herşey çalışıyorsa programı incelemeye başlayabilirsiniz! Örnek ROS dökümanlarımıza ve örnek kodlara göz atabilirsiniz:  
 [ROS temelleri](lecture%20materials/ros%20fundamentals.md)  
 [Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
 
-
-# Projenin belirlenen çalışma alanına taşınması
+## <a name="imu"></a>IMU kurulumu
+Bu adımda IMU'yu kurmak için aşağıdaki komutu çalıştırmanız yeterlidir.
+```bash 
+sudo apt-get install ros-kinetic-razor-imu-9dof
+```
+# <a name="proje_tasi"></a>(Opsiyonel)Projenin Belirlenen Çalışma Alanına Taşınması
 [Proje klonlandıktan sonra](#installracecar) belirlenen çalışma alanına taşınıp takım arkadaşlarınızla Git kullanmak isterseniz:
 
-ana dizindeki `.gitmodules` dosyasına gir. Buna benziyor olmalı:
+ana dizindeki `.gitmodules` dosyasına giriniz. Dosya içeriği aşağıdakine benzer olmalıdır:
 ```bash
 [submodule "src/racecar"]
 	path = src/racecar
@@ -473,46 +430,45 @@ ana dizindeki `.gitmodules` dosyasına gir. Buna benziyor olmalı:
 	path = src/vesc
 	url = https://github.com/mit-racecar/vesc
 ```
-Bu gördüklerine submodule deniyor (Ayrıntı için: [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)). Submodule ler sayesinde birden fazla git projesini bir proje altında toplayabiliyoruz, burada da öyle yaptık. Fakat muhtemelen değişiklik yaptığında commit ve push dediğin zaman iznin olmadığını söyleyecek, bunun için kendi özel repository'ni oluşturmalısın.  
+(Submodule ile ilgili daha fazla bilgi için: [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)). Submodule'ler sayesinde birden fazla git projesini bir proje altında toplayabilirsiniz. Fakat muhtemelen değişiklik yaptığınız commit ve push dediğiniz zaman izninizin olmadığını söyleyecektir. Bunun için kendi özel repository'nizi oluşturmanız gerekmektedir.  
 * Github da her proje için (racecar, racecar-controllers, racecar-simulator, vesc) bir repository oluşturun ([Github: Create A Repo](https://help.github.com/articles/create-a-repo/))  
-Veya değişiklik yapmayacağını düşündüğün repo varsa (mesela muhtemelen VESC), o repository için bunu yapmana gerek yok. 
-* Repoların adreslerini az önceki `.gitmodules` dosyasında değiştir, kendininkileri yaz. Mesela şunun gibi:
+Veya değişiklik yapmayacağınızı düşündüğünüz repo varsa (mesela muhtemelen VESC), o repository için bunu yapmanıza gerek yoktur. 
+* Repoların adreslerini az önceki `.gitmodules` dosyasında değiştiriniz. Örnek olarak:
 ```bash
 [submodule "src/racecar"]
 	path = src/racecar
-	url = <buraya senin git repository adresin>
+	url = <buraya git repository adresinizi yazınız>
 ```
-* Şimdi de racecar-ws için bir repository oluştur. Ve proje ana dizininde (`.gitmodules` dosyasının olduğu yer) Şu komutu çalıştır:
+* Şimdi de racecar-workspace için bir repository oluşturunuz ve proje ana dizininde (`.gitmodules` dosyasının olduğu yer) Şu komutu çalıştırınız:
 ```bash
 git remote remove origin
-git remote add origin <senin racecar-ws repository nin linki>
+git remote add origin <senin racecar-workspace repository nin linki>
 ```
 Doğrulamak için:
 ```bash
 git remote -v
 ```
-Çıktı buna benzemeli:
+Çıktı şu şekilde olmalıdır:
 ```bash
-origin	https://github.com/MuhsinFatih/racecar-workspace (fetch)
-origin	https://github.com/MuhsinFatih/racecar-workspace (push)
+origin	https://github.com/openzeka/racecar-workspace (fetch)
+origin	https://github.com/openzeka/racecar-workspace (push)
 ```
 
-* Tekrar ana dizinde iken kendi repository'ne push yap:
+* Tekrar ana dizinde iken kendi repository'nize push yapınız:
 ```bash
 git push origin master
 ```
-* Son olarak az önce oluşturduğun repository ler için bunları tekrar et:
+* Son olarak az önce oluşturduğunız repository'ler için bunları tekrar ediniz:
 ```bash
 git remote remove origin
 git remote add origin <senin racecar/simulator/controller vb. repository nin adresi>
 git push origin master
 ```
 
-Github a bak ve kontrol et, projen artık senin adresinde olmalı. Submodule'lere basınca da işaret ettikleri repository'e yönlendirmesi gerek. Bunları yapıyorsa herşey tamam demektir.
-
+Yaptığınız işlemleri Github üzerinden kontrol edebilirsiniz. 
 ---
 
-## ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar (Bu aşama opsiyoneldir)
+## <a name="ros_uzaktan_baglanti"></a>(Opsiyonel) ROS Uzaktan Bağlantısınının Varsayılan Olarak Açılması İçin Gerekli Konfigürasyonlar
 
 `nano ~/.profile` dosyasını açtıktan sonra aşağıdaki satırları ekleyiniz:
 
@@ -534,9 +490,9 @@ export ROS_IP=$(hostname -I)
 source ~/.profile
 ```
 
-## Gerekli eklentilerin kurulması
+## <a name="gerekli_eklentilerin_kurulması"></a>Gerekli eklentilerin kurulması
 
-### Caffe Kurulumu
+### <a name="caffe"></a>Caffe Kurulumu
 
 Caffe kurulumuna geçmeden önce caffe için bazı gereksinimlerin kurulu olması gerekmektedir. Aşağıdaki komutları sırasıyla çalıştırınız:
 
@@ -568,7 +524,7 @@ sudo sed -i 's/# WITH_PYTHON_LAYER := 1/WITH_PYTHON_LAYER := 1/' Makefile.config
 ```
 
 Devam etmeden önce "config" dosyasına Jetson TX2'ye ait mimari kodlarının da eklenmesi gerekmektedir. `Makefile.config` dosyasını çift tıklayarak açın.
-**CUDA_ARCH** değişkenini dosya içerisinde bulun. `compute_62` ve `sm_62` satırları (aşağıdaki son iki satır) varsayılan olarak bulunmuyor olabilir. Eğer yoksa bu dosyaya onları eklediğinizden emin olun. **Makefile.config** dosyası içerisinde bulunan **CUDA_ARCH** değişkeninin aşağıdaki ile aynı olduğundan emin olun ve dosyayı kaydederek kapatın. 
+**CUDA_ARCH** değişkenini dosya içerisinde bulunuz. `compute_62` ve `sm_62` satırları (aşağıdaki son iki satır) varsayılan olarak bulunmuyor olabilir. Eğer yoksa bu dosyaya onları eklediğinizden emin olun. **Makefile.config** dosyası içerisinde bulunan **CUDA_ARCH** değişkeninin aşağıdaki ile aynı olduğundan emin olun ve dosyayı kaydederek kapatın. 
 
 ```bash
 CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \
@@ -588,8 +544,11 @@ Bu değişiklilk yapıldıktan sonra devam edilebilir.
 
 
 ```bash
+cd ~/caffe
+mkdir build 
+cd build
 # Ubuntu 16.04, static cuda ile ilgili bir hata verdiğinden, derleme işlemi yapılırken bu özelliğin kapatılması gerekmektedir.
-cmake -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF
+cmake -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF ..
 # Derleme işlemi, Jetson'da bulunan 6 çekirdek de kullanılarak yapılacaktır. Bu işlem sırasında başka bir işlem yapmamanız önerilir.
 # Ayrıca bu adımdan önce Jetsonu yüksek performans moduna almak işlemi hızlandıracaktır. 
 sudo nvpmodel -m 0
@@ -602,7 +561,7 @@ cd ~/caffe
 tools/caffe time --model=models/bvlc_alexnet/deploy.prototxt --gpu=0
 ```
 
-Eğer işlemler sırasında hdf5 hatası alınırsa şu adımları uyguladıktan sonra tekrar derleyin. 
+Eğer işlemler sırasında hdf5 hatası alınırsa şu adımları uyguladıktan sonra tekrar derleyiniz. 
 
 ```bash
 echo “INCLUDE_DIRS += /usr/include/hdf5/serial” >> Makefile.config
@@ -610,17 +569,17 @@ echo “LIBRARY_DIRS += /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5
 ```
 
 Buraya kadar herhangi bir hata ile karşılaşmadıysanız caffe kurulumu başarılı bir şekilde tamamlanmıştır. 
-Eğer bu adımları takip ederek caffe'yi derlediyseniz Caffe executable dosyasını `~/caffe/tool` dizini altında bulabilirsiniz. 
+Eğer bu adımları takip ederek caffe'yi derlediyseniz Caffe executable dosyasını `~/caffe/build/tool` dizini altında bulabilirsiniz. 
 
-### Torch Kurulumu
+### <a name="torch"></a>Torch Kurulumu
 
-Öncelikle Torch için bazı gereksinimlerin kurulumunu yapalım. Aşağıdaki kodları sırasıyla terminalde çalıştırın. 
+Öncelikle Torch için bazı gereksinimlerin kurulumunu yapınız. Aşağıdaki kodları sırasıyla terminalde çalıştırınız. 
 
 ```bash 
 sudo apt-get install --no-install-recommends git software-properties-common -y
 ```
 
-Genel gereksinimleri kurduktan sonra github'tan Torch'u çekelim ve kuruluma geçelim.
+Genel gereksinimleri kurduktan sonra github'tan Torch'u indiriniz ve kuruluma geçiniz.
 
 ```bash
 echo 'export TORCH_ROOT=~/torch' >> ~/.bashrc
@@ -631,7 +590,7 @@ cd ~/torch
 source ~/.bashrc
 ```
 
-Aşağıdaki kurulumları tamamlandıktan sonra **Torch** kurulumu tamamlanacaktır. 
+Aşağıdaki kurulumları da tamamladıktan sonra **Torch** kurulumu tamamlanacaktır. 
 
 
 ```bash
@@ -643,7 +602,7 @@ luarocks install "https://raw.github.com/Neopallium/lua-pb/master/lua-pb-scm-0.r
 luarocks install lightningmdb 0.9.18.1-1 LMDB_INCDIR=/usr/include LMDB_LIBDIR=/usr/lib/x86_64-linux-gnu
 ```
 
-### Tensorflow 
+### <a name="tensorflow_1_6"></a>Tensorflow 1.6
 İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow'u kurun. Bunun için şu adımları takip edin.
 
 ```bash
@@ -660,14 +619,14 @@ sess = tf.Session()
 print(sess.run(hello))
 ```
 
-### Keras ve diğer eklentiler
+### <a name="keras"></a>Keras ve diğer eklentiler
 Şu kodu çalıştırmanız,bu adım için yeterli olacaktır.
 ```bash
 sudo pip install h5py keras matplotlib scipy pandas
 ```
 Bu kurulum uzun sürecektir(~45 dakika).
 
-### Jupyter Notebook
+### <a name="jupyter"></a>Jupyter Notebook
 
 Jupyter Notebook kurulumunu aşağıdaki komut ile yapabilirsiniz.
 
@@ -680,7 +639,7 @@ Bu işlem, jupyter'i sadece **python2** kerneli ile kuracaktır. Eğer **python3
 python3 -m pip install ipykernel
 python3 -m ipykernel install --user
 ```
-## Jetson TX2 Yüksek Performans modu
+## <a name="jetson_yuksek_performans"></a>Jetson TX2 Yüksek Performans modu
 
 Jetson'u farklı senaryolarda yüksek performans yada enerji tasarrufu ayarı ile kullanabiliriz. NVIDIA, bunun için bize **NVPModel**'i sunmaktadır. 
 
@@ -745,7 +704,7 @@ ls /dev/input
 </p>
 
 
-Bu komutun çıktısında **js0** adında bir dosya görüyor olmanız lazım. Eğer **js1** gibi bir dosya var ise aşağıdaki komutu çalıştırın.
+Bu komutun çıktısında **js0** adında bir dosya görüyor olmanız lazım. Eğer **js1** gibi bir dosya var ise aşağıdaki komutu çalıştırınız.
 
 ```bash
 sudo mv /dev/input/js1 /dev/input/js0
