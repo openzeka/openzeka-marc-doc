@@ -140,14 +140,14 @@ Burada bazı değişikliklerin yapılması gerekmektedir. JetsonHacks'e ait olan
 
 *Bu paragrafta anlatılanlar opsiyoneldir*.Öncelikle açılan ekrandan **General Setup**'a tıklanır, daha sonra ise sağ tarafta açılan menüden **Local version -append to kernel release** butonuna çift tıklanır. Bu kısma, - ile başlayan bir isim gireilebilir. Burada *-openzeka-v0.1* şeklinde isim verilecektir. 
 
-Daha sonra **Edit > Find** menüsünden açılan pencereye **ACM** yazılarak **USB Modem (CDC ACM) support** aktif hale getirilir. **DİKKAT: Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz. **
+Daha sonra **Edit > Find** menüsünden açılan pencereye **ACM** yazılarak **USB Modem (CDC ACM) support** aktif hale getirilir. **DİKKAT: Nokta ile değil tik işareti ile işaretlediğinizden emin olunuz.**
 
 Daha sonra aynı şekile arama yapılarak **CH341** portu da aktifleştiriniz.
 
 Değişiklikleri kaydedip uygulamayı kapatabilirsiniz. Artık kernel derlenebilir. Aşağıdaki komutu çalıştırınız:
 ```bash
 cd ~/buildJetsonTX2Kernel
-#Kernel kaynaklarının "build" edilmesi
+#Kernel kaynaklarının derlenmesi
 ./makeKernel.sh
 ```
 Bu işlem 10 dakika civarında sürmektedir. Derleme tamamlandıktan sonra, derlenen dosyaları kopyalamak için aşağıdaki komutu çalıştırınız:
