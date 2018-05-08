@@ -23,9 +23,11 @@
   - [Keras ve diğer eklentilerin kurulumu](#keras)
   - [Jupyter Notebook kurulumu](#jupyter)
   - [Jetson TX2 Yüksek Performans modu](#jetson_yuksek_performans)
-- [**Verilerin Toplanması**](#verilerin-toplanmas%C4%B1)
-- [**Toplanan verilerle ağın eğitilmesi**](#toplanan-verilerle-a%C4%9F%C4%B1n-e%C4%9Fitilmesi)
-- [**Eğitilen ağın kullanılması**](#e%C4%9Fitilen-a%C4%9F%C4%B1n-kullan%C4%B1lmas%C4%B1)
+- [**Aracın İlk Defa Hareket Ettirilmesi**](#ilk_hareket)
+- [**Aracın Otonom Olarak Hareket Ettirilmesi**](#otonom_surus)
+- [**Verilerin Toplanması**](#veri_toplanmasi)
+- [**Toplanan verilerle ağın eğitilmesi**](#ag_egitimi)
+- [**Eğitilen modelin kullanılması**](#model_kullanimi)
   
 
 # <a name="ilk_adim"></a>Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar
@@ -204,16 +206,6 @@ source ~/.bashrc
 Son olarak aşağıdaki kurulumları gerçekleştiriniz:
 ```bash
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
-```
-
-## <a name="rp_lidar_kurulumu"></a>RPLIDAR kurulumu ve Test Edilmesi (ROS kurulumundan sonra yapılmalıdır)
-```bash
-cd ~/racecar-workspace/src
-# rplidar_ros repository'si indirilir
-git clone https://github.com/robopeak/rplidar_ros.git
-
-# rplidar ros paketi ile yapılan taramanın grafiksel arayüzde görüntülenmesi
-roslaunch rplidar_ros view_rplidar.launch
 ```
 
 ## <a name="vesc_kurulumu"></a>VESC sürücülerinin yüklenmesi
@@ -620,11 +612,11 @@ print(sess.run(hello))
 ```
 
 ### <a name="keras"></a>Keras ve diğer eklentiler
-Şu kodu çalıştırmanız,bu adım için yeterli olacaktır.
+Aşağıdaki kodu çalıştırmanız,bu adım için yeterli olacaktır.
 ```bash
 sudo pip install h5py keras matplotlib scipy pandas
 ```
-Bu kurulum uzun sürecektir(~45 dakika).
+Bu kurulum uzun sürebilir(~45 dakika).
 
 ### <a name="jupyter"></a>Jupyter Notebook
 
@@ -684,16 +676,26 @@ sudo nvpmodel -m 0
 # Burada 0 yerine istediğiniz modu girebilirsiniz.
 # 0 yüksek performans modudur ve tüm çekirdekleri aktif hale getirir. 
 ```
-## Verilerin Toplanması
 
-Buraya kadar başarıyla gelebildiyseniz artık veri toplayabiliriz. Veri toplama işlemine başlamadan önce aracı aracın bataryalarının dolu olduğundan ve tüm donanımın özellikle de joystick ve kameranın bağlı olduğundan emin olun. Teleop'u çalıştırmadan önce joytstick'in doğru ayarlandığından emin olalım. 
+## <a name="ilk_hareket"></a>Aracın İlk Kez Hareket Ettirilmesi
+
+Aracı satın aldıktan sonra ilk kez hareket ettirmek için aşağıdaki adımları uygulayabilirsiniz. 
+- İlk olarak OpenPower'ı aracın üzerine yerleştirin. OpenPower'ın altında bulunan ve aracın üzerinde hazır bulunan çift taraflı bant yardımıyla sabitleyebilirsiniz. Kabloları bağlamadan önce OpenPower'ın kapalı olduğundan emin olun. Üzerinde **Jetson 16V** etiketi olan kablonun bir ucunu OpenPower'ın 16V çıkışına diğer ucunu ise Jetson güç girişine bağlayın. Üzerinde **USB HUB 12V** etiketi olan kablonun bir ucunu 12V çıkışına diğer ucunu USB Hub'a ait güç girişine bağlayın. Artık OpenPower'ı açarak Jetson'a ve USB Hub'a güç verebilirsiniz.
+
+- Araç Bataryasını, VESC'in güç girişine bağlayın ve bataryayı aracın altına yerleştirin.
+
+**Jetson'ın HDMI kablosu ile bir ekrana bağlı olması büyük oranda kolaylık sağlayacaktır.**
+
+Artık Jetson'ın güç düğmesine basarak başlatabilirsiniz. 
+
+Teleop'u çalıştırmadan önce joytstick'in doğru ayarlandığından emin olalım. 
 Öncelikle joystick'in açık olduğundan ve _mode_ ışığının **yanmadığından** emin olun. Vibration tuşu ile kontrol edin. **D** moduna alın. 
 
 <p align="center">
   <img src="images/joystick_d_mode.png" />
 </p>
 
-Aşağıda gösterilen dizini kontrol edin
+Yeni bir terminal açın ve aşağıda gösterilen dizini kontrol edin
 
 ```bash
 ls /dev/input
@@ -704,13 +706,13 @@ ls /dev/input
 </p>
 
 
-Bu komutun çıktısında **js0** adında bir dosya görüyor olmanız lazım. Eğer **js1** gibi bir dosya var ise aşağıdaki komutu çalıştırınız.
+Bu komutun çıktısında **js0** adında bir dosya görüyor olmanız gerekmektedir. Eğer **js1** gibi bir dosya var ise aşağıdaki komutu çalıştırınız.
 
 ```bash
 sudo mv /dev/input/js1 /dev/input/js0
 ```
 
-Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca bağlı olduğundan, mode ışığının yanmadığından ve **D** modunda olduğundan emin olun. 
+Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca bağlı olduğundan, mode ışığının yanmadığından ve **D** modunda olduğundan emin olun. **js0** adındaki dosya yukarıda belirtilen dizinde oluşmadan ilerlemeyin.
 
 Şimdi **teleop**'u çalıştırabiliriz.
 
@@ -721,7 +723,28 @@ roslaunch racecar teleop.launch
 ```
 Komut çalıştırıldıktan sonra joystick ile aracı kontrol edebilirsiniz. 
 **Aracı kontrol etmek için LB tuşuna basılı tutmayı unutmayın.**
-Teleopun çalıştığı terminali kapatmadan yeni bir terminal açın ve veri toplamak için aşağıdaki kodu çalıştırın. 
+
+## <a name="otonom_surus"></a>Aracın Otonom Olarak Hareket Ettirilmesi
+
+Aracı satın aldığınızda içerisinde otonom olarak gitmesi için daha önceden hazır olarak eğitilmiş bir model bulabilirsiniz. Aracı otonom olarak hareket ettirmek için öncelikle yukarıdaki **Aracın İlk Kez Hareket Ettirilmesi** bölümünde belirtilen işlemleri uygulayınız. Teleop'un çalıştığı terminali kapatmadan yeni bir terminal açın. 
+
+Aşağıdaki kodu sırasıyla çalıştırdığınızda, araç otonom olarak hareket edecektir.
+
+```bash
+
+cd ~/racecar-workspace
+source devel/setup.bash
+rosrun deep_learning predict.py
+
+```
+
+**Tebrikler!**
+
+## <a name="veri_toplanmasi"></a>Verilerin Toplanması
+
+Kendi modelinizi üretmek için öncelikle araç ile veri toplamanız gerekmektedir. Bu aşamada aracı, öğrenmesi istediğiniz alanlarda sürmeniz yeterli olacaktır. 
+
+Eğer Teleop çalışmıyorsa yukarıda belirtilen adımları uygulayın. Teleopun çalıştığı terminali kapatmadan yeni bir terminal açın ve veri toplamak için aşağıdaki kodu çalıştırın. 
 
 ```bash
 cd ~/racecar-workspace
@@ -741,9 +764,9 @@ Joystick ile kontrol etmeye başladığınızda hız ve açı değerlerinin resi
   <img src="images/daha_flowing_change.png" />
 </p>
 
-Aracı sürmeye başlayarak veri toplayabilirsiniz. Kameradan alınan görüntü, hız ve açı değerleri **racecar-workspace/src/racecar-controllers/marc-examples/deep_learning/data/** klasörüne kaydedilecektir. Her collect_data.py dosyasını çalıştırdığınızda **001**'den başlayarak ve artarak yeni bir klasör oluşturulacak ve veriler o klasöre kaydedilecektir. 
+Aracı sürmeye başlayarak veri toplayabilirsiniz. Kameradan alınan görüntü, hız ve açı değerleri **racecar-workspace/src/racecar-controllers/marc-examples/deep_learning/data/** klasörüne kaydedilecektir. Her `collect_data.py` dosyasını çalıştırdığınızda **001**'den başlayarak ve artarak yeni bir klasör oluşturulacak ve veriler en son oluşturulan klasöre kaydedilecektir. 
 
-## Toplanan verilerle ağın eğitilmesi
+## <a name="ag_egitimi"></a>Toplanan Verilerle Ağın Eğitilmesi
 
 Verileri topladıktan sonra eğitim aşamasına geçebiliriz. **racecar-workspace/src/racecar-controllers/marc-examples/ktrain** klasörüne gidin. Klasörün içinde bulunan **model_trainer.ipynb** dosyasını jupyter notebook yardımıyla açın.
 
@@ -758,7 +781,7 @@ Dosyada belirtilen adımları takip ederek **train** işlemini tamamlayabilirsin
 
 Eğitim bittikten sonra **ktrain** dosyasında oluşturulmuş olan **model_new.h5** ve **model_new_json** dosyalarını **racecar-workspace/src/racecar-controllers/marc-examples/deep_learning** klasörüne kopyalayın. 
 
-## Eğitilen ağın kullanılması
+## <a name="model_kullanimi"></a>Eğitilen ağın kullanılması
 
  **model_new.h5** ve **model_new_json** dosyalarını _predict.py_ ile aynı klasöre kopyaladıktan sonra **teleop**'u çalıştırın. (Eğer çalışıyorsa tekrar çalıştırmanıza gerek yok)
  
