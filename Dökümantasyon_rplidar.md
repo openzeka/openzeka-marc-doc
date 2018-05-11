@@ -7,14 +7,15 @@
   - [Hostname'in(Bilgisayar Adı) Değiştirilmesi](#hostname_degistir)
   - [(Opsiyonel) ZSH'ın kurulması](#zsh_kurulumu)
   - [(Opsiyonel) Screen'in kurulması](#screen_kurulumu)
-- [Kernelin yeniden derlenmesi](#kernel_derlenmesi)
-- [ROS Kinetic kurulumu](#ros_kurulumu)
-- [VESC sürücülerinin yüklenmesi](#vesc_kurulumu)
-- [Racecar'ın kurulması](#racecar_kurulumu)
-- [RPLIDAR Ros kurulumu](#rplidar)
-- [USB port kuralları konfigürasyonu](#usb_port)
+- [Kernelin Yeniden Derlenmesi](#kernel_derlenmesi)
+- [ROS Kinetic Kurulumu](#ros_kurulumu)
+- [VESC Sürücülerinin Yüklenmesi](#vesc_kurulumu)
+- [Racecar'ın Kurulması](#racecar_kurulumu)
+- [RPLIDAR Ros Kurulumu](#rplidar)
+- [USB Port Kuralları Konfigürasyonu](#usb_port)
 - [IMU Kurulumu](#imu)
-- [Projenin belirlenen çalışma alanına taşınması](#proje_tasi)
+- [ZED Kamera Kurulumu]
+- [Projenin Belirlenen Çalışma Alanına Taşınması](#proje_tasi)
 - [ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar](#ros_uzaktan_baglanti)
 - [**Gerekli eklentilerin kurulması**](#gerekli_eklentilerin_kurulması)
   - [Caffe kurulumu](#caffe) 
@@ -318,7 +319,7 @@ Bu aşamada "Portlar bulunamadı" hasatsı görmeniz muhtemeldir. Bu aşamada po
 ---
 
 
-## <a name="rp_lidar_kurulumu"></a>RPLIDAR kurulumu ve Test Edilmesi (ROS kurulumundan sonra yapılmalıdır)
+## <a name="rplidar"></a>RPLIDAR kurulumu ve Test Edilmesi (ROS kurulumundan sonra yapılmalıdır)
 ```bash
 cd ~/racecar-workspace/src
 # rplidar_ros repository'si indirilir
@@ -676,7 +677,7 @@ Aracı satın aldıktan sonra ilk kez hareket ettirmek için aşağıdaki adıml
 
 - Araç Bataryasını, VESC'in güç girişine bağlayın ve bataryayı aracın altına yerleştirin.
 
-**Jetson'ın HDMI kablosu ile bir ekrana bağlı olması büyük oranda kolaylık sağlayacaktır.**
+**Jetson'ın HDMI kablosu ile bir ekrana bağlı olması büyük oranda kolaylık sağlayacaktır. Eğer bir ekrana bağlama forsatınız yok ise, aracın sizin de bulunduğunuz bir ağa bağlı olması ve araca _ssh_ ile bağlanılması gerekmektedir.**
 
 Artık Jetson'ın güç düğmesine basarak başlatabilirsiniz. 
 
@@ -718,7 +719,7 @@ Komut çalıştırıldıktan sonra joystick ile aracı kontrol edebilirsiniz.
 
 ## <a name="otonom_surus"></a>Aracın Otonom Olarak Hareket Ettirilmesi
 
-Aracı satın aldığınızda içerisinde otonom olarak gitmesi için daha önceden hazır olarak eğitilmiş bir model bulabilirsiniz. Aracı otonom olarak hareket ettirmek için öncelikle yukarıdaki **Aracın İlk Kez Hareket Ettirilmesi** bölümünde belirtilen işlemleri uygulayınız. Teleop'un çalıştığı terminali kapatmadan yeni bir terminal açın. 
+Aracı satın aldığınızda içerisinde otonom olarak gitmesi için daha önceden hazır olarak eğitilmiş bir model bulabilirsiniz. Aracı otonom olarak hareket ettirmek için öncelikle yukarıdaki **Aracın İlk Kez Hareket Ettirilmesi** bölümünde belirtilen işlemleri uygulayınız. Teleop'un çalıştığı terminali kapatmadan **yeni bir terminal açın.** 
 
 Aşağıdaki kodu sırasıyla çalıştırdığınızda, araç otonom olarak hareket edecektir.
 
