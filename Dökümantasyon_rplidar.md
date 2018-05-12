@@ -12,9 +12,9 @@
 - [VESC Sürücülerinin Yüklenmesi](#vesc_kurulumu)
 - [Racecar'ın Kurulması](#racecar_kurulumu)
 - [RPLIDAR Ros Kurulumu](#rplidar)
-- [USB Port Kuralları Konfigürasyonu](#usb_port)
 - [IMU Kurulumu](#imu)
-- [ZED Kamera Kurulumu]
+- [ZED Kamera Kurulumu](#zed)
+- [USB Port Kuralları Konfigürasyonu](#usb_port)
 - [Projenin Belirlenen Çalışma Alanına Taşınması](#proje_tasi)
 - [ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar](#ros_uzaktan_baglanti)
 - [**Gerekli eklentilerin kurulması**](#gerekli_eklentilerin_kurulması)
@@ -237,7 +237,7 @@ VESC Firmware'ı yüklemek için aşağıdaki komutları sırasıyla uygulayın�
 
 ```bash
 cd ~/bldc-tool
-./BLDC-Tool
+./BLDC_Tool
 ```
 
 Bu komut çalıştırıldığında, firmware'ın yüklenmesi için aşağıdaki arayüz ile karşılaşılacaktır. 
@@ -265,11 +265,11 @@ Araçta servo motor kullanıldı için `~/bldc-tool/firmwares/hw_410_411_412` di
 
 **Upload** butonuna basılarak VESC'e Firmware yükleme işlemi başlatılabilir. Yükleme bittikten sonra uygulama kapanacaktır. Uygulama, terminalden yukarıda anlatıldığı gibi tekrar başlatılabilir. Bu adım ile VESC'e firmware yüklenmiş olunur. 
 
-`bldc-tool`'u yeniden başlattıktan sonra *VESC-ttyACM0* adı ile **Connect**'e tıklamayı unutmayınız. 
+`bldc-tool`'u yeniden başlattıktan sonra *VESC-ttyACM0* (VESC-ttyACM1 veya baska bir sayi da olabilir) adı ile **Connect**'e tıklamayı unutmayınız. 
 
 **Read Configuration**'a tıklayınız. Mevcut konfigürasyon ayarları mevcut ekranda görünecektir. 
 
-**Load XML** butonuna tıklayın. `~/hardware/vesc/6.141_bldc_old_hw_30k_erpm.xml` dizinindeki dosyayı seçiniz. 
+**Load XML** butonuna tıklayın. `~/hardware/vesc/6.141_bldc_VESC_X_hw_30k_erpm.xml` dizinindeki dosyayı seçiniz. 
 
 **Write Configuration** butonuna tıklayınız. Daha sonra **Reboot**'a tıklayarak VESC'i yeniden başlatınız. Bu adımda uygulama yine kapanabilir. Yukarıda belirtilen yol ile tekrar uygulamayı başlatabilirsiniz. Uygulamanın kapanması, VESC'in yeniden başlatılmasını engellemez.
 
@@ -294,6 +294,17 @@ Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
 
 ```bash
 sudo apt-get install ros-kinetic-ackermann-msgs ros-kinetic-serial ros-kinetic-joy ros-kinetic-joy-teleop 
+
+```
+
+###<a name="rplidar"></a>RPLIDAR kurulumu
+
+RPLidar'ı ROS ile derlemek için `catkin workspace` ortamını derlemeden önce, gerekli dosyaları bu çalışma ortamına ekleyin. Bunun için aşağıdaki adımları takip edebilirsiniz.
+
+```bash
+cd ~/racecar-workspace/src
+# rplidar_ros repository'si indirilir
+git clone https://github.com/robopeak/rplidar_ros.git
 ```
 
 Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
@@ -316,25 +327,25 @@ roslaunch racecar teleop.launch
 
 Bu aşamada "Portlar bulunamadı" hasatsı görmeniz muhtemeldir. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
 
----
-
-
-## <a name="rplidar"></a>RPLIDAR kurulumu ve Test Edilmesi (ROS kurulumundan sonra yapılmalıdır)
-```bash
-cd ~/racecar-workspace/src
-# rplidar_ros repository'si indirilir
-git clone https://github.com/robopeak/rplidar_ros.git
-
-cd ~/racecar-workspace
-sudo rm -rf build devel
-catkin_make
-
-# rplidar ros paketi ile yapılan taramanın grafiksel arayüzde görüntülenmesi
-cd ~/racecar-workspace
-roslaunch rplidar_ros view_rplidar.launch
+## <a name="imu"></a>IMU kurulumu
+Bu adımda IMU'yu kurmak için aşağıdaki komutu çalıştırmanız yeterlidir.
+```bash 
+sudo apt-get install ros-kinetic-razor-imu-9dof
 ```
 
+## <a name="zed></a> ZED SDK Kurulumu
 
+[Öncelike ZED SDK son sürümü indirmek için bu bağlatıdaki linke gidiniz.](#https://www.stereolabs.com/developers/release/latest/#sdkdownloads_anchor)
+ Açılan sayfada **TX2** butonuna tıklayın. Dosya indirilmeye başlayacaktır. 
+ 
+ Dosyanın indirildiği dizine gidin.
+ ```bash
+ cd ~/Downloads # Dosya farklı dizine indirilmiş olabilir
+ sh ./<indirdiğiniz zed sdk ismi>
+ ```
+ 
+ Yukarıdaki adımları takip edip kurulumu tamamladığınızda ZED kurulumu tamamlanmış olacaktır. ZED araçlarına `usr/local/zed` klasörü altında erişebilirsiniz.  
+ 
 ## <a name="usb_port"></a>Usb Port Kuralları Konfigürasyonu
 Usb sensörleri, motoru ve diğer donanımları taktığımızda linux bunlara ttyUSB0 gibi adresler verecektir. Bu adresler herkesde aynı olmayabilir, fakat sabit olması bizi "daha sonra hangi porta hangi cihaz bağlı" uğraşından kurtarmaktadır. 
 
@@ -377,6 +388,7 @@ Bus <bus number> Device <device number>: ID <vendor id>:<product id> <Device nam
 
 Usb port kurallarını ayarlamak için usb kural dosyasını düzenleyeceğiz:
 ```bash
+sudo apt-get install nano
 sudo nano /etc/udev/rules.d/99-usb-serial.rules
 ```
 Aşağıda gösterilen kodları usb kural dosyasına yapıştırınız, `idVendor` karşısına kendi cihazınızın "vendor id"lerini, `idProduct` karşısına kendi cihazınızın "product id"lerini yazınız.
@@ -387,16 +399,11 @@ ATTRS{idProduct}=="9d0f", SYMLINK+="imu"
 ATTRS{idVendor}=="0483", SYMLINK+="vesc"
 ATTRS{idProduct}=="5740", SYMLINK+="vesc"
 ```
-
+B işlemleri IMU ve VESC cihazlarını araçtan söküp tekrar takınız. 
 Buraya kadar herşey çalışıyorsa programı incelemeye başlayabilirsiniz! Örnek ROS dökümanlarımıza ve örnek kodlara göz atabilirsiniz:  
 [ROS temelleri](lecture%20materials/ros%20fundamentals.md)  
 [Racecar örnek kodları](https://github.com/openzeka/racecar-controllers/tree/bwsi_2017/marc-examples)
 
-## <a name="imu"></a>IMU kurulumu
-Bu adımda IMU'yu kurmak için aşağıdaki komutu çalıştırmanız yeterlidir.
-```bash 
-sudo apt-get install ros-kinetic-razor-imu-9dof
-```
 # <a name="proje_tasi"></a>(Opsiyonel)Projenin Belirlenen Çalışma Alanına Taşınması
 [Proje klonlandıktan sonra](#installracecar) belirlenen çalışma alanına taşınıp takım arkadaşlarınızla Git kullanmak isterseniz:
 
