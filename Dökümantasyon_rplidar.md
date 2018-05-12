@@ -11,7 +11,7 @@
 - [ROS Kinetic Kurulumu](#ros_kurulumu)
 - [VESC Sürücülerinin Yüklenmesi](#vesc_kurulumu)
 - [Racecar'ın Kurulması](#racecar_kurulumu)
-- [RPLIDAR Ros Kurulumu](#rplidar)
+- [RPLIDAR Ros Kurulumu](#racecar_kurulumu)
 - [IMU Kurulumu](#imu)
 - [ZED Kamera Kurulumu](#zed)
 - [USB Port Kuralları Konfigürasyonu](#usb_port)
@@ -280,8 +280,8 @@ VESC ayarlarını yaptıktan sonra *Racecar* kurulumuna geçebilirsiniz.
 
 ## <a name="zed"></a> ZED SDK Kurulumu
 
-[Öncelike ZED SDK son sürümü indirmek için bu bağlatıdaki linke gidiniz.](#https://www.stereolabs.com/developers/release/latest/#sdkdownloads_anchor)
- Açılan sayfada **TX2** butonuna tıklayın. Dosya indirilmeye başlayacaktır. 
+<a href="https://www.stereolabs.com/developers/release/latest/#sdkdownloads_anchor">Öncelike ZED SDK son sürümü indirmek için bu bağlatıdaki linke gidiniz </a>
+ Açılan sayfada **ZED SDK for Jetson TX2** butonuna tıklayın. Dosya indirilmeye başlayacaktır. 
  
  Dosyanın indirildiği dizine gidin.
  ```bash
@@ -310,11 +310,9 @@ Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
 ```bash
 sudo apt-get install ros-kinetic-ackermann-msgs ros-kinetic-serial ros-kinetic-joy ros-kinetic-joy-teleop 
 
-```
+``` 
 
-###<a name="rplidar"></a>RPLIDAR kurulumu
-
-RPLidar'ı ROS ile derlemek için `catkin workspace` ortamını derlemeden önce, gerekli dosyaları bu çalışma ortamına ekleyin. Bunun için aşağıdaki adımları takip edebilirsiniz.
+**ZED ROS Node** ve **RPLIDAR**'ı ROS ile derlemek için `catkin workspace` ortamını derlemeden önce, gerekli dosyaları bu çalışma ortamına ekleyin. Bunun için aşağıdaki adımları takip edebilirsiniz.
 
 ```bash
 cd ~/racecar-workspace/src
