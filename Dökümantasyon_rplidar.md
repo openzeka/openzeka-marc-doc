@@ -277,6 +277,21 @@ Uygulamayı yeniden başlattıktan sonra **Read Configuration**'a tıklayarak ay
 
 VESC ayarlarını yaptıktan sonra *Racecar* kurulumuna geçebilirsiniz. 
 
+
+## <a name="zed"></a> ZED SDK Kurulumu
+
+[Öncelike ZED SDK son sürümü indirmek için bu bağlatıdaki linke gidiniz.](#https://www.stereolabs.com/developers/release/latest/#sdkdownloads_anchor)
+ Açılan sayfada **TX2** butonuna tıklayın. Dosya indirilmeye başlayacaktır. 
+ 
+ Dosyanın indirildiği dizine gidin.
+ ```bash
+ cd ~/Downloads # Dosya farklı dizine indirilmiş olabilir
+ sh ./<indirdiğiniz zed sdk ismi>
+ ```
+ 
+ Yukarıdaki adımları takip edip kurulumu tamamladığınızda ZED kurulumu tamamlanmış olacaktır. ZED araçlarına `usr/local/zed` klasörü altında erişebilirsiniz.  
+ 
+
 ## <a name="racecar_kurulumu"></a> Racecar'ı kur
 Ana dizine racecar-workspace klasörünü indirmek için aşağıdaki komutu sırasıyla çalıştırınız:
 
@@ -305,12 +320,14 @@ RPLidar'ı ROS ile derlemek için `catkin workspace` ortamını derlemeden önce
 cd ~/racecar-workspace/src
 # rplidar_ros repository'si indirilir
 git clone https://github.com/robopeak/rplidar_ros.git
+
+# zed için repo indirilir. (Bu adımdan önce yukarıda belirtilen ZED SDK Kurulumunlarını yaptığınızdan emin olun)
+https://github.com/stereolabs/zed-ros-wrapper.git
 ```
 
 Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
 ```bash
 cd ~/racecar-workspace
-sudo rm -rf build devel
 catkin_make
 ```
 
@@ -319,13 +336,10 @@ Aşağıdaki komutlar ile test aşamasına geçebilirsiniz.
 ```bash
 cd ~/racecar-workspace
 source devel/setup.bash
-```
-
-```bash
 roslaunch racecar teleop.launch
 ```
 
-Bu aşamada "Portlar bulunamadı" hasatsı görmeniz muhtemeldir. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
+Bu aşamada "Portlar bulunamadı" hatası görmeniz muhtemeldir. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
 
 ## <a name="imu"></a>IMU kurulumu
 Bu adımda IMU'yu kurmak için aşağıdaki komutu çalıştırmanız yeterlidir.
@@ -333,19 +347,6 @@ Bu adımda IMU'yu kurmak için aşağıdaki komutu çalıştırmanız yeterlidir
 sudo apt-get install ros-kinetic-razor-imu-9dof
 ```
 
-## <a name="zed></a> ZED SDK Kurulumu
-
-[Öncelike ZED SDK son sürümü indirmek için bu bağlatıdaki linke gidiniz.](#https://www.stereolabs.com/developers/release/latest/#sdkdownloads_anchor)
- Açılan sayfada **TX2** butonuna tıklayın. Dosya indirilmeye başlayacaktır. 
- 
- Dosyanın indirildiği dizine gidin.
- ```bash
- cd ~/Downloads # Dosya farklı dizine indirilmiş olabilir
- sh ./<indirdiğiniz zed sdk ismi>
- ```
- 
- Yukarıdaki adımları takip edip kurulumu tamamladığınızda ZED kurulumu tamamlanmış olacaktır. ZED araçlarına `usr/local/zed` klasörü altında erişebilirsiniz.  
- 
 ## <a name="usb_port"></a>Usb Port Kuralları Konfigürasyonu
 Usb sensörleri, motoru ve diğer donanımları taktığımızda linux bunlara ttyUSB0 gibi adresler verecektir. Bu adresler herkesde aynı olmayabilir, fakat sabit olması bizi "daha sonra hangi porta hangi cihaz bağlı" uğraşından kurtarmaktadır. 
 
