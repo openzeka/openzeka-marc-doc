@@ -1,9 +1,40 @@
-# First steps after installing ubuntu on jetson
-### Find Jetson's ip address and connect via ssh
-You can use lanscan on mac, wnetwatcher on windows, and "angry ip scanner" on linux. Or, you can scan using terminal:
+![logo](images/Open-Zeka-logo_resized.png)
+- [First Steps to Follow After Installing JetPack](#first_step)
+  - [How to get IP address of Jetson and make connection via SSH](#first_step_ssh)
+  - [How to change password](#password_change)
+  - [How to install text editor](#editor_install)
+  - [How to change hostname](#hostname_change)
+  - [(Optional) How to install ZSH](#zsh_install)
+  - [(Optional) How to install Screen](#screen_install)
+- [Rebuilding the kernel](#kernel_build)
+- [ROS Kinetic Installation](#ros_install)
+- [VESC Driver Installation](#vesc_install)
+- [Racecar Installation](#racecar_install)
+- [RPLIDAR (/w ROS Environment) Installation](#rplidar_install)
+- [IMU Installation](#imu_install)
+- [ZED Stereo Camera Installation](#zed_install)
+- [USB Port Protocol Configurations](#usb_port)
+- [Move Project to Another Directory](#move_project)
+- [Necessary Steps to Establish ROS Remote Connection as Default](#ros_remote_con)
+- [**Necessary Framework Installations**](#additional_install)
+  - [Caffe installation](#caffe) 
+  - [Torch installation](#torch)
+  - [Tensorflow installation](#tensorflow_1_6)
+  - [Keras and other addons](#keras)
+  - [Jupyter Notebook installation](#jupyter)
+  - [Jetson TX2 high performance mode](#jetson_high_perf)
+- [**Make Vehicle Move for the First Time**](#first_move)
+- [**Driving Autonomously**](#autonomous_drive)
+- [**Collecting Data**](#gather_data)
+- [**Training the Neural Net with Collected Data**](#training)
+- [**Using the Trained Model**](#using_model)
+
+# <a name="first_step"></a> First Steps to Follow After Installing JetPack
+### <a name="first_step_ssh"></a>How to get IP address of Jetson and make connection via SSH
+You can use "lanscan" on MAC, "wnetwatcher" on Windows and "angry IP scanner" on Linux. However, you can still use terminal to scan IPs  with the commands below:
 ```bash
 sudo apt-get update && sudo apt-get install arp-scan
-sudo arp-scan --localnet ## you might need to search for the "--interface" option on your computer
+sudo arp-scan --localnet ## You might need to look for the "--interface" parameter on terminal.
 ```
 The output should look like this:
 ```bash
@@ -14,27 +45,28 @@ Starting arp-scan 1.8.1 with 256 hosts (http://www.nta-monitor.com/tools/arp-sca
 2 packets received by filter, 0 packets dropped by kernel
 Ending arp-scan 1.8.1: 256 hosts scanned in 1.546 seconds (165.59 hosts/sec). 2 responded
 ```
-After retrieving the IP address:
+You can establish a connection after you retrieve the IP address:
 ```bash
-ssh nvidia@<ip address here>
+ssh nvidia@<IP address here>
 # example:
-ssh nvidia@192.168.1.110 # default password is nvidia
+ssh nvidia@192.168.1.110 # Default password is nvidia
 ```
 
-### Change your password
-It's not a good idea to leave the password to default
+### <a name="password_change"></a>How to change password
+It's not a good idea to leave the password as default.
 ```bash
 passwd
 ```
 
-### Install a text editor (Use nano especially if you're a linux newbie)
+### <a name="editor_install"></a>How to install text editor
+It is recommended to use Nano if you are new to the Linux platform.
 ```bash
 sudo apt-get install nano
 ```
 ---
-### Change your hostname (computer's name)
-To use a local domain instead of looking for ip every time.  
-[Asciinema version (kinda like video but you can copy text)](https://asciinema.org/a/nytXz7ZUMGAXb6VpHY0fLHEJY)
+### <a name="hostname_change"></a>How to change hostname
+It is reasonable to use a local domain name, instead of looking for IP address every time.  
+[Asciinema app (a video that you can copy its context)](https://asciinema.org/a/nytXz7ZUMGAXb6VpHY0fLHEJY)
 ```bash
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install avahi-daemon
@@ -52,11 +84,11 @@ Find the line below and change `tegra` for what you want. For example you can pu
 ...
 ```
 
-Write the same name on this file as well:
+Write the same name to this file as well:
 ```bash
 sudo nano /etc/hostname
 ```
-Lastly, run the hostname script and restart the device:
+Lastly, run the script named `hostname` and restart the device:
 ```bash
 sudo /etc/init.d/hostname.sh
 
@@ -71,17 +103,36 @@ ssh nvidia@<HostNameHere>.local
 ssh nvidia@teamName.local
 ```
 
-### Install zsh (optional)
+### <a name="zsh_install"></a>(Optional) How to install ZSH
 Ascii cinema: https://asciinema.org/a/x6QlETqxDvdK8t0lmBvOWVoKD
 
-### Install Screen
-Screen is a program that will help keep scripts running in the background.
+### <a name="screen_install"></a>(Optional) How to install Screen
+Screen is an application that will help you to keep scripts running in the background.
 ```bash
 sudo apt-get install screen
 ```
 To learn how to use screen:  
 https://www.gnu.org/software/screen/manual/screen.html
 
+## <a name="kernel_build"></a>Rebuilding the kernel
+Some applications needs to be installed before move on to rebuild. You can run the command below to install these apps:
+```bash
+sudo apt-get install cmake ca-certificates
+```
+First of all, you need to download necessary files like shown below to rebuild kernel:
+```bash
+cd ~/
+git clone https://github.com/jetsonhacks/buildJetsonTX2Kernel.git
+```
+
+There are some scripts to run necessary commands to rebuild kernel in this repository. First, it will download the kernel files from NVIDIA website. Run the command shown below to get the kernel files:
+```bash
+cd ~/buildJetsonTX2Kernel
+#Kernel kaynaklarının indirilmesi
+./getKernelSources.sh
+```
+
+A GUI will come up 
 
 ## Install Scanse SDK
 ```bash
