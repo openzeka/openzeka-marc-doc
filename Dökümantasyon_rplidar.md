@@ -32,7 +32,7 @@
   
 
 # <a name="ilk_adim"></a>Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar
-### <a name="ilk_adim_ssh"></a>Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması
+### <a name="ilk_adim_ssh"></a> HoJetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması
 Bu bağlantının yapılabilmesi için MacOS'ta "lanscan", Windows'ta "wnetwatcher" ve Linux'ta "angry IP scanner" kullanabilirsiniz.
 Bu yöntemler yerine, terminal kullanılarak da aşağıdaki komutlarda gösterildiği gibi IP taraması yapabilirsiniz:
 
@@ -70,7 +70,7 @@ sudo apt-get install nano
 ---
 ### <a name="hostname_degistir"></a>Hostname'in(bilgisayar adı) değiştirilmesi
 Her seferinde IP adresini aramak yerine yerel alan adı kullanmak için bu video takip edilebilir:
-[Ascii Cinema sürümü (yazılar kopyalayanabilmektedir)](https://asciinema.org/a/nytXz7ZUMGAXb6VpHY0fLHEJY)
+[Asciinema sürümü (yazılar kopyalayanabilmektedir)](https://asciinema.org/a/nytXz7ZUMGAXb6VpHY0fLHEJY)
 ```bash
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install avahi-daemon
