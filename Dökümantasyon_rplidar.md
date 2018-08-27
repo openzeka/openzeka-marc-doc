@@ -595,23 +595,24 @@ luarocks install lightningmdb 0.9.18.1-1 LMDB_INCDIR=/usr/include LMDB_LIBDIR=/u
 
 ### <a name="tensorflow"></a>Tensorflow
 İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow'u kurun. Bunun için NVIDIA'nın paylaşmış olduğu aşağıdaki linklerden kendinize uygun olan sürümü indirin.
-
-**Jetpack 3.2 sürümü için:**
-Python 2.7:
-r1.9: https://nvidia.box.com/v/TF190rc0-py27-wTRT
-r1.8: https://nvidia.box.com/v/TF180-Py27-wTRT
-r1.7: https://nvidia.box.com/v/TF170-py27-wTRT
-
-Python 3.5:
-r1.9: https://nvidia.box.com/v/TF190rc0-py35-wTRT
-r1.8: https://nvidia.box.com/v/TF180-Py35-wTRT
-r1.7: https://nvidia.box.com/v/TF170-py35-wTRT
-
-**Jetpack 3.3 sürümü için:**
-Python 2.7:
-https://nvidia.app.box.com/v/TF1100-Py27-wTRT
-Python 3.5:
-https://nvidia.app.box.com/v/TF1100-Py35-wTRT
+  
+**Jetpack 3.2 sürümü için:**  
+  
+Python 2.7:  
+ - r1.9: https://nvidia.box.com/v/TF190rc0-py27-wTRT
+ - r1.8: https://nvidia.box.com/v/TF180-Py27-wTRT
+ - r1.7: https://nvidia.box.com/v/TF170-py27-wTRT
+Python 3.5:  
+ - r1.9: https://nvidia.box.com/v/TF190rc0-py35-wTRT
+ - r1.8: https://nvidia.box.com/v/TF180-Py35-wTRT
+ - r1.7: https://nvidia.box.com/v/TF170-py35-wTRT
+  
+**Jetpack 3.3 sürümü için:** 
+  
+Python 2.7:  
+ - https://nvidia.app.box.com/v/TF1100-Py27-wTRT
+Python 3.5:  
+ - https://nvidia.app.box.com/v/TF1100-Py35-wTRT
 
 Tensorflow kurulumu tamamlandıktan sonra aşağıdaki gibi test edebilirsiniz. 
 
