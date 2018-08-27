@@ -20,7 +20,7 @@
 - [**Gerekli eklentilerin kurulması**](#gerekli_eklentilerin_kurulması)
   - [Caffe kurulumu](#caffe) 
   - [Torch kurulumu](#torch)
-  - [Tensorflow kurulumu](#tensorflow_1_6)
+  - [Tensorflow kurulumu](#tensorflow)
   - [Keras ve diğer eklentilerin kurulumu](#keras)
   - [Jupyter Notebook kurulumu](#jupyter)
   - [Jetson TX2 Yüksek Performans modu](#jetson_yuksek_performans)
@@ -593,14 +593,26 @@ luarocks install "https://raw.github.com/Neopallium/lua-pb/master/lua-pb-scm-0.r
 luarocks install lightningmdb 0.9.18.1-1 LMDB_INCDIR=/usr/include LMDB_LIBDIR=/usr/lib/x86_64-linux-gnu
 ```
 
-### <a name="tensorflow_1_6"></a>Tensorflow 1.6
-İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow'u kurun. Bunun için şu adımları takip edin.
+### <a name="tensorflow"></a>Tensorflow
+İlk verimizi toplamadan önce bazı eklentilerin kurulması gerekmektedir. Öncelikle Tensorflow'u kurun. Bunun için NVIDIA'nın paylaşmış olduğu aşağıdaki linklerden kendinize uygun olan sürümü indirin.
 
-```bash
-git clone https://github.com/openzeka/Tensorflow-for-Jetson-TX2.git ~/tensorflow
-cd ~/tensorflow/Tensorflow-for-Jetson-TX2/Jetpack-3.1/1.6
-sudo pip install tensorflow-1.6.0rc1-cp27-cp27mu-linux_aarch64.whl
-```
+**Jetpack 3.2 sürümü için:**
+Python 2.7:
+r1.9: https://nvidia.box.com/v/TF190rc0-py27-wTRT
+r1.8: https://nvidia.box.com/v/TF180-Py27-wTRT
+r1.7: https://nvidia.box.com/v/TF170-py27-wTRT
+
+Python 3.5:
+r1.9: https://nvidia.box.com/v/TF190rc0-py35-wTRT
+r1.8: https://nvidia.box.com/v/TF180-Py35-wTRT
+r1.7: https://nvidia.box.com/v/TF170-py35-wTRT
+
+**Jetpack 3.3 sürümü için:**
+Python 2.7:
+https://nvidia.app.box.com/v/TF1100-Py27-wTRT
+Python 3.5:
+https://nvidia.app.box.com/v/TF1100-Py35-wTRT
+
 Tensorflow kurulumu tamamlandıktan sonra aşağıdaki gibi test edebilirsiniz. 
 
 ```python
