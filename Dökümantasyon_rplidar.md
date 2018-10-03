@@ -599,11 +599,15 @@ luarocks install lightningmdb 0.9.18.1-1 LMDB_INCDIR=/usr/include LMDB_LIBDIR=/u
 **Jetpack 3.2 sürümü için:**  
   
 Python 2.7:  
+ - r1.10.1: https://nvidia.box.com/v/TF1101-Py27-wTRT
+ - r1.10: https://nvidia.app.box.com/v/TF1100-Py27-wTRT
  - r1.9: https://nvidia.box.com/v/TF190rc0-py27-wTRT
  - r1.8: https://nvidia.box.com/v/TF180-Py27-wTRT
  - r1.7: https://nvidia.box.com/v/TF170-py27-wTRT
   
 Python 3.5:  
+ - r1.10.1: https://nvidia.box.com/v/TF1101-Py35-wTRT
+ - r1.10: https://nvidia.app.box.com/v/TF1100-Py35-wTRT
  - r1.9: https://nvidia.box.com/v/TF190rc0-py35-wTRT
  - r1.8: https://nvidia.box.com/v/TF180-Py35-wTRT
  - r1.7: https://nvidia.box.com/v/TF170-py35-wTRT
@@ -611,10 +615,12 @@ Python 3.5:
 **Jetpack 3.3 sürümü için:** 
   
 Python 2.7:  
- - https://nvidia.app.box.com/v/TF1100-Py27-wTRT
+ - r1.10: https://nvidia.app.box.com/v/TF1100-Py27-wTRT
+ - r1.11: https://nvidia.box.com/v/JP33-TF1-11-0rc0-py27-wTRT
   
 Python 3.5:  
- - https://nvidia.app.box.com/v/TF1100-Py35-wTRT
+ - r1.10: https://nvidia.app.box.com/v/TF1100-Py35-wTRT
+ - r1.11: https://nvidia.box.com/v/JP33-TF1-11-0rc1-py35-wTRT
 
 Tensorflow kurulumu tamamlandıktan sonra aşağıdaki gibi test edebilirsiniz. 
 
