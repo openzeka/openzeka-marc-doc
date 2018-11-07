@@ -15,7 +15,6 @@
 - [IMU Kurulumu](#imu)
 - [ZED Kamera Kurulumu](#zed)
 - [USB Port Kuralları Konfigürasyonu](#usb_port)
-- [Projenin Belirlenen Çalışma Alanına Taşınması](#proje_tasi)
 - [ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar](#ros_uzaktan_baglanti)
 - [**Gerekli eklentilerin kurulması**](#gerekli_eklentilerin_kurulması)
   - [Caffe kurulumu](#caffe) 
