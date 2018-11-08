@@ -295,7 +295,7 @@ Ana dizine racecar-workspace klasörünü indirmek için aşağıdaki komutu sı
 
 ```bash
 cd ~/
-git clone https://github.com/openzeka/racecar-workspace-rplidar
+git clone https://github.com/openzeka/openzeka-marc
 ```
 
 Bu `racecar-workspace` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
@@ -321,7 +321,7 @@ catkin_make
 Aşağıdaki komutlar ile test aşamasına geçebilirsiniz.
 
 ```bash
-cd ~/racecar-workspace-rplidar
+cd ~/openzeka-marc
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
@@ -671,7 +671,7 @@ Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca ba�
 Şimdi **teleop**'u çalıştırabiliriz.
 
 ```bash
-cd ~/racecar-workspace-rplidar
+cd ~/openzeka-marc
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
@@ -686,7 +686,7 @@ Aşağıdaki kodu sırasıyla çalıştırdığınızda, araç otonom olarak har
 
 ```bash
 
-cd ~/racecar-workspace-rplidar
+cd ~/openzeka-marc
 source devel/setup.bash
 rosrun deep_learning predict.py
 
@@ -701,7 +701,7 @@ Kendi modelinizi üretmek için öncelikle araç ile veri toplamanız gerekmekte
 Eğer Teleop çalışmıyorsa yukarıda belirtilen adımları uygulayın. Teleopun çalıştığı terminali kapatmadan yeni bir terminal açın ve veri toplamak için aşağıdaki kodu çalıştırın. 
 
 ```bash
-cd ~/racecar-workspace-rplidar
+cd ~/openzeka-marc
 source devel/setup.bash
 rosrun deep_learning collect_data.py
 ```
@@ -725,7 +725,7 @@ Aracı sürmeye başlayarak veri toplayabilirsiniz. Kameradan alınan görüntü
 Verileri topladıktan sonra eğitim aşamasına geçebiliriz. **racecar-workspace/src/racecar-controllers/marc-examples/ktrain** klasörüne gidin. Klasörün içinde bulunan **model_trainer.ipynb** dosyasını jupyter notebook yardımıyla açın.
 
 ```bash
-cd ~/racecar-workspace-rplidar/src/racecar-controllers/marc-examples/ktrain
+cd ~/openzeka-marc/src/racecar-controllers/marc-examples/ktrain
 jupyter notebook model_trainer.ipynb
 ```
 
@@ -740,7 +740,7 @@ Eğitim bittikten sonra **ktrain** dosyasında oluşturulmuş olan **model_new.h
  **model_new.h5** ve **model_new_json** dosyalarını _predict.py_ ile aynı klasöre kopyaladıktan sonra **teleop**'u çalıştırın. (Eğer çalışıyorsa tekrar çalıştırmanıza gerek yok)
  
  ```bash
-cd ~/racecar-workspace-rplidar
+cd ~/openzeka-marc
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
@@ -748,7 +748,7 @@ roslaunch racecar teleop.launch
 Yeni bir terminal açın ve eğittiğiniz ağı kullanmak için aşağıdaki kodu kullanın
 
  ```bash
-cd ~/racecar-workspace-rplidar
+cd ~/openzeka-marc
 source devel/setup.bash
 rosrun deep_learning predict.py
 ```
