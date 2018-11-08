@@ -14,7 +14,6 @@
 - [Racecar'ın kurulması](#racecar_kurulumu)
 - [USB port kuralları konfigürasyonu](#usb_port)
 - [IMU Kurulumu](#imu)
-- [Projenin belirlenen çalışma alanına taşınması](#proje_tasi)
 - [ROS uzaktan bağlantısının varsayılan olarak açılması için gerekli konfigürasyonlar](#ros_uzaktan_baglanti)
 - [**Gerekli eklentilerin kurulması**](#gerekli_eklentilerin_kurulması)
   - [Caffe kurulumu](#caffe) 
@@ -302,10 +301,10 @@ Ana dizine racecar-workspace klasörünü indirmek için aşağıdaki komutu sı
 
 ```bash
 cd ~/
-git clone --recursive https://github.com/openzeka/racecar-workspace
+git clone https://github.com/openzeka/openzeka-marc-scance
 ```
 
-Bu `racecar-workspace` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
+Bu `openzeka-marc-scance` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
 wiki.ros.org/ROS/Tutorials  
 Eğitimde kullanılan örneklere ulaşmak için:  
 github.com/openzeka/racecar-controllers  
@@ -318,7 +317,7 @@ sudo apt-get install ros-kinetic-ackermann-msgs ros-kinetic-serial ros-kinetic-j
 
 Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
 ```bash
-cd ~/racecar-workspace
+cd ~/openzeka-marc-scance
 sudo rm -rf build devel
 catkin_make
 ```
@@ -326,7 +325,7 @@ catkin_make
 Aşağıdaki komutlar ile test aşamasına geçebilirsiniz.
 
 ```bash
-cd ~/racecar-workspace
+cd ~/openzeka-marc-scance
 source devel/setup.bash
 ```
 
@@ -404,62 +403,6 @@ Bu adımda IMU'yu kurmak için aşağıdaki komutu çalıştırmanız yeterlidir
 ```bash 
 sudo apt-get install ros-kinetic-razor-imu-9dof
 ```
-# <a name="proje_tasi"></a>(Opsiyonel)Projenin Belirlenen Çalışma Alanına Taşınması
-[Proje klonlandıktan sonra](#installracecar) belirlenen çalışma alanına taşınıp takım arkadaşlarınızla Git kullanmak isterseniz:
-
-ana dizindeki `.gitmodules` dosyasına giriniz. Dosya içeriği aşağıdakine benzer olmalıdır:
-```bash
-[submodule "src/racecar"]
-	path = src/racecar
-	url = https://github.com/openzeka/racecar.git
-[submodule "src/racecar-controllers"]
-	path = src/racecar-controllers
-	url = https://github.com/openzeka/racecar-controllers.git
-[submodule "src/racecar-simulator"]
-	path = src/racecar-simulator
-	url = https://github.com/openzeka/racecar-simulator.git
-[submodule "src/vesc"]
-	path = src/vesc
-	url = https://github.com/mit-racecar/vesc
-```
-(Submodule ile ilgili daha fazla bilgi için: [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)). Submodule'ler sayesinde birden fazla git projesini bir proje altında toplayabilirsiniz. Fakat muhtemelen değişiklik yaptığınız commit ve push dediğiniz zaman izninizin olmadığını söyleyecektir. Bunun için kendi özel repository'nizi oluşturmanız gerekmektedir.  
-* Github da her proje için (racecar, racecar-controllers, racecar-simulator, vesc) bir repository oluşturun ([Github: Create A Repo](https://help.github.com/articles/create-a-repo/))  
-Veya değişiklik yapmayacağınızı düşündüğünüz repo varsa (mesela muhtemelen VESC), o repository için bunu yapmanıza gerek yoktur. 
-* Repoların adreslerini az önceki `.gitmodules` dosyasında değiştiriniz. Örnek olarak:
-```bash
-[submodule "src/racecar"]
-	path = src/racecar
-	url = <buraya git repository adresinizi yazınız>
-```
-* Şimdi de racecar-workspace için bir repository oluşturunuz ve proje ana dizininde (`.gitmodules` dosyasının olduğu yer) Şu komutu çalıştırınız:
-```bash
-git remote remove origin
-git remote add origin <senin racecar-workspace repository nin linki>
-```
-Doğrulamak için:
-```bash
-git remote -v
-```
-Çıktı şu şekilde olmalıdır:
-```bash
-origin	https://github.com/openzeka/racecar-workspace (fetch)
-origin	https://github.com/openzeka/racecar-workspace (push)
-```
-
-* Tekrar ana dizinde iken kendi repository'nize push yapınız:
-```bash
-git push origin master
-```
-* Son olarak az önce oluşturduğunız repository'ler için bunları tekrar ediniz:
-```bash
-git remote remove origin
-git remote add origin <senin racecar/simulator/controller vb. repository nin adresi>
-git push origin master
-```
-
-Yaptığınız işlemleri Github üzerinden kontrol edebilirsiniz. 
----
-
 ## <a name="ros_uzaktan_baglanti"></a>(Opsiyonel) ROS Uzaktan Bağlantısınının Varsayılan Olarak Açılması İçin Gerekli Konfigürasyonlar
 
 `nano ~/.profile` dosyasını açtıktan sonra aşağıdaki satırları ekleyiniz:
@@ -738,7 +681,7 @@ Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca ba�
 Şimdi **teleop**'u çalıştırabiliriz.
 
 ```bash
-cd ~/racecar-workspace
+cd ~/openzeka-marc-scance
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
@@ -753,7 +696,7 @@ Aşağıdaki kodu sırasıyla çalıştırdığınızda, araç otonom olarak har
 
 ```bash
 
-cd ~/racecar-workspace
+cd ~/openzeka-marc-scance
 source devel/setup.bash
 rosrun deep_learning predict.py
 
@@ -768,7 +711,7 @@ Kendi modelinizi üretmek için öncelikle araç ile veri toplamanız gerekmekte
 Eğer Teleop çalışmıyorsa yukarıda belirtilen adımları uygulayın. Teleopun çalıştığı terminali kapatmadan yeni bir terminal açın ve veri toplamak için aşağıdaki kodu çalıştırın. 
 
 ```bash
-cd ~/racecar-workspace
+cd ~/openzeka-marc-scance
 source devel/setup.bash
 rosrun deep_learning collect_data.py
 ```
@@ -792,7 +735,7 @@ Aracı sürmeye başlayarak veri toplayabilirsiniz. Kameradan alınan görüntü
 Verileri topladıktan sonra eğitim aşamasına geçebiliriz. **racecar-workspace/src/racecar-controllers/marc-examples/ktrain** klasörüne gidin. Klasörün içinde bulunan **model_trainer.ipynb** dosyasını jupyter notebook yardımıyla açın.
 
 ```bash
-cd ~/racecar-workspace/src/racecar-controllers/marc-examples/ktrain
+cd ~/openzeka-marc-scance/src/racecar-controllers/marc-examples/ktrain
 jupyter notebook model_trainer.ipynb
 ```
 
@@ -807,7 +750,7 @@ Eğitim bittikten sonra **ktrain** dosyasında oluşturulmuş olan **model_new.h
  **model_new.h5** ve **model_new_json** dosyalarını _predict.py_ ile aynı klasöre kopyaladıktan sonra **teleop**'u çalıştırın. (Eğer çalışıyorsa tekrar çalıştırmanıza gerek yok)
  
  ```bash
-cd ~/racecar-workspace
+cd ~/openzeka-marc-scance
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
@@ -815,7 +758,7 @@ roslaunch racecar teleop.launch
 Yeni bir terminal açın ve eğittiğiniz ağı kullanmak için aşağıdaki kodu kullanın
 
  ```bash
-cd ~/racecar-workspace
+cd ~/openzeka-marc-scance
 source devel/setup.bash
 rosrun deep_learning predict.py
 ```
