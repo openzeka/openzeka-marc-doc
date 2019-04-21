@@ -1,4 +1,4 @@
-![logo](images/logo yeni.png.png)
+![logo](images/logo yeni.png)
 
 - [Jetson'a, JetPack kurduktan sonra izlenecek ilk adımlar](#ilk_adim)
   - [Jetson'ın IP adresinin alınması ve SSH ile bağlantı kurulması](#ilk_adim_ssh)
