@@ -163,7 +163,7 @@ cd /usr/src/sources
 sudo rm -rf kernel_src-tx2.tbz2 
 ```
 
-## <a name="ros_kurulumu"></a>ROS Kinetic Kurulumu
+## <a name="ros_kurulumu"></a>ROS Melodic Kurulumu
 Racecar, ROS (Robot Operating System) kütüphaneleri ile çalışmaktadr. (Kurulum ile ilgili ayrıntılı ve açıklamalı döküman için: http://wiki.ros.org/kinetic/Installation/Ubuntu . Veya kısaca aşağıdakileri de uygulayabilirsin:)
 ```bash
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -171,19 +171,19 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 sudo apt-get update
-sudo apt-get install ros-kinetic-desktop-full
+sudo apt install ros-melodic-desktop-full
 # Bu kurulum biraz uzun sürmektedir.
 sudo rosdep init
 rosdep update
 ```
 Daha sonra:
 ```bash
-echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 Son olarak aşağıdaki kurulumları gerçekleştiriniz:
 ```bash
-sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 
 ## <a name="vesc_kurulumu"></a>VESC sürücülerinin yüklenmesi
@@ -295,44 +295,37 @@ Ana dizine racecar-workspace klasörünü indirmek için aşağıdaki komutu sı
 
 ```bash
 cd ~/
-git clone https://github.com/openzeka/openzeka-marc
+git clone https://github.com/openzeka/marc
 ```
 
-Bu `racecar-workspace` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
+Bu `marc` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
 wiki.ros.org/ROS/Tutorials  
-Eğitimde kullanılan örneklere ulaşmak için:  
-github.com/openzeka/racecar-controllers  
 
 Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
 
 ```bash
-sudo apt-get install ros-kinetic-ackermann-msgs ros-kinetic-serial ros-kinetic-joy ros-kinetic-joy-teleop 
-
+sudo apt install ros-melodic-ackermann-msgs ros-melodic-serial ros-melodic-joy ros-melodic-joy-teleop 
 ``` 
+
+Çalışma alanı içerisinde bulunan **collec_data.py ** ve ** predict.py** dosyalarını  çalıştırabilmek için öncelikle cv_bridge kütüphanesini python 3 için derlemeniz gerekmektedir. Bunun için devam etmeden önce [buradaki](https://github.com/openzeka/cv_bridge_python3) adımları uygulayın.
 
 Bu çalışma alanının içerisinde ZED ve RPLidar ait node'lar da hazır gelmektedir. ROS çalışma alanı içerisinde ekstra indirip derlemenize gerek yoktur. 
 
 Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
 ```bash
-cd ~/racecar-workspace-rplidar
+cd ~/marc
 catkin_make
 ```
 
 Aşağıdaki komutlar ile test aşamasına geçebilirsiniz.
 
 ```bash
-cd ~/openzeka-marc
+cd ~/marc
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
 
 Bu aşamada "Portlar bulunamadı" hatası görmeniz muhtemeldir. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
-
-## <a name="imu"></a>IMU kurulumu
-Bu adımda IMU'yu kurmak için aşağıdaki komutu çalıştırmanız yeterlidir.
-```bash 
-sudo apt-get install ros-kinetic-razor-imu-9dof
-```
 
 ## <a name="usb_port"></a>Usb Port Kuralları Konfigürasyonu
 Usb sensörleri, motoru ve diğer donanımları taktığımızda linux bunlara ttyUSB0 gibi adresler verecektir. Bu adresler herkesde aynı olmayabilir, fakat sabit olması bizi "daha sonra hangi porta hangi cihaz bağlı" uğraşından kurtarmaktadır. 
@@ -423,16 +416,16 @@ Caffe kurulumuna geçmeden önce caffe için bazı gereksinimlerin kurulu olmas�
 
 ```bash
 sudo add-apt-repository universe
-sudo apt-get update -y
-sudo apt-get install cmake -y
+sudo apt update -y
+sudo apt install cmake -y
 # Genel gereksinimler
-sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler -y
-sudo apt-get install --no-install-recommends libboost-all-dev -y
+sudo apt install libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler -y
+sudo apt install --no-install-recommends libboost-all-dev -y
 # BLAS
-sudo apt-get install libatlas-base-dev -y
+sudo apt install libatlas-base-dev -y
 # Diğer gereksinimler
-sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev -y
-sudo apt-get install python-dev python-numpy -y
+sudo apt install libgflags-dev libgoogle-glog-dev liblmdb-dev -y
+sudo apt install python-dev python-numpy -y
 sudo usermod -a -G video $USER
 ```
 
@@ -477,7 +470,7 @@ cmake -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF ..
 # Derleme işlemi, Jetson'da bulunan 6 çekirdek de kullanılarak yapılacaktır. Bu işlem sırasında başka bir işlem yapmamanız önerilir.
 # Ayrıca bu adımdan önce Jetsonu yüksek performans moduna almak işlemi hızlandıracaktır. 
 sudo nvpmodel -m 0
-sudo ~/jetson_clocks.sh
+sudo jetson_clocks
 make -j6 all
 # Derleme işlemi bittikten sonra testleri çalıştıralım
 make -j6 runtest
@@ -556,9 +549,13 @@ Python 3.5:
  - r1.10: https://nvidia.app.box.com/v/TF1100-Py35-wTRT
  - r1.11: https://nvidia.box.com/v/JP33-TF1-11-0rc1-py35-wTRT
 
+**Jetpack 4.2 sürümü için:**
+
+- sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu
+
 Tensorflow kurulumu tamamlandıktan sonra aşağıdaki gibi test edebilirsiniz. 
 
-```python
+```python3
 import tensorflow as tf
 hello = tf.constant('Hello, TensorFlow!')
 sess = tf.Session()
@@ -568,7 +565,7 @@ print(sess.run(hello))
 ### <a name="keras"></a>Keras ve diğer eklentiler
 Aşağıdaki kodu çalıştırmanız,bu adım için yeterli olacaktır.
 ```bash
-sudo pip install h5py keras matplotlib scipy pandas
+sudo pip3 install h5py keras matplotlib scipy pandas
 ```
 Bu kurulum uzun sürebilir(~45 dakika).
 
@@ -577,14 +574,9 @@ Bu kurulum uzun sürebilir(~45 dakika).
 Jupyter Notebook kurulumunu aşağıdaki komut ile yapabilirsiniz.
 
 ```bash
-sudo -H pip install jupyter
+sudo -H pip3 install jupyterlab
 ```
 
-Bu işlem, jupyter'i sadece **python2** kerneli ile kuracaktır. Eğer **python3** kernelini de kurmak isterseniz aşağıdaki kodu kullanabilirsiniz. 
-```bash
-python3 -m pip install ipykernel
-python3 -m ipykernel install --user
-```
 ## <a name="jetson_yuksek_performans"></a>Jetson TX2 Yüksek Performans modu
 
 Jetson'u farklı senaryolarda yüksek performans yada enerji tasarrufu ayarı ile kullanabiliriz. NVIDIA, bunun için bize **NVPModel**'i sunmaktadır. 
@@ -604,10 +596,9 @@ Tegrastats, sistem kaynaklarının ne kadarının kullanıldığını gösteren 
 
 Burada GPU kullanımı gösterilmemektedir. GPU kullanımı takip etmek için _super\_user_ modunda çalıştırmamız gerekiyor. Bunun için : 
 ```bash
-sudo su
-./tegrastats
+sudo tegrastats
 ```
-En sağda gösterilen **GR3D** bizim GPU'muzu göstermektedir. 
+Aşağıda resimde görüldüğü gibi benzer bir konsol çıktısı elde edeceksiniz. En sağda gösterilen **GR3D** bizim GPU'muzu göstermektedir. 
 
 <p align="center">
   <img src="images/tegrastats_gpu.png" />
@@ -671,7 +662,7 @@ Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca ba�
 Şimdi **teleop**'u çalıştırabiliriz.
 
 ```bash
-cd ~/openzeka-marc
+cd ~/marc
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
@@ -686,7 +677,7 @@ Aşağıdaki kodu sırasıyla çalıştırdığınızda, araç otonom olarak har
 
 ```bash
 
-cd ~/openzeka-marc
+cd ~/marc
 source devel/setup.bash
 rosrun deep_learning predict.py
 
@@ -701,7 +692,7 @@ Kendi modelinizi üretmek için öncelikle araç ile veri toplamanız gerekmekte
 Eğer Teleop çalışmıyorsa yukarıda belirtilen adımları uygulayın. Teleopun çalıştığı terminali kapatmadan yeni bir terminal açın ve veri toplamak için aşağıdaki kodu çalıştırın. 
 
 ```bash
-cd ~/openzeka-marc
+cd ~/marc
 source devel/setup.bash
 rosrun deep_learning collect_data.py
 ```
@@ -725,8 +716,8 @@ Aracı sürmeye başlayarak veri toplayabilirsiniz. Kameradan alınan görüntü
 Verileri topladıktan sonra eğitim aşamasına geçebiliriz. **racecar-workspace/src/racecar-controllers/marc-examples/ktrain** klasörüne gidin. Klasörün içinde bulunan **model_trainer.ipynb** dosyasını jupyter notebook yardımıyla açın.
 
 ```bash
-cd ~/openzeka-marc/src/racecar-controllers/marc-examples/ktrain
-jupyter notebook model_trainer.ipynb
+cd ~/marc/src/racecar-controllers/marc-examples/ktrain
+jupyter lab model_trainer.ipynb
 ```
 
 Dosyada belirtilen adımları takip ederek **train** işlemini tamamlayabilirsiniz. Bu işlemi Jetson TX2 üzerinde gerçekleştirebilir ya da daha güçlü bir GPU olan bilgisayarda yapabilirsiniz. 
@@ -740,7 +731,7 @@ Eğitim bittikten sonra **ktrain** dosyasında oluşturulmuş olan **model_new.h
  **model_new.h5** ve **model_new_json** dosyalarını _predict.py_ ile aynı klasöre kopyaladıktan sonra **teleop**'u çalıştırın. (Eğer çalışıyorsa tekrar çalıştırmanıza gerek yok)
  
  ```bash
-cd ~/openzeka-marc
+cd ~/marc
 source devel/setup.bash
 roslaunch racecar teleop.launch
 ```
@@ -748,7 +739,7 @@ roslaunch racecar teleop.launch
 Yeni bir terminal açın ve eğittiğiniz ağı kullanmak için aşağıdaki kodu kullanın
 
  ```bash
-cd ~/openzeka-marc
+cd ~/marc
 source devel/setup.bash
 rosrun deep_learning predict.py
 ```
