@@ -166,11 +166,9 @@ sudo rm -rf kernel_src-tx2.tbz2
 Racecar, ROS (Robot Operating System) kütüphaneleri ile çalışmaktadr. (Kurulum ile ilgili ayrıntılı ve açıklamalı döküman için: http://wiki.ros.org/kinetic/Installation/Ubuntu . Veya kısaca aşağıdakileri de uygulayabilirsin:)
 ```bash
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-
-sudo apt-get update
-sudo apt install ros-melodic-desktop-full
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+sudo apt update
+sudo apt install -y ros-melodic-desktop-full
 # Bu kurulum biraz uzun sürmektedir.
 sudo rosdep init
 rosdep update
@@ -182,7 +180,7 @@ source ~/.bashrc
 ```
 Son olarak aşağıdaki kurulumları gerçekleştiriniz:
 ```bash
-sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt install -y python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 
 ## <a name="vesc_kurulumu"></a>VESC sürücülerinin yüklenmesi
@@ -207,7 +205,7 @@ Bu bölümün bir monitör varlığında veya X Server mevcut olan bir işletim 
 Bu aşamadan itibaren devam edilebilmesi için öncelikle bazı gereksinimlerin yüklü olduğundan emin olunmalıdır. Bunun için aşağıdaki komutu çalıştırınız:
 
 ```bash
-sudo apt-get install qtcreator qt-sdk libudev-dev libqt5serialport5-dev 
+sudo apt install -y qtcreator libudev-dev libqt5serialport5-dev 
 ```
 
 Yükleme bittikten sonra VESC kontrol ve firmware yüklemek için kullanacağımız uygulamanın, GitHub'dan çekilmesi ve derlenmesi gerekmektedir. Bunun için aşağıdaki komutları sırasıyla çalıştırınız:
@@ -303,7 +301,7 @@ wiki.ros.org/ROS/Tutorials
 Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
 
 ```bash
-sudo apt install ros-melodic-ackermann-msgs ros-melodic-serial ros-melodic-joy ros-melodic-joy-teleop 
+sudo apt install -y ros-melodic-ackermann-msgs ros-melodic-serial ros-melodic-joy ros-melodic-joy-teleop 
 ``` 
 
 Çalışma alanı içerisinde bulunan **collec_data.py ** ve ** predict.py** dosyalarını  çalıştırabilmek için öncelikle cv_bridge kütüphanesini python 3 için derlemeniz gerekmektedir. Bunun için devam etmeden önce [buradaki](https://github.com/openzeka/cv_bridge_python3) adımları uygulayın.
@@ -368,8 +366,7 @@ Bus <bus number> Device <device number>: ID <vendor id>:<product id> <Device nam
 
 Usb port kurallarını ayarlamak için usb kural dosyasını düzenleyeceğiz:
 ```bash
-sudo apt-get install nano
-sudo nano /etc/udev/rules.d/99-usb-serial.rules
+sudo gedit /etc/udev/rules.d/99-usb-serial.rules
 ```
 Aşağıda gösterilen kodları usb kural dosyasına yapıştırınız, `idVendor` karşısına kendi cihazınızın "vendor id"lerini, `idProduct` karşısına kendi cihazınızın "product id"lerini yazınız.
 ```bash
@@ -409,7 +406,7 @@ source ~/.profile
 
 ## <a name="gerekli_eklentilerin_kurulması"></a>Gerekli eklentilerin kurulması
 
-### <a name="caffe"></a>Caffe Kurulumu
+### <a name="caffe"></a>Caffe Kurulumu (Opsiyonel)
 
 Caffe kurulumuna geçmeden önce caffe için bazı gereksinimlerin kurulu olması gerekmektedir. Aşağıdaki komutları sırasıyla çalıştırınız:
 
@@ -488,7 +485,7 @@ echo “LIBRARY_DIRS += /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5
 Buraya kadar herhangi bir hata ile karşılaşmadıysanız caffe kurulumu başarılı bir şekilde tamamlanmıştır. 
 Eğer bu adımları takip ederek caffe'yi derlediyseniz Caffe executable dosyasını `~/caffe/build/tool` dizini altında bulabilirsiniz. 
 
-### <a name="torch"></a>Torch Kurulumu
+### <a name="torch"></a>Torch Kurulumu (Opsiyonel)
 
 Öncelikle Torch için bazı gereksinimlerin kurulumunu yapınız. Aşağıdaki kodları sırasıyla terminalde çalıştırınız. 
 
@@ -564,9 +561,11 @@ print(sess.run(hello))
 ### <a name="keras"></a>Keras ve diğer eklentiler
 Aşağıdaki kodu çalıştırmanız,bu adım için yeterli olacaktır.
 ```bash
-sudo pip3 install h5py keras matplotlib scipy pandas
+sudo apt install -y python3-scipy python3-pandas
+sudo pip3 install h5py keras matplotlib 
 ```
-Bu kurulum uzun sürebilir(~45 dakika).
+[python3-scipy](https://packages.debian.org/jessie/python3-scipy)
+[python3-pandas](https://packages.debian.org/buster/python3-pandas)
 
 ### <a name="jupyter"></a>Jupyter Notebook
 
@@ -585,18 +584,10 @@ Jetson, 4 adet ARM A57 ve 2 adet Denver 2 çekirdeği ile gelmektedir. Default o
 Tegrastats, sistem kaynaklarının ne kadarının kullanıldığını gösteren ve derin öğrenme tarafında uygulamalar geliştirirken takip etmemiz gereken bir uygulamadır. Çalıştırmak için aşağıdaki komutu çalıştırın. 
 
 ```bash
-~/tegrastats
-```
-Çıktı şu şekilde olacaktır. 
-
-<p align="center">
-  <img src="images/tegrastats.png" />
-</p>
-
-Burada GPU kullanımı gösterilmemektedir. GPU kullanımı takip etmek için _super\_user_ modunda çalıştırmamız gerekiyor. Bunun için : 
-```bash
 sudo tegrastats
 ```
+Çıktı şuna benzer bir şekilde olacaktır. 
+
 Aşağıda resimde görüldüğü gibi benzer bir konsol çıktısı elde edeceksiniz. En sağda gösterilen **GR3D** bizim GPU'muzu göstermektedir. 
 
 <p align="center">
@@ -620,6 +611,8 @@ sudo nvpmodel -m 0
 # Burada 0 yerine istediğiniz modu girebilirsiniz.
 # 0 yüksek performans modudur ve tüm çekirdekleri aktif hale getirir. 
 ```
+
+Aynı zamanda Jetpack 4.2'den itibaren kullanıcılar, bu güç modları arasında bildirim çubuğunda bulunan aracı kullanarak da geçiş yapabilmektedir. 
 
 ## <a name="ilk_hareket"></a>Aracın İlk Kez Hareket Ettirilmesi
 
