@@ -301,10 +301,10 @@ wiki.ros.org/ROS/Tutorials
 Aşağıdaki eklentilerin de kurulu olduğundan emin olunuz.
 
 ```bash
-sudo apt install -y ros-melodic-ackermann-msgs ros-melodic-serial ros-melodic-joy ros-melodic-joy-teleop 
+sudo apt install -y ros-melodic-ackermann-msgs ros-melodic-serial ros-melodic-joy ros-melodic-joy-teleop python3-catkin-pkg
 ``` 
 
-Çalışma alanı içerisinde bulunan **collec_data.py ** ve ** predict.py** dosyalarını  çalıştırabilmek için öncelikle cv_bridge kütüphanesini python 3 için derlemeniz gerekmektedir. Bunun için devam etmeden önce [buradaki](https://github.com/openzeka/cv_bridge_python3) adımları uygulayın.
+Çalışma alanı içerisinde bulunan **collect_data.py ** ve ** predict.py** dosyalarını  çalıştırabilmek için öncelikle cv_bridge kütüphanesini python 3 için derlemeniz gerekmektedir. Bunun için devam etmeden önce [buradaki](https://github.com/openzeka/cv_bridge_python3) adımları uygulayın.
 
 Bu çalışma alanının içerisinde ZED ve RPLidar ait node'lar da hazır gelmektedir. ROS çalışma alanı içerisinde ekstra indirip derlemenize gerek yoktur. 
 
