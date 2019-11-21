@@ -61,7 +61,7 @@ passwd
 
 ### <a name="editor_kurulumu"></a>Text Editörün Kurulması (Linux konusunda tecrübesi az olan/olmayan kullanıcıların NANO kullanması tavsiye edilir.)
 ```bash
-sudo apt-get install nano
+sudo apt install nano
 ```
 
 ---
@@ -116,6 +116,8 @@ https://www.gnu.org/software/screen/manual/screen.html
 
 
 ## <a name="kernel_derlenmesi"></a>Kernelin yeniden derlenmesi
+
+**JETPACK 4 VEYA DAHA ÜST BİR VERSİYONDA KERNEL DERLENMESİNE GEREK YOKTUR**
 
 Bu aşamadan itibaren devam etmeden önce bazı gerekli uygulamaların kurulması gereklidir. Bunun için terminalde, aşağıdaki komutu çalıştırınız:
 ```bash
@@ -295,6 +297,8 @@ cd ~/
 git clone https://github.com/openzeka/marc
 ```
 
+**İlgili repoda bulunan adımları takip ediniz.**
+
 Bu `marc` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
 wiki.ros.org/ROS/Tutorials  
 
@@ -312,14 +316,6 @@ Aşağıdaki komut ile indirdiğiniz `catkin workspace` alanını derleyiniz:
 ```bash
 cd ~/marc
 catkin_make
-```
-
-Aşağıdaki komutlar ile test aşamasına geçebilirsiniz.
-
-```bash
-cd ~/marc
-source devel/setup.bash
-roslaunch racecar teleop.launch
 ```
 
 Bu aşamada "Portlar bulunamadı" hatası görmeniz muhtemeldir. Bu aşamada portların konfigürasyon ayarlarının yapılması gerekmektedir.
@@ -655,8 +651,7 @@ Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca ba�
 
 ```bash
 cd ~/marc
-source devel/setup.bash
-roslaunch racecar teleop.launch
+./start_teleop.sh
 ```
 Komut çalıştırıldıktan sonra joystick ile aracı kontrol edebilirsiniz. 
 **Aracı kontrol etmek için LB tuşuna basılı tutmayı unutmayın.**
@@ -670,8 +665,7 @@ Aşağıdaki kodu sırasıyla çalıştırdığınızda, araç otonom olarak har
 ```bash
 
 cd ~/marc
-source devel/setup.bash
-rosrun deep_learning predict.py
+./autonomous.sh
 
 ```
 
@@ -685,8 +679,7 @@ Eğer Teleop çalışmıyorsa yukarıda belirtilen adımları uygulayın. Teleop
 
 ```bash
 cd ~/marc
-source devel/setup.bash
-rosrun deep_learning collect_data.py
+./collect_data.sh
 ```
 
 Kodu çalıştırdıktan sonra aşağıdaki gibi araca ait hız ve açı değerleri akmaya başlayacaktır. 
@@ -714,31 +707,23 @@ jupyter lab model_trainer.ipynb
 
 Dosyada belirtilen adımları takip ederek **train** işlemini tamamlayabilirsiniz. Bu işlemi Jetson TX2 üzerinde gerçekleştirebilir ya da daha güçlü bir GPU olan bilgisayarda yapabilirsiniz. 
 
-**Eğer verilerin olduğu klasörün yerini değiştirirseniz aynı zamanda yine resimlerin olduğu klasörün içinde bulunan _seyir.csv_ dosyasındaki resimlerin yolunu da değiştirmeniz gerekmektedir. Aksi halde hata alacaksınız. Bu dosya resimlerin bilgisayardaki bulunduğu yeri ve her resime ait açı ve hız değerlerini bulundurmaktadır.**
 
-Eğitim bittikten sonra **ktrain** dosyasında oluşturulmuş olan **model_new.h5** ve **model_new_json** dosyalarını **racecar-workspace/src/racecar-controllers/marc-examples/deep_learning** klasörüne kopyalayın. 
+Eğitim bittikten sonra  **model_new.h5** ve **model_new_json** dosyaları `HOME` dizininde oluşturulmuş `marc_models` klasörüne kaydedilecektir. Otonom sürüş için bu dosyaların konum ve isimlerini değiştirmenize gerek yokturç
 
 ## <a name="model_kullanimi"></a>Eğitilen ağın kullanılması
 
- **model_new.h5** ve **model_new_json** dosyalarını _predict.py_ ile aynı klasöre kopyaladıktan sonra **teleop**'u çalıştırın. (Eğer çalışıyorsa tekrar çalıştırmanıza gerek yok)
+Yeni bir terminal açarak **teleop**'u çalıştırın. (Eğer çalışıyorsa tekrar çalıştırmanıza gerek yok)
  
  ```bash
 cd ~/marc
-source devel/setup.bash
-roslaunch racecar teleop.launch
+./start_teleop.sh
 ```
 
 Yeni bir terminal açın ve eğittiğiniz ağı kullanmak için aşağıdaki kodu kullanın
 
  ```bash
 cd ~/marc
-source devel/setup.bash
-rosrun deep_learning predict.py
+./autonomous.sh
 ```
-
-Eğer bu komutu çalıştırdıktan sonra _No such file or directory_ hatası alırsanız, **predict.py** içindeki 28.satırda bulunan **model_name** değişkeninin doğru yolu gösterdiğinden emin olun. 
-
-![predict.py](images/predict.png)
-
 
 # Bitti :metal:
