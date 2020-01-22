@@ -183,6 +183,9 @@ source ~/.bashrc
 Son olarak aşağıdaki kurulumları gerçekleştiriniz:
 ```bash
 sudo apt install -y python-rosinstall python-rosinstall-generator python-wstool build-essential
+# pip kurulumu
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
 ```
 
 ## <a name="vesc_kurulumu"></a>VESC sürücülerinin yüklenmesi
@@ -296,8 +299,6 @@ Ana dizine racecar-workspace klasörünü indirmek için aşağıdaki komutu sı
 cd ~/
 git clone https://github.com/openzeka/marc
 ```
-
-**İlgili repoda bulunan adımları takip ediniz.**
 
 Bu `marc` klasörü `catkin workspace` adında bir çalışma ortamıdır. ROS kullanımı ve catkin workspace ile ilgili daha ayrıntılı bilgiye ulaşmak için:  
 wiki.ros.org/ROS/Tutorials  
@@ -542,7 +543,7 @@ Python 3.5:
  - r1.10: https://nvidia.app.box.com/v/TF1100-Py35-wTRT
  - r1.11: https://nvidia.box.com/v/JP33-TF1-11-0rc1-py35-wTRT
 
-**Jetpack 4.2 sürümü için:**
+**Jetpack 4.2 ve sonrası için:**
 
 - sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu
 
@@ -649,6 +650,7 @@ sudo mv /dev/input/js1 /dev/input/js0
 Eğer hiç **js** ile başlayan bir dosya göremiyorsanız, joystickin araca bağlı olduğundan, mode ışığının yanmadığından ve **D** modunda olduğundan emin olun. **js0** adındaki dosya yukarıda belirtilen dizinde oluşmadan ilerlemeyin.
 
 Şimdi **teleop**'u çalıştırabiliriz.
+
 
 ```bash
 cd ~/marc
