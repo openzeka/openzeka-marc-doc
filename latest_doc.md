@@ -184,6 +184,7 @@ Son olarak aşağıdaki kurulumları gerçekleştiriniz:
 ```bash
 sudo apt install -y python-rosinstall python-rosinstall-generator python-wstool build-essential
 # pip kurulumu
+sudo apt install curl -y 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 ```
@@ -547,6 +548,8 @@ Python 3.5:
 
 - sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu
 
+**v42** alanını kendi JetPack versiyonunuza göre düzenlemeyi unutmayın. (Örnek: JetPack 4.3 için v43)
+
 Tensorflow kurulumu tamamlandıktan sonra aşağıdaki gibi test edebilirsiniz. 
 
 ```python3
@@ -557,7 +560,7 @@ print(sess.run(hello))
 ```
 
 ### <a name="keras"></a>Keras ve diğer eklentiler
-Aşağıdaki kodu çalıştırmanız,bu adım için yeterli olacaktır.
+Aşağıdaki kodu çalıştırmanız,bu adım için yeterli olacaktır. Tensorflow 2.0'dan itibaren [OpenZeka MARC](https://github.com/openzeka/marc) reposu Tensorflow içerisinde gömülü gelen Keras kütüphanesini kullanmaktadır. 
 ```bash
 sudo apt install -y python3-scipy python3-pandas
 sudo pip3 install h5py keras matplotlib 
@@ -592,7 +595,7 @@ Aşağıda resimde görüldüğü gibi benzer bir konsol çıktısı elde edecek
   <img src="images/tegrastats_gpu.png" />
 </p>
 
-NVPModel'in farklı modlarda nasıl çalıştığını aşağıdaki tabloda görebilirsiniz. 
+Jetson TX2 için NVPModel'in farklı modlarda nasıl çalıştığını aşağıdaki tabloda görebilirsiniz. Jetson AGX Xavier ve Xavier NX için [buradan](https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2Fpower_management_jetson_xavier.html%23wwpID0E0LO0HA) güç modları hakkında detaylı bilgi alabilirsiniz.
 
 Mode | Mode Name | Denver 2 | Frequency | ARM A57 | Frequency | GPU Frequency
 ---- | --------- | -------- | --------- | ------- | --------- | -------------
@@ -624,11 +627,7 @@ Aracı satın aldıktan sonra ilk kez hareket ettirmek için aşağıdaki adıml
 Artık Jetson'ın güç düğmesine basarak başlatabilirsiniz. 
 
 Teleop'u çalıştırmadan önce joytstick'in doğru ayarlandığından emin olalım. 
-Öncelikle joystick'in açık olduğundan ve _mode_ ışığının **yanmadığından** emin olun. Vibration tuşu ile kontrol edin. **D** moduna alın. 
-
-<p align="center">
-  <img src="images/joystick_d_mode.png" />
-</p>
+Öncelikle joystick'in açık olduğundan ve _mode_ ışığının **yanmadığından** emin olun. Vibration tuşu ile kontrol edin. **X** moduna alın. 
 
 Yeni bir terminal açın ve aşağıda gösterilen dizini kontrol edin
 
